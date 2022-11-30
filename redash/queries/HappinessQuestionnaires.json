@@ -1,0 +1,6 @@
+{
+  "collection": "instruments",
+  "query": {
+    "kind": "HappinessQuestionnaire"
+  }
+}
