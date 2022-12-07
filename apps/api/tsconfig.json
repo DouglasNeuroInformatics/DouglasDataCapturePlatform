@@ -1,0 +1,7 @@
+{
+  "extends": "@dnp/tsconfig/nestjs.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "dist"
+  }
+}

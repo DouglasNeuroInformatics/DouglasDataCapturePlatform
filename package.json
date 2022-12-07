@@ -1,5 +1,5 @@
 {
-  "name": "douglas-data-capture-platform",
+  "name": "@dnp/douglas-data-capture-platform",
   "version": "0.0.0",
   "private": true,
   "workspaces": [
@@ -8,22 +8,22 @@
   ],
   "license": "GPL-3.0",
   "scripts": {
-    "build": "dotenv -- turbo run build",
+    "build": "turbo run build",
     "clean": "turbo run clean",
-    "dev": "dotenv -- turbo run dev",
+    "dev": "turbo run dev",
     "format": "prettier --write .",
     "lint": "turbo run lint",
-    "test": "dotenv -- turbo run test",
+    "test": "turbo run test",
     "prepare": "husky install"
   },
   "devDependencies": {
+    "@dnp/eslint-config": "*",
     "@types/node": "^18.11.9",
-    "dotenv-cli": "^6.0.0",
     "eslint": "^8.28.0",
-    "eslint-config-dnp": "*",
     "husky": "^8.0.0",
     "prettier": "^2.8.0",
     "turbo": "^1.6.3",
+    "ts-node": "^10.9.1",
     "typescript": "^4.9.3"
   },
   "engines": {
@@ -31,5 +31,4 @@
     "npm": ">=9.0.0 <10.0.0"
   },
   "packageManager": "yarn@1.22.19"
-  
 }

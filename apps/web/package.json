@@ -1,0 +1,25 @@
+{
+  "name": "@dnp/web",
+  "version": "0.0.0",
+  "private": true,
+  "license": "GPL-3.0",
+  "scripts": {
+    "build": "next build",
+    "check-types": "tsc --noemit",
+    "dev": "next dev",
+    "lint": "yarn check-types && next lint --dir . --fix",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@dnp/common": "*",
+    "next": "^13.0.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@dnp/eslint-config": "*",
+    "@dnp/tsconfig": "*",
+    "@types/react": "^18.0.26",
+    "@types/react-dom": "^18.0.9"
+  }
+}
