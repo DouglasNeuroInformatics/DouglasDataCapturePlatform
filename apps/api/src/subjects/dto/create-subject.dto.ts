@@ -1,14 +1,34 @@
-import { IsNotEmpty, IsOptional } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
 
-export type Diagnosis = 'SSD' | 'Affective Psychosis';
+import { Sex, SubjectType } from '@dnp/common/types';
+import { IsNotEmpty, IsIn, IsDate } from 'class-validator';
 
-export class CreateSubjectDto {
+export class CreateSubjectDto implements SubjectType {
+  @ApiProperty({
+    description: "The subject's first name",
+    example: 'Jane'
+  })
   @IsNotEmpty()
   firstName: string;
 
+  @ApiProperty({
+    description: "The subject's last name",
+    example: 'Doe'
+  })
   @IsNotEmpty()
   lastName: string;
 
-  @IsOptional()
-  dx?: Diagnosis;
+  @ApiProperty({
+    description: "The subject's date of birth",
+    example: '2000-01-01'
+  })
+  @IsDate()
+  dateOfBirth: Date;
+
+  @ApiProperty({
+    description: "The subject's biological sex",
+    enum: ['male', 'female'],
+  })
+  @IsIn(['male', 'female'])
+  sex: Sex;
 }

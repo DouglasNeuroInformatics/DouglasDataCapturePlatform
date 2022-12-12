@@ -1,41 +1,43 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, Post } from '@nestjs/common';
+import { ApiBody, ApiExtraModels, ApiResponse, ApiTags } from '@nestjs/swagger';
 
-import { CreateSubjectDto, Diagnosis } from './dto/create-subject.dto';
-import { SubjectsFilterDto } from './dto/subjects-filter.dto';
-import { UpdateDiagnosisDto } from './dto/update-diagnosis.dto';
-import { Subject } from './subject.model';
+import { CreateSubjectDto } from './dto/create-subject.dto';
+import { Subject } from './schemas/subject.schema';
 import { SubjectsService } from './subjects.service';
 
+@ApiExtraModels(Subject)
+@ApiTags('subjects')
 @Controller('subjects')
 export class SubjectsController {
   constructor(private subjectsService: SubjectsService) {}
 
   @Get()
-  find(@Query() filterDto: SubjectsFilterDto): Subject[] {
-    if (Object.keys(filterDto).length > 0) {
-      return this.subjectsService.findWithFilters(filterDto);
-    }
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'The resource has been fetched and transmitted in the message body',
+    type: [Subject]
+  })
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: 'The resource has been fetched and transmitted in the message body'
+  })
+  findAll(): Promise<Subject[]> {
     return this.subjectsService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string): Subject {
+  findOne(@Param('id') id: string): Promise<Subject> {
     return this.subjectsService.findOne(id);
   }
 
-  @Delete(':id')
-  delete(@Param('id') id: string): void {
-    return this.subjectsService.delete(id);
-  }
-
   @Post()
-  create(@Body() createSubjectDto: CreateSubjectDto): Subject {
-    const { firstName, lastName } = createSubjectDto;
-    return this.subjectsService.create(firstName, lastName);
+  @ApiBody({ type: [CreateSubjectDto] })
+  create(@Body() createSubjectDto: CreateSubjectDto): Promise<Subject> {
+    return this.subjectsService.create(createSubjectDto);
   }
 
-  @Patch(':id/dx')
-  updateDiagnosis(@Param('id') id: string, @Body() updateDiagnosisDto: UpdateDiagnosisDto): Subject {
-    return this.subjectsService.updateDiagnosis(id, updateDiagnosisDto.dx);
+  @Delete(':id')
+  delete(@Param('id') id: string): Promise<Subject> {
+    return this.subjectsService.delete(id);
   }
 }

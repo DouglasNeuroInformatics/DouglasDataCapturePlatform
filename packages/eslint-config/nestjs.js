@@ -22,7 +22,8 @@ module.exports = {
             pattern: '@nestjs/**',
             position: 'before'
           }
-        ]
+        ],
+        pathGroupsExcludedImportTypes: ['@nestjs']
       }
     ]
   }

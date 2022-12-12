@@ -1,52 +1,40 @@
 import { createHash } from 'node:crypto';
 
-import { StringUtils } from '@dnp/common/utils';
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
 
-import { Diagnosis } from './dto/create-subject.dto';
-import { SubjectsFilterDto } from './dto/subjects-filter.dto';
-import { Subject } from './subject.model';
+import { StringUtils } from '@dnp/common/utils';
+import { Model } from 'mongoose';
+
+import { CreateSubjectDto } from './dto/create-subject.dto';
+import { Subject, SubjectDocument } from './schemas/subject.schema';
 
 @Injectable()
 export class SubjectsService {
-  private subjects: Subject[] = [];
+  constructor(@InjectModel(Subject.name) private readonly subjectModel: Model<SubjectDocument>) {}
 
-  findAll(): Subject[] {
-    return this.subjects;
+  findAll(): Promise<Subject[]> {
+    return this.subjectModel.find().exec();
   }
 
-  findWithFilters(filterDto: SubjectsFilterDto): Subject[] {
-    const subjects = [...this.findAll()];
-    console.log(subjects);
-    return subjects.filter((subj) => subj.dx === filterDto.dx);
-  }
-
-  findOne(id: string): Subject {
-    const subject = this.subjects.find((subject) => subject._id === id);
+  async findOne(id: string): Promise<Subject> {
+    const subject = await this.subjectModel.findById(id).exec();
     if (!subject) {
       throw new NotFoundException();
     }
     return subject;
   }
 
-  create(firstName: string, lastName: string): Subject {
-    const subject: Subject = {
-      _id: this.generateSubjectId(firstName, lastName, new Date()),
-      firstName: firstName,
-      lastName: lastName
-    };
-    this.subjects.push(subject);
-    return subject;
+  create(createSubjectDto: CreateSubjectDto): Promise<Subject> {
+    return this.subjectModel.create(createSubjectDto);
   }
 
-  delete(id: string): void {
-    this.subjects = this.subjects.filter((subject) => subject._id !== id);
-  }
-
-  updateDiagnosis(id: string, dx: Diagnosis): Subject {
-    const subject = this.findOne(id);
-    subject.dx = dx;
-    return subject;
+  async delete(id: string): Promise<Subject> {
+    const deletedSubject = await this.subjectModel.findByIdAndDelete(id).exec();
+    if (!deletedSubject) {
+      throw new NotFoundException();
+    }
+    return deletedSubject;
   }
 
   private generateSubjectId(firstName: string, lastName: string, dateOfBirth: Date): string {
