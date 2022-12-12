@@ -27,7 +27,7 @@ export class CreateSubjectDto implements SubjectType {
 
   @ApiProperty({
     description: "The subject's biological sex",
-    enum: ['male', 'female'],
+    enum: ['male', 'female']
   })
   @IsIn(['male', 'female'])
   sex: Sex;

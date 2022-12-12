@@ -6,7 +6,6 @@ import { HydratedDocument } from 'mongoose';
 
 @Schema({ strict: true, timestamps: true })
 export class Subject implements SubjectType {
-
   @ApiProperty()
   @Prop({ required: true })
   _id: string;
