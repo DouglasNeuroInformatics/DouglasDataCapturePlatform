@@ -6,7 +6,15 @@ import { AppModule } from './app.module';
 
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(
+    new ValidationPipe({
+      enableDebugMessages: true,
+
+      forbidNonWhitelisted: true,
+      transform: true,
+      whitelist: true
+    })
+  );
   app.setGlobalPrefix('/api');
 
   const documentConfig = new DocumentBuilder()

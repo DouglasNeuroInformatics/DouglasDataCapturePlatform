@@ -26,7 +26,11 @@ export class SubjectsService {
   }
 
   create(createSubjectDto: CreateSubjectDto): Promise<Subject> {
-    return this.subjectModel.create(createSubjectDto);
+    const subjectData = {
+      _id: this.generateSubjectId(createSubjectDto.firstName, createSubjectDto.lastName, createSubjectDto.dateOfBirth),
+      ...createSubjectDto
+    };
+    return this.subjectModel.create(subjectData);
   }
 
   async delete(id: string): Promise<Subject> {
@@ -38,6 +42,7 @@ export class SubjectsService {
   }
 
   private generateSubjectId(firstName: string, lastName: string, dateOfBirth: Date): string {
+    console.log(typeof dateOfBirth);
     const shortDateOfBirth = dateOfBirth.toISOString().split('T')[0];
     const source = StringUtils.sanitize(firstName + lastName) + StringUtils.sanitize(shortDateOfBirth, true);
     return createHash('sha256').update(source).digest('hex');
