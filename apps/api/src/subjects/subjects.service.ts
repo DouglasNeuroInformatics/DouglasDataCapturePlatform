@@ -1,6 +1,6 @@
 import { createHash } from 'node:crypto';
 
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
 import { StringUtils } from '@dnp/common/utils';
@@ -25,12 +25,16 @@ export class SubjectsService {
     return subject;
   }
 
-  create(createSubjectDto: CreateSubjectDto): Promise<Subject> {
-    const subjectData = {
-      _id: this.generateSubjectId(createSubjectDto.firstName, createSubjectDto.lastName, createSubjectDto.dateOfBirth),
-      ...createSubjectDto
-    };
-    return this.subjectModel.create(subjectData);
+  async create(createSubjectDto: CreateSubjectDto): Promise<Subject> {
+    const subjectId = this.generateSubjectId(
+      createSubjectDto.firstName,
+      createSubjectDto.lastName,
+      createSubjectDto.dateOfBirth
+    );
+    if (await this.subjectModel.exists({ _id: subjectId })) {
+      throw new BadRequestException('Subject already registered in database');
+    }
+    return this.subjectModel.create({ _id: subjectId, ...createSubjectDto });
   }
 
   async delete(id: string): Promise<Subject> {
