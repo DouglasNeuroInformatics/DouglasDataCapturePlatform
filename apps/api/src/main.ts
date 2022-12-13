@@ -9,7 +9,6 @@ async function bootstrap(): Promise<void> {
   app.useGlobalPipes(
     new ValidationPipe({
       enableDebugMessages: true,
-
       forbidNonWhitelisted: true,
       transform: true,
       whitelist: true
