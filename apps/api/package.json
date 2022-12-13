@@ -5,7 +5,7 @@
   "license": "GPL-3.0",
   "scripts": {
     "build": "nest build",
-    "dev": "nest start --watch",
+    "dev": "NODE_ENV=development nest start --watch",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "prebuild": "rm -rf dist",
     "start": "nest start",

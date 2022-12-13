@@ -1,52 +1,39 @@
 import { createHash } from 'node:crypto';
 
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 import { StringUtils } from '@dnp/common/utils';
-import { Model } from 'mongoose';
 
 import { CreateSubjectDto } from './dto/create-subject.dto';
-import { Subject, SubjectDocument } from './schemas/subject.schema';
+import { Subject } from './schemas/subject.schema';
+import { SubjectsRepository } from './subjects.repository';
 
 @Injectable()
 export class SubjectsService {
-  constructor(@InjectModel(Subject.name) private readonly subjectModel: Model<SubjectDocument>) {}
+  constructor(private readonly subjectsRepository: SubjectsRepository) {}
 
   findAll(): Promise<Subject[]> {
-    return this.subjectModel.find().exec();
+    return this.subjectsRepository.findAll();
   }
 
-  async findOne(id: string): Promise<Subject> {
-    const subject = await this.subjectModel.findById(id).exec();
-    if (!subject) {
-      throw new NotFoundException();
-    }
-    return subject;
+  findById(id: string): Promise<Subject> {
+    return this.subjectsRepository.findById(id);
   }
 
-  async create(createSubjectDto: CreateSubjectDto): Promise<Subject> {
+  create(createSubjectDto: CreateSubjectDto): Promise<Subject> {
     const subjectId = this.generateSubjectId(
       createSubjectDto.firstName,
       createSubjectDto.lastName,
       createSubjectDto.dateOfBirth
     );
-    if (await this.subjectModel.exists({ _id: subjectId })) {
-      throw new BadRequestException('Subject already registered in database');
-    }
-    return this.subjectModel.create({ _id: subjectId, ...createSubjectDto });
+    return this.subjectsRepository.create({ _id: subjectId, ...createSubjectDto });
   }
 
-  async delete(id: string): Promise<Subject> {
-    const deletedSubject = await this.subjectModel.findByIdAndDelete(id).exec();
-    if (!deletedSubject) {
-      throw new NotFoundException();
-    }
-    return deletedSubject;
+  deleteById(id: string): Promise<void> {
+    return this.subjectsRepository.deleteById(id);
   }
 
   private generateSubjectId(firstName: string, lastName: string, dateOfBirth: Date): string {
-    console.log(typeof dateOfBirth);
     const shortDateOfBirth = dateOfBirth.toISOString().split('T')[0];
     const source = StringUtils.sanitize(firstName + lastName) + StringUtils.sanitize(shortDateOfBirth, true);
     return createHash('sha256').update(source).digest('hex');

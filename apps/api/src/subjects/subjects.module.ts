@@ -3,6 +3,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 
 import { Subject, SubjectSchema } from './schemas/subject.schema';
 import { SubjectsController } from './subjects.controller';
+import { SubjectsRepository } from './subjects.repository';
 import { SubjectsService } from './subjects.service';
 
 @Module({
@@ -15,6 +16,6 @@ import { SubjectsService } from './subjects.service';
     ])
   ],
   controllers: [SubjectsController],
-  providers: [SubjectsService]
+  providers: [SubjectsRepository, SubjectsService]
 })
 export class SubjectsModule {}
