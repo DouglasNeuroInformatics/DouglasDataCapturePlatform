@@ -14,6 +14,7 @@ async function bootstrap(): Promise<void> {
       whitelist: true
     })
   );
+  app.enableCors();
   app.setGlobalPrefix('/api');
 
   const documentConfig = new DocumentBuilder()
