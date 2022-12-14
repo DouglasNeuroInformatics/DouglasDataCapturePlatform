@@ -23,6 +23,6 @@ export class UsersService {
   }
 
   async delete(username: string): Promise<void> {
-    return this.usersRepository.deleteOne({ username })
+    return this.usersRepository.deleteOne({ username });
   }
 }

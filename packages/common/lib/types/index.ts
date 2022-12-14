@@ -12,5 +12,5 @@ export type UserRole = 'admin';
 export interface UserType {
   username: string;
   password: string;
-  role: UserRole
+  role: UserRole;
 }

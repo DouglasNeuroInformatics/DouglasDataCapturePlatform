@@ -49,15 +49,15 @@ export abstract class EntityRepository<T extends Document> {
 
   async deleteById(id: string): Promise<void> {
     const entity = await this.findById(id);
-    entity.delete()
+    entity.delete();
   }
 
   async deleteOne(filterQuery: FilterQuery<T>): Promise<void> {
     const entity = await this.findOne(filterQuery);
-    entity.delete()
+    entity.delete();
   }
 
   async exists(filterQuery: FilterQuery<T>): Promise<boolean> {
-    return await this.entityModel.exists(filterQuery).exec() !== null;
+    return (await this.entityModel.exists(filterQuery).exec()) !== null;
   }
 }

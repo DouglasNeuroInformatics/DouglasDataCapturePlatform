@@ -10,7 +10,7 @@ export class UsersController {
 
   @Get()
   findAll(): Promise<User[]> {
-    return this.usersService.findAll()
+    return this.usersService.findAll();
   }
 
   @Get(':username')
@@ -25,7 +25,6 @@ export class UsersController {
 
   @Delete(':username')
   delete(@Param('username') username: string): Promise<void> {
-    return this.usersService.delete(username)
+    return this.usersService.delete(username);
   }
-
 }

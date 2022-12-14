@@ -6,7 +6,7 @@ import { userRoles } from '../schemas/user.schema';
 export class CreateUserDto implements UserType {
   @IsString()
   @IsNotEmpty()
-  username: string
+  username: string;
 
   @IsString()
   @IsNotEmpty()
@@ -15,5 +15,5 @@ export class CreateUserDto implements UserType {
   @IsIn(userRoles)
   @IsString()
   @IsNotEmpty()
-  role: UserRole
+  role: UserRole;
 }
