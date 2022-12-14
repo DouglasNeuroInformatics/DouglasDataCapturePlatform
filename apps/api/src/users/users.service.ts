@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 
 import { User } from './schemas/user.schema';
 import { UsersRepository } from './users.repository';
@@ -17,7 +17,7 @@ export class UsersService {
 
   async create(user: User): Promise<User> {
     if (await this.usersRepository.exists({ username: user.username })) {
-      throw new BadRequestException(`User with username '${user.username}' already exists!`);
+      throw new ConflictException(`User with username '${user.username}' already exists!`);
     }
     return this.usersRepository.create(user);
   }
