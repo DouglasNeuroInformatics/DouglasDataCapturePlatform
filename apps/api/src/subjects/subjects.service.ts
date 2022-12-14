@@ -1,6 +1,6 @@
 import { createHash } from 'node:crypto';
 
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 
 import { StringUtils } from '@dnp/common/utils';
 

@@ -1,3 +1,5 @@
+import { NotFoundException } from '@nestjs/common';
+
 import { Document, FilterQuery, Model, UpdateQuery } from 'mongoose';
 
 export class RepositoryOperationError extends Error {
@@ -11,12 +13,19 @@ export abstract class EntityRepository<T extends Document> {
   constructor(protected readonly entityModel: Model<T>) {}
 
   async create(entityDoc: unknown): Promise<T> {
-    const entity = new this.entityModel(entityDoc);
-    return entity.save();
+    return this.entityModel.create(entityDoc);
   }
 
   async find(filterQuery: FilterQuery<T>, projection?: Record<string, unknown>): Promise<T[]> {
     return this.entityModel.find(filterQuery, projection).exec();
+  }
+
+  async findOne(filterQuery: FilterQuery<T>, projection?: Record<string, unknown>): Promise<T> {
+    const entity = await this.entityModel.findOne(filterQuery, projection).exec();
+    if (!entity) {
+      throw new NotFoundException();
+    }
+    return entity;
   }
 
   async findAll(): Promise<T[]> {
@@ -26,25 +35,29 @@ export abstract class EntityRepository<T extends Document> {
   async findById(id: string): Promise<T> {
     const entity = await this.entityModel.findById(id);
     if (!entity) {
-      throw new RepositoryOperationError(`Failed to find document with id: ${id}`);
+      throw new NotFoundException();
     }
     return entity;
   }
 
   async updateById(id: string, updateQuery: UpdateQuery<unknown>): Promise<T> {
-    const updatedEntity = await this.entityModel.findByIdAndUpdate(id, updateQuery, {
+    const entity = await this.findById(id);
+    return entity.update(updateQuery, {
       new: true
     });
-    if (!updatedEntity) {
-      throw new RepositoryOperationError(`Failed to find document with id: ${id}`);
-    }
-    return updatedEntity;
   }
 
   async deleteById(id: string): Promise<void> {
-    const deletedEntity = await this.entityModel.findByIdAndDelete(id);
-    if (!deletedEntity) {
-      throw new RepositoryOperationError(`Failed to find document with id: ${id}`);
-    }
+    const entity = await this.findById(id);
+    entity.delete()
+  }
+
+  async deleteOne(filterQuery: FilterQuery<T>): Promise<void> {
+    const entity = await this.findOne(filterQuery);
+    entity.delete()
+  }
+
+  async exists(filterQuery: FilterQuery<T>): Promise<boolean> {
+    return await this.entityModel.exists(filterQuery).exec() !== null;
   }
 }

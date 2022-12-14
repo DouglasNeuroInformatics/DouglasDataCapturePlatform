@@ -6,3 +6,11 @@ export interface SubjectType {
   dateOfBirth: Date;
   sex: Sex;
 }
+
+export type UserRole = 'admin';
+
+export interface UserType {
+  username: string;
+  password: string;
+  role: UserRole
+}
