@@ -1,6 +1,6 @@
 import { createHash } from 'node:crypto';
 
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 import { StringUtils } from '@dnp/common/utils';
 
@@ -16,8 +16,12 @@ export class SubjectsService {
     return this.subjectsRepository.findAll();
   }
 
-  findById(id: string): Promise<Subject> {
-    return this.subjectsRepository.findById(id);
+  async findById(id: string): Promise<Subject> {
+    const subject = await this.subjectsRepository.findById(id);
+    if (!subject) {
+      throw new NotFoundException();
+    }
+    return subject;
   }
 
   create(createSubjectDto: CreateSubjectDto): Promise<Subject> {
@@ -29,8 +33,11 @@ export class SubjectsService {
     return this.subjectsRepository.create({ _id: subjectId, ...createSubjectDto });
   }
 
-  deleteById(id: string): Promise<void> {
-    return this.subjectsRepository.deleteById(id);
+  async deleteById(id: string): Promise<void> {
+    const deleted = await this.subjectsRepository.deleteById(id);
+    if (!deleted) {
+      throw new NotFoundException()
+    }
   }
 
   private generateSubjectId(firstName: string, lastName: string, dateOfBirth: Date): string {
