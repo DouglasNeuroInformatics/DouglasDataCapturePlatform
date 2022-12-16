@@ -1,13 +1,23 @@
 import React from 'react';
 
-import { Form } from '@dnp/react-form';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
+import IndexPage from './pages/IndexPage';
+import LoginPage from './pages/LoginPage';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <IndexPage />
+  },
+  {
+    path: '/login',
+    element: <LoginPage />
+  }
+]);
 
 const App = () => {
-  return (
-    <div>
-      <Form />
-    </div>
-  );
+  return <RouterProvider router={router} />;
 };
 
 export default App;
