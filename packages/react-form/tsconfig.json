@@ -1,0 +1,7 @@
+{
+  "extends": "@dnp/tsconfig/react.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./src"
+  }
+}

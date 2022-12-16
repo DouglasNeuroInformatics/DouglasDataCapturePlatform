@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "@dnp/eslint-config": "*",
+    "@dnp/react-form": "*",
     "@dnp/tsconfig": "*",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.9",

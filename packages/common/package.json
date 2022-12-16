@@ -7,7 +7,8 @@
     "@dnp/tsconfig": "*"
   },
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "dev": "tsc --watch"
   },
   "exports": {
     "./types": {

@@ -3,11 +3,9 @@
   "display": "React",
   "extends": "./base.json",
   "compilerOptions": {
-    "incremental": true,
     "jsx": "react",
     "module": "esnext",
     "moduleResolution": "node",
-    "noEmit": true,
     "resolveJsonModule": true,
     "useDefineForClassFields": true
   },
