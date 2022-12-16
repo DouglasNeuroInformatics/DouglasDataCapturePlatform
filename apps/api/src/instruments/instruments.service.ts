@@ -1,7 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 
-import { CreateInstrumentDto } from './dto/create-instrument.dto';
-import { UpdateInstrumentDto } from './dto/update-instrument.dto';
+import { CreateInstrumentDto } from '@dnp/common/dto';
+import { UpdateInstrumentDto } from '@dnp/common/dto';
+
 import { InstrumentsRepository } from './instruments.repository';
 import { Instrument } from './schemas/instrument.schema';
 

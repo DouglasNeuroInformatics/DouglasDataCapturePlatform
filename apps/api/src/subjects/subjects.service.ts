@@ -2,9 +2,9 @@ import { createHash } from 'node:crypto';
 
 import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 
+import { CreateSubjectDto } from '@dnp/common/dto';
 import { StringUtils } from '@dnp/common/utils';
 
-import { CreateSubjectDto } from './dto/create-subject.dto';
 import { Subject } from './schemas/subject.schema';
 import { SubjectsRepository } from './subjects.repository';
 

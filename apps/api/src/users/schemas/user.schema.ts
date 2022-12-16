@@ -1,9 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
-import { UserRole } from '@dnp/common/types';
+import { UserRole } from '@dnp/common/enums';
 import { HydratedDocument } from 'mongoose';
-
-export const userRoles: UserRole[] = ['admin'];
 
 @Schema({ strict: true, timestamps: true })
 export class User {
@@ -13,7 +11,7 @@ export class User {
   @Prop({ required: true })
   password: string;
 
-  @Prop({ required: true, enum: userRoles })
+  @Prop({ enum: Object.values(UserRole), required: true })
   role: UserRole;
 }
 

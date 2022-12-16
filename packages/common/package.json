@@ -11,8 +11,13 @@
     "dev": "tsc --watch"
   },
   "exports": {
-    "./types": {
-      "types": "./dist/types/index.d.ts"
+    "./dto": {
+      "types": "./dist/dto/index.d.ts",
+      "default": "./dist/dto/index.js"
+    },
+    "./enums": {
+      "types": "./dist/enums/index.d.ts",
+      "default": "./dist/enums/index.js"
     },
     "./utils": {
       "types": "./dist/utils/index.d.ts",

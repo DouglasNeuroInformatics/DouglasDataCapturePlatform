@@ -1,11 +1,11 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ApiProperty } from '@nestjs/swagger';
 
-import { Sex, SubjectType } from '@dnp/common/types';
+import { Sex } from '@dnp/common/enums';
 import { HydratedDocument } from 'mongoose';
 
 @Schema({ strict: true, timestamps: true })
-export class Subject implements SubjectType {
+export class Subject {
   @ApiProperty()
   @Prop({ required: true })
   _id: string;
@@ -23,8 +23,8 @@ export class Subject implements SubjectType {
   dateOfBirth: Date;
 
   @ApiProperty()
-  @Prop({ required: true, enum: ['male', 'female'] })
-  sex: Sex;
+  @Prop({ enum: Object.values(Sex), required: true })
+  sex: Sex
 }
 
 export type SubjectDocument = HydratedDocument<Subject>;

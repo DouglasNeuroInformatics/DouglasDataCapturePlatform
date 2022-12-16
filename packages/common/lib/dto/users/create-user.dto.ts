@@ -1,9 +1,8 @@
-import { UserRole, UserType } from '@dnp/common/types';
-import { IsNotEmpty, IsIn, IsString, MinLength, MaxLength, Matches } from 'class-validator';
+import { IsNotEmpty, IsEnum, IsString, MinLength, MaxLength, Matches } from 'class-validator';
 
-import { userRoles } from '../schemas/user.schema';
+import { UserRole } from '../../enums/index';
 
-export class CreateUserDto implements UserType {
+export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
   username: string;
@@ -17,8 +16,6 @@ export class CreateUserDto implements UserType {
   @IsNotEmpty()
   password: string;
 
-  @IsIn(userRoles)
-  @IsString()
-  @IsNotEmpty()
+  @IsEnum(UserRole)
   role: UserRole;
 }

@@ -4,7 +4,9 @@
   "compilerOptions": {
     "declaration": true,
     "declarationMap": true,
+    "emitDecoratorMetadata": true,
     "esModuleInterop": true,
+    "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
     "inlineSources": false,
     "isolatedModules": true,
@@ -16,6 +18,7 @@
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
+    "strictPropertyInitialization": false,
     "target": "es6"
   }
 }

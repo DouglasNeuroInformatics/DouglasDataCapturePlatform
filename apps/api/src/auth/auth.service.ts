@@ -1,13 +1,13 @@
 import { Injectable, InternalServerErrorException, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
+import { AuthCredentialsDto } from '@dnp/common/dto';
 import bcrypt from 'bcrypt';
 
 import { User } from '../users/schemas/user.schema';
 import { UsersService } from '../users/users.service';
 
 import { AuthCredentialsResponse, JwtPayload } from './auth.interfaces';
-import { AuthCredentialsDto } from './dto/auth-credentials.dto';
 
 @Injectable()
 export class AuthService {

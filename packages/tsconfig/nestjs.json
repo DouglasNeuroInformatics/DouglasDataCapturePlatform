@@ -3,10 +3,7 @@
   "display": "NestJS",
   "extends": "./base.json",
   "compilerOptions": {
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
     "incremental": true,
-    "module": "commonjs",
-    "strictPropertyInitialization": false
+    "module": "commonjs"
   }
 }
