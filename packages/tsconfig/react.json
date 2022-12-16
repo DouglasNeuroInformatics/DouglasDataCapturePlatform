@@ -8,5 +8,5 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "useDefineForClassFields": true
-  },
+  }
 }
