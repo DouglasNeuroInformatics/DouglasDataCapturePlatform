@@ -2,17 +2,16 @@
   "name": "@dnp/web",
   "version": "0.0.0",
   "private": true,
-  "license": "GPL-3.0",
+  "license": "AGPL-3.0",
+  "type": "module",
   "scripts": {
-    "build": "next build",
-    "check-types": "tsc --noemit",
-    "dev": "next dev",
-    "lint": "yarn check-types && next lint --dir . --fix",
-    "start": "next start"
+    "build": "tsc && vite build",
+    "dev": "vite",
+    "lint": "eslint --fix --ext .tsx,.ts src/**/*",
+    "preview": "vite preview"
   },
   "dependencies": {
     "@dnp/common": "*",
-    "next": "^13.0.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -20,6 +19,9 @@
     "@dnp/eslint-config": "*",
     "@dnp/tsconfig": "*",
     "@types/react": "^18.0.26",
-    "@types/react-dom": "^18.0.9"
+    "@types/react-dom": "^18.0.9",
+    "@vitejs/plugin-react-swc": "^3.0.0",
+    "typescript": "^4.9.3",
+    "vite": "^4.0.0"
   }
 }

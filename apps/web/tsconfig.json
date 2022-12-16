@@ -1,8 +1,6 @@
 {
-  "extends": "@dnp/tsconfig/nextjs.json",
+  "extends": "@dnp/tsconfig/react.json",
   "compilerOptions": {
     "outDir": "dist"
-  },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  }
 }

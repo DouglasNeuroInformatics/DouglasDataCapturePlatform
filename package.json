@@ -2,11 +2,12 @@
   "name": "@dnp/douglas-data-capture-platform",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
   "workspaces": [
     "apps/*",
     "packages/*"
   ],
-  "license": "GPL-3.0",
+  "license": "AGPL-3.0",
   "scripts": {
     "build": "turbo run build",
     "clean": "turbo run clean",

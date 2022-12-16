@@ -3,7 +3,7 @@ module.exports = {
   env: {
     browser: true
   },
-  extends: ['./base', 'next', 'turbo', 'prettier'],
+  extends: ['./base', 'prettier'],
   parserOptions: {
     ecmaFeatures: {
       jsx: true
