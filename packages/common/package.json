@@ -8,7 +8,7 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
-    "lint": "eslint --fix ."
+    "lint": "eslint --fix lib"
   },
   "exports": {
     "./dto": {
