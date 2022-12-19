@@ -2,6 +2,7 @@
   "name": "@dnp/douglas-data-capture-platform",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
   "workspaces": [
     "apps/*",
     "packages/*"
@@ -17,7 +18,7 @@
     "prepare": "husky install"
   },
   "devDependencies": {
-    "@dnp/eslint-config": "*",
+    "@dnp/tsconfig": "*",
     "@types/node": "^18.11.9",
     "@typescript-eslint/eslint-plugin": "^5.46.1",
     "@typescript-eslint/parser": "^5.46.1",

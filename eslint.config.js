@@ -1,9 +1,9 @@
-const globals = require('globals');
-const importPlugin = require('eslint-plugin-import');
-const prettierConfig = require('eslint-config-prettier');
-const reactPlugin = require('eslint-plugin-react');
-const tsParser = require('@typescript-eslint/parser');
-const tsPlugin = require('@typescript-eslint/eslint-plugin');
+import globals from 'globals';
+import importPlugin from 'eslint-plugin-import';
+import prettierConfig from 'eslint-config-prettier';
+import reactPlugin from 'eslint-plugin-react';
+import tsParser from '@typescript-eslint/parser';
+import tsPlugin from '@typescript-eslint/eslint-plugin';
 
 /**
  * GENERIC CONFIGS
@@ -19,6 +19,7 @@ const baseConfig = {
     parser: tsParser,
     parserOptions: {
       ecmaVersion: 'latest',
+      project: ['./tsconfig.json'],
       sourceType: 'module'
     }
   },
@@ -28,7 +29,7 @@ const baseConfig = {
   },
   rules: {
     ...tsPlugin.configs['recommended'].rules,
-    // ...tsPlugin.configs['recommended-requiring-type-checking'].rules,
+    ...tsPlugin.configs['recommended-requiring-type-checking'].rules,
     'import/exports-last': 'error',
     'import/newline-after-import': 'error',
     'import/order': [
@@ -162,4 +163,4 @@ const webConfig = { ...jsxConfig, files: ['apps/web/**/*.ts', 'apps/web/**/*.tsx
  * CONFIG CASCADE
  */
 
-module.exports = ['eslint:recommended', prettierConfig, baseConfig, jsxConfig, apiConfig, webConfig];
+export default ['eslint:recommended', prettierConfig, baseConfig, jsxConfig, apiConfig, webConfig];
