@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc && vite build",
     "dev": "vite",
-    "lint": "eslint --fix --ext .tsx,.ts src/**/*",
+    "lint": "eslint --fix .",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -17,7 +17,6 @@
     "react-router-dom": "^6.4.5"
   },
   "devDependencies": {
-    "@dnp/eslint-config": "*",
     "@dnp/react-form": "*",
     "@dnp/tsconfig": "*",
     "@types/react": "^18.0.26",
