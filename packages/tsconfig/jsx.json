@@ -4,7 +4,6 @@
   "extends": "./base.json",
   "compilerOptions": {
     "jsx": "react",
-    "module": "ESNext",
     "resolveJsonModule": true,
     "useDefineForClassFields": true
   }
