@@ -1,13 +1,30 @@
 import React from 'react';
 
-import LoginForm from '../components/LoginForm.js';
+import Layout from '../components/Layout.js';
 
 const LoginPage = () => {
+  const handleSubmitLogin: React.FormEventHandler<HTMLFormElement> = (event) => {
+    event.preventDefault();
+    alert('Not Implemented!');
+  };
+
   return (
-    <div>
+    <Layout>
       <h1>Login Page</h1>
-      <LoginForm />
-    </div>
+      <form className="border-2" onSubmit={handleSubmitLogin}>
+        <div>
+          <label htmlFor="username">Username</label>
+          <input id="username" name="username" type="text" />
+        </div>
+        <div>
+          <label htmlFor="username">Password</label>
+          <input id="username" name="username" type="password" />
+        </div>
+        <button className="bg-slate-500" type="submit">
+          Login
+        </button>
+      </form>
+    </Layout>
   );
 };
 
