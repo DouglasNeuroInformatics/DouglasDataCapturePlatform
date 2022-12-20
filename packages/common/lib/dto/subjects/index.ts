@@ -1,7 +1,7 @@
 import { Type } from 'class-transformer';
 import { IsNotEmpty, IsEnum, IsString, IsDate } from 'class-validator';
 
-import { Sex } from '../../enums/index';
+import { Sex } from '../../enums/index.js';
 
 export class CreateSubjectDto {
   @IsString()

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import API from '../api';
+import API from '../api/index.js';
 
 const LoginForm = () => {
   const handleSubmit: React.FormEventHandler = (event) => {

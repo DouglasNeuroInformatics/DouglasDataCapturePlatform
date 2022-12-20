@@ -1,5 +1,5 @@
 {
-  "extends": "@dnp/tsconfig/react.json",
+  "extends": "@dnp/tsconfig/jsx.json",
   "compilerOptions": {
     "outDir": "dist"
   }

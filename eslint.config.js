@@ -23,7 +23,6 @@ const baseConfig = {
     parser: tsParser,
     parserOptions: {
       ecmaVersion: 'latest',
-      //tsconfigRootDir: rootDir,
       project: [path.resolve(rootDir, 'tsconfig.eslint.json')],
       sourceType: 'module'
     }

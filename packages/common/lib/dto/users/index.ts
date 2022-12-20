@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsEnum, IsString, MinLength, MaxLength, Matches } from 'class-validator';
 
-import { UserRole } from '../../enums/index';
+import { UserRole } from '../../enums/index.js';
 
 export class CreateUserDto {
   @IsString()

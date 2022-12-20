@@ -2,11 +2,13 @@
   "name": "@dnp/common",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
   "devDependencies": {
     "@dnp/tsconfig": "*"
   },
   "scripts": {
     "build": "tsc",
+    "clean": "rm -rf dist",
     "dev": "tsc --watch",
     "lint": "eslint --fix lib"
   },
