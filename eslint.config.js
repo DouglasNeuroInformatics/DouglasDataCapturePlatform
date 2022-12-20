@@ -1,3 +1,6 @@
+import path from 'path';
+import url from 'url';
+
 import globals from 'globals';
 import importPlugin from 'eslint-plugin-import';
 import prettierConfig from 'eslint-config-prettier';
@@ -5,9 +8,10 @@ import reactPlugin from 'eslint-plugin-react';
 import tsParser from '@typescript-eslint/parser';
 import tsPlugin from '@typescript-eslint/eslint-plugin';
 
-/**
- * GENERIC CONFIGS
- */
+// Replicate the functionality of __dirname in ES module
+const rootDir = path.dirname(url.fileURLToPath(import.meta.url));
+
+// GENERIC CONFIGS
 
 const baseConfig = {
   files: ['**/*.ts', '**/*.tsx'],
@@ -19,10 +23,11 @@ const baseConfig = {
     parser: tsParser,
     parserOptions: {
       ecmaVersion: 'latest',
-      project: ['./tsconfig.json'],
+      //tsconfigRootDir: rootDir,
+      project: [path.resolve(rootDir, 'tsconfig.eslint.json')],
       sourceType: 'module'
     }
-  },
+  }, 
   plugins: {
     '@typescript-eslint': tsPlugin,
     import: importPlugin
@@ -32,6 +37,7 @@ const baseConfig = {
     ...tsPlugin.configs['recommended-requiring-type-checking'].rules,
     'import/exports-last': 'error',
     'import/newline-after-import': 'error',
+    'import/no-nodejs-modules': 'error',
     'import/order': [
       'error',
       {
@@ -121,9 +127,7 @@ const jsxConfig = {
   }
 };
 
-/**
- * PROJECT-SPECIFIC CONFIGS
- */
+// PROJECT-SPECIFIC CONFIGS
 
 const apiConfig = {
   files: ['apps/api/**/*.ts'],
@@ -159,8 +163,6 @@ const apiConfig = {
 
 const webConfig = { ...jsxConfig, files: ['apps/web/**/*.ts', 'apps/web/**/*.tsx'] };
 
-/**
- * CONFIG CASCADE
- */
+// CONFIG CASCADE
 
 export default ['eslint:recommended', prettierConfig, baseConfig, jsxConfig, apiConfig, webConfig];
