@@ -1,8 +1,9 @@
 {
   "extends": "@dnp/tsconfig/base.json",
   "compilerOptions": {
-    "baseUrl": ".",
     "outDir": "dist",
-    "module": "CommonJS"
-  }
+    "module": "CommonJS",
+    "moduleResolution": "Node16",
+  },
+  "include": ["src/**/*"]
 }
