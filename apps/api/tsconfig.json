@@ -1,7 +1,8 @@
 {
-  "extends": "@dnp/tsconfig/nestjs.json",
+  "extends": "@dnp/tsconfig/base.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "outDir": "dist"
+    "outDir": "dist",
+    "module": "CommonJS"
   }
 }
