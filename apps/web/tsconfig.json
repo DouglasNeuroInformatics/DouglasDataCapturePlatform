@@ -1,6 +1,7 @@
 {
   "extends": "@dnp/tsconfig/jsx.json",
   "compilerOptions": {
+    "allowJs": true,
     "outDir": "dist"
   }
 }

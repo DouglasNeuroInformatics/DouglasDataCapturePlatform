@@ -1,13 +1,17 @@
 import React from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import Layout from '../components/Layout.js';
 
 const IndexPage = () => {
+  const { t } = useTranslation('common');
+
   return (
     <Layout>
       <div className="py-6 sm:py-10">
         <h1 className="text-center text-4xl font-extrabold text-slate-900 dark:text-white sm:text-5xl lg:text-6xl">
-          Welcome to the Douglas Data Capture Platform
+          {t('welcomeMessage')}
         </h1>
         <p className="mx-auto mt-6 max-w-3xl text-center text-lg text-slate-600 dark:text-slate-400">
           The Douglas Data Capture Platform is build from the ground up to serve the needs of clinical researchers. The

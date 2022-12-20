@@ -1,8 +1,13 @@
 import React from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import Layout from '../components/Layout.js';
 
+
 const LoginPage = () => {
+  const { t } = useTranslation();
+  
   const handleSubmitLogin: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
     alert('Not Implemented!');
