@@ -20,7 +20,6 @@ export class AuthAPI extends BaseAPI {
     }
 
     const data = await response.json() as unknown;
-    const dto = Object.assign(new AuthLoginResponseDto(), data);
-    return dto;
+    return { accessToken : ''};
   }
 }
