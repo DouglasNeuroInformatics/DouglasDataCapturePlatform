@@ -5,15 +5,14 @@ import Sidebar from './Sidebar.js';
 
 interface LayoutProps {
   children: React.ReactNode;
-  showSidebar?: boolean;
 }
 
-const Layout = ({ children, showSidebar = true }: LayoutProps) => {
+const Layout = ({ children }: LayoutProps) => {
   return (
     <div className="flex h-screen">
-      {showSidebar && <Sidebar />}
-      <div>
-        <main className="container mx-auto grow">{children}</main>
+      <Sidebar />
+      <div className="container mx-auto flex min-h-full grow flex-col overflow-scroll">
+        <main className="flex-grow">{children}</main>
         <Footer />
       </div>
     </div>

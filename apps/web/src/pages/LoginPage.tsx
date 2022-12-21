@@ -29,6 +29,7 @@ const LoginPage = () => {
     if (token) {
       authContext.setAuthToken(token);
       navigate('/');
+      window.sessionStorage.setItem('token', token)
     } else {
       alert('Failed to obtain token with credentials');
     }
