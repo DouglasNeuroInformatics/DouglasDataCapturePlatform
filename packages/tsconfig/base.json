@@ -16,6 +16,6 @@
     "sourceMap": true,
     "strict": true,
     "strictPropertyInitialization": false,
-    "target": "ES2017"
+    "target": "ESNext"
   }
 }

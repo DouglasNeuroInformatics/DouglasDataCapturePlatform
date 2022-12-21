@@ -34,6 +34,9 @@ const baseConfig = {
   rules: {
     ...tsPlugin.configs['recommended'].rules,
     ...tsPlugin.configs['recommended-requiring-type-checking'].rules,
+    "@typescript-eslint/no-misused-promises": ['error', {
+      checksVoidReturn: false
+    }],
     'import/exports-last': 'error',
     'import/newline-after-import': 'error',
     'import/no-nodejs-modules': 'error',
@@ -106,7 +109,6 @@ const jsxConfig = {
         unnamedComponents: 'arrow-function'
       }
     ],
-    'react/button-has-type': 'error',
     'react/jsx-sort-props': [
       'error',
       {
