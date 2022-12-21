@@ -5,16 +5,16 @@ import { authRequestSchema } from '@dnp/common/schemas';
 import { joiResolver } from '@hookform/resolvers/joi/dist/joi.js';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 import AuthAPI from '../api/api.auth.js';
 import Button from '../components/Button.js';
-import AuthContext from '../store/auth-context.js';
+import AuthContext from '../store/AuthContext.js';
 
 const LoginPage = () => {
   const authContext = useContext(AuthContext);
+  const navigate = useNavigate();
   const { t } = useTranslation('login');
-
-  console.log(authContext)
 
   const {
     register,
@@ -27,9 +27,10 @@ const LoginPage = () => {
   const onSubmit: SubmitHandler<AuthRequestDto> = async (credentials) => {
     const token = await AuthAPI.requestToken(credentials);
     if (token) {
-      authContext.setAuthToken(token)
+      authContext.setAuthToken(token);
+      navigate('/');
     } else {
-      alert('Failed to obtain token with credentials')
+      alert('Failed to obtain token with credentials');
     }
   };
 

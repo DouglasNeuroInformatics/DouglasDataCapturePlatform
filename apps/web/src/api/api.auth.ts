@@ -1,7 +1,7 @@
 import { AuthRequestDto, AuthResponseDto } from '@dnp/common/dto';
 import { authResponseSchema } from '@dnp/common/schemas';
 
-import { type AuthToken } from '../store/auth-context.js';
+import { type AuthToken } from '../store/AuthContext.js';
 
 import BaseAPI from './api.base.js';
 

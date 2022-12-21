@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useTranslation } from 'react-i18next';
 
-const IndexPage = () => {
+const HomePage = () => {
   const { t } = useTranslation('common');
 
   return (
@@ -22,13 +22,13 @@ const IndexPage = () => {
       <div className="flex justify-center space-x-6 text-sm">
         <a
           className="dark:highlight-white/20 flex h-12 w-full items-center justify-center rounded-lg bg-slate-900 px-6 font-semibold text-white hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50  sm:w-auto"
-          href="/login"
+          href="#"
         >
-          Login
+          Something
         </a>
       </div>
     </div>
   );
 };
 
-export default IndexPage;
+export default HomePage;
