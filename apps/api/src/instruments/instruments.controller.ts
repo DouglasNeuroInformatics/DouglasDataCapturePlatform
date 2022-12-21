@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body } from '@nestjs/common';
 
-import { CreateInstrumentDto } from '@dnp/common/dto';
+import { CreateInstrumentRequestDto } from '@dnp/common/dto';
 
 import { InstrumentsService } from './instruments.service';
 import { Instrument } from './schemas/instrument.schema';
@@ -10,7 +10,7 @@ export class InstrumentsController {
   constructor(private readonly instrumentsService: InstrumentsService) {}
 
   @Post()
-  create(@Body() createInstrumentDto: CreateInstrumentDto): Promise<Instrument> {
+  create(@Body() createInstrumentDto: CreateInstrumentRequestDto): Promise<Instrument> {
     return this.instrumentsService.create(createInstrumentDto);
   }
 

@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import { AuthLoginRequestDto } from '@dnp/common/dto';
-import { classValidatorResolver } from '@hookform/resolvers/class-validator/dist/class-validator.js';
+import { AuthLoginRequestDto, authLoginRequestSchema } from '@dnp/common/dto';
+import { joiResolver } from '@hookform/resolvers/joi/dist/joi.js';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
@@ -16,7 +16,7 @@ const LoginPage = () => {
     handleSubmit,
     formState: { errors }
   } = useForm<AuthLoginRequestDto>({
-    resolver: classValidatorResolver(AuthLoginRequestDto)
+    resolver: joiResolver(authLoginRequestSchema)
   });
 
   const onSubmit: SubmitHandler<AuthLoginRequestDto> = (data) => {

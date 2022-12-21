@@ -24,6 +24,11 @@
       "import": "./dist/esm/enums/index.js",
       "types": "./dist/esm/enums/index.d.ts"
     },
+    "./schemas": {
+      "require": "./dist/cjs/schemas/index.js",
+      "import": "./dist/esm/schemas/index.js",
+      "types": "./dist/esm/schemas/index.d.ts"
+    },
     "./utils": {
       "require": "./dist/cjs/utils/index.js",
       "import": "./dist/esm/utils/index.js",

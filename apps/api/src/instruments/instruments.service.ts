@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 
-import { CreateInstrumentDto } from '@dnp/common/dto';
-import { UpdateInstrumentDto } from '@dnp/common/dto';
+import { CreateInstrumentRequestDto } from '@dnp/common/dto';
+import { UpdateInstrumentRequestDto } from '@dnp/common/dto';
 
 import { InstrumentsRepository } from './instruments.repository';
 import { Instrument } from './schemas/instrument.schema';
@@ -10,7 +10,7 @@ import { Instrument } from './schemas/instrument.schema';
 export class InstrumentsService {
   constructor(private readonly instrumentsRepository: InstrumentsRepository) {}
 
-  create(createInstrumentDto: CreateInstrumentDto): Promise<Instrument> {
+  create(createInstrumentDto: CreateInstrumentRequestDto): Promise<Instrument> {
     return this.instrumentsRepository.create(createInstrumentDto)
   }
 
@@ -23,7 +23,7 @@ export class InstrumentsService {
     return this.instrumentsRepository.find({ kind })
   }
 
-  async update(id: string, updateInstrumentDto: UpdateInstrumentDto): Promise<Instrument> {
+  async update(id: string, updateInstrumentDto: UpdateInstrumentRequestDto): Promise<Instrument> {
     const updatedInstrument = await this.instrumentsRepository.updateById(id, updateInstrumentDto);
     if (!updatedInstrument) {
       throw new NotFoundException()

@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
-import { ApiBody, ApiTags } from '@nestjs/swagger';
+import { ApiTags } from '@nestjs/swagger';
 
-import { CreateSubjectDto } from '@dnp/common/dto';
+import { CreateSubjectRequestDto } from '@dnp/common/dto';
 
 import { Subject } from './schemas/subject.schema';
 import { SubjectsService } from './subjects.service';
@@ -22,8 +22,7 @@ export class SubjectsController {
   }
 
   @Post()
-  @ApiBody({ type: [CreateSubjectDto] })
-  create(@Body() createSubjectDto: CreateSubjectDto): Promise<Subject> {
+  create(@Body() createSubjectDto: CreateSubjectRequestDto): Promise<Subject> {
     return this.subjectsService.create(createSubjectDto);
   }
 

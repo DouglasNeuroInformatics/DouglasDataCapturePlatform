@@ -141,6 +141,7 @@ const apiConfig = {
   rules: {
     '@typescript-eslint/explicit-function-return-type': 'error',
     '@typescript-eslint/explicit-module-boundary-types': 'error',
+    'import/no-nodejs-modules': 'off',
     'import/order': [
       'error',
       {

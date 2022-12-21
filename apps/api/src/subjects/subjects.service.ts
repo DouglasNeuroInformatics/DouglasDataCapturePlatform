@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto';
 
 import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 
-import { CreateSubjectDto } from '@dnp/common/dto';
+import { CreateSubjectRequestDto } from '@dnp/common/dto';
 import { StringUtils } from '@dnp/common/utils';
 
 import { Subject } from './schemas/subject.schema';
@@ -24,16 +24,16 @@ export class SubjectsService {
     return subject;
   }
 
-  async create(createSubjectDto: CreateSubjectDto): Promise<Subject> {
+  async create(createSubjectRequestDto: CreateSubjectRequestDto): Promise<Subject> {
     const subjectId = this.generateSubjectId(
-      createSubjectDto.firstName,
-      createSubjectDto.lastName,
-      createSubjectDto.dateOfBirth
+      createSubjectRequestDto.firstName,
+      createSubjectRequestDto.lastName,
+      createSubjectRequestDto.dateOfBirth
     );
     if (await this.subjectsRepository.exists({ _id: subjectId })) {
       throw new ConflictException('A subject with the provided demographic information already exists')
     }
-    return this.subjectsRepository.create({ _id: subjectId, ...createSubjectDto });
+    return this.subjectsRepository.create({ _id: subjectId, ...createSubjectRequestDto });
   }
 
   async deleteById(id: string): Promise<void> {

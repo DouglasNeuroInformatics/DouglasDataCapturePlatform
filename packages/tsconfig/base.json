@@ -4,9 +4,7 @@
   "compilerOptions": {
     "declaration": true,
     "declarationMap": true,
-    "emitDecoratorMetadata": true,
     "esModuleInterop": true,
-    "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "module": "ES2022",
@@ -15,7 +13,6 @@
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
-    "strictPropertyInitialization": false,
     "target": "ESNext"
   }
 }

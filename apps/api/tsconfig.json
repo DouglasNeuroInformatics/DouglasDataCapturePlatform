@@ -1,9 +1,11 @@
 {
   "extends": "@dnp/tsconfig/base.json",
   "compilerOptions": {
-    "outDir": "dist",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "module": "CommonJS",
-    "moduleResolution": "Node16",
+    "outDir": "dist",
+    "strictPropertyInitialization": false,
   },
   "include": ["src/**/*"]
 }
