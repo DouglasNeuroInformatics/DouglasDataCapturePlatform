@@ -1,4 +1,5 @@
 import { IsNotEmpty, IsString } from 'class-validator';
+import Joi from 'joi';
 
 export class AuthLoginRequestDto {
   @IsString()
@@ -13,3 +14,12 @@ export class AuthLoginRequestDto {
 export class AuthLoginResponseDto {
   accessToken: string;
 }
+
+export const authLoginRequestSchema = Joi.object({
+  username: Joi.string().required(),
+  password: Joi.string().required()
+});
+
+export const authLoginResponseSchema = Joi.object({
+  accessToken: Joi.string().required()
+});

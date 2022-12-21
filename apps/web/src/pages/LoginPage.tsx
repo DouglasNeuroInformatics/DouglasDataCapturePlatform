@@ -1,18 +1,26 @@
 import React, { useState } from 'react';
 
+import { AuthLoginRequestDto } from '@dnp/common/dto';
+import { classValidatorResolver } from '@hookform/resolvers/class-validator/dist/class-validator.js';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+
+import { AuthAPI } from '../api/auth-api.js';
+import Button from '../components/Button.js';
 
 const LoginPage = () => {
   const { t } = useTranslation('login');
 
-  const [credentials, setCredentials] = useState({
-    username: '',
-    password: ''
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<AuthLoginRequestDto>({
+    resolver: classValidatorResolver(AuthLoginRequestDto)
   });
 
-  const handleSubmitLogin: React.FormEventHandler<HTMLFormElement> = (event) => {
-    event.preventDefault();
-    alert('Not Implemented!');
+  const onSubmit: SubmitHandler<AuthLoginRequestDto> = (data) => {
+    alert(JSON.stringify(data));
   };
 
   return (
@@ -21,26 +29,11 @@ const LoginPage = () => {
         <div className="flex justify-center">
           <img alt="logo" className="w-20 p-3" src="/logo.png" />
         </div>
-        <form className="border-2" onSubmit={handleSubmitLogin}>
-          <div className="flex flex-col">
-            <label htmlFor="username">Username</label>
-            <input
-              id="username"
-              name="username"
-              type="text"
-              value={credentials.username}
-              onChange={(event) =>
-                setCredentials((prevCredentials) => ({ ...prevCredentials, username: event.target.value }))
-              }
-            />
-          </div>
-          <div className="flex flex-col">
-            <label htmlFor="username">Password</label>
-            <input id="username" name="username" type="password" value={credentials.password} />
-          </div>
-          <button className="rounded-full bg-cyan-500 px-4 py-2 font-semibold text-white shadow-sm" type="submit">
-            {t('loginBtn')}
-          </button>
+        <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
+          <input placeholder="username" {...register('username')} type="text" />
+          <input placeholder="password" {...register('password')} type="password" />
+          <Button type="submit">{t('loginBtn')}</Button>
+          {errors.username && <span>This field is required</span>}
         </form>
       </div>
     </div>

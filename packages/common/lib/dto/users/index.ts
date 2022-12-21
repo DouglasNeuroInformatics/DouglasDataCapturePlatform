@@ -1,4 +1,5 @@
 import { IsNotEmpty, IsEnum, IsString, MinLength, MaxLength, Matches } from 'class-validator';
+import Joi from 'joi';
 
 import { UserRole } from '../../enums/index.js';
 
@@ -19,3 +20,10 @@ export class CreateUserDto {
   @IsEnum(UserRole)
   role: UserRole;
 }
+
+export const createUserRequestSchema = Joi.object({
+  username: Joi.string().required(),
+  password: Joi.string().min(8).max(32).regex(/[a-z]/).regex(/[A-Z]/).regex(/\d/).required(),
+  role: Joi.string().required()
+  // role: Joi.string().valid(Object.values(UserRole)).required()
+});
