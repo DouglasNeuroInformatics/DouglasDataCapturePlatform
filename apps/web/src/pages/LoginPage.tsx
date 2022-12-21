@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import { AuthLoginRequestDto } from '@dnp/common/dto';
 import { authLoginRequestSchema } from '@dnp/common/schemas';
@@ -7,9 +7,13 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import Button from '../components/Button.js';
+import AuthContext from '../store/auth-context.js';
 
 const LoginPage = () => {
+  const authContext = useContext(AuthContext);
   const { t } = useTranslation('login');
+
+  console.log(authContext);
 
   const {
     register,
@@ -22,10 +26,6 @@ const LoginPage = () => {
   const onSubmit: SubmitHandler<AuthLoginRequestDto> = (data) => {
     alert(JSON.stringify(data));
   };
-
-  if (errors) {
-    console.error(errors);
-  }
 
   return (
     <div className="h-screen">
