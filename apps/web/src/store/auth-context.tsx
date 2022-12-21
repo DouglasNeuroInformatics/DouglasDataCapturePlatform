@@ -1,37 +1,15 @@
-import React, { createContext, useState } from 'react';
+import { createContext, type Dispatch, type SetStateAction } from 'react';
 
 type AuthToken = string | null;
 
-type LoginHandler = (token: string) => void;
-
-type LogoutHandler = () => void;
-
 interface IAuthContext {
   authToken: AuthToken;
-  loginHandler: LoginHandler;
-  logoutHandler: LogoutHandler;
+  setAuthToken: Dispatch<SetStateAction<AuthToken>>;
 }
 
-const AuthContext = createContext<IAuthContext | undefined>(undefined);
+const AuthContext = createContext<IAuthContext>({
+  authToken: null,
+  setAuthToken: () => null
+});
 
-const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const [authToken, setAuthToken] = useState<AuthToken>(null);
-
-  const loginHandler: LoginHandler = (token) => {
-    setAuthToken(token);
-  };
-
-  const logoutHandler: LogoutHandler = () => setAuthToken(null);
-
-  const contextValue: IAuthContext = {
-    authToken: authToken,
-    loginHandler: loginHandler,
-    logoutHandler: logoutHandler
-  };
-
-  return <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>;
-};
-
-export default AuthContext;
-export { AuthContextProvider };
-export type { AuthToken, LoginHandler, LogoutHandler, IAuthContext };
+export { AuthContext as default, type AuthToken, type IAuthContext };

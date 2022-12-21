@@ -14,6 +14,8 @@ const LoginPage = () => {
   const authContext = useContext(AuthContext);
   const { t } = useTranslation('login');
 
+  console.log(authContext)
+
   const {
     register,
     handleSubmit,
@@ -24,7 +26,11 @@ const LoginPage = () => {
 
   const onSubmit: SubmitHandler<AuthRequestDto> = async (credentials) => {
     const token = await AuthAPI.requestToken(credentials);
-    alert(JSON.stringify(token));
+    if (token) {
+      authContext.setAuthToken(token)
+    } else {
+      alert('Failed to obtain token with credentials')
+    }
   };
 
   return (
