@@ -1,5 +1,6 @@
 {
   "platformTitle": "Douglas Data Capture Platform",
+  "organizationName": "Douglas Neuroinformatics Platform",
   "welcomeMessage": "Welcome to the Douglas Data Capture Platform",
   "description": "This is an early prototype of our planned web portal. Here, you can add new subjects to our database and view a simple table of all subjects. Separately, we have also deployed a dashboard with Redash, which is connected to our API.",
   "addNewSubjectMessage": "Try Adding a New Subject",
@@ -11,5 +12,8 @@
     "/view-subjects": "View Subjects",
     "/add-instrument": "Add Instrument",
     "/happiness-scale": "Happiness Scale"
+  },
+  "footer": {
+    "viewSourceCode": "View Source Code"
   }
 }

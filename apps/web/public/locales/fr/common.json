@@ -10,5 +10,8 @@
     "/view-subjects": "Voir toutes les personnes",
     "/add-instrument": "Ajouter un instrument",
     "/happiness-scale": "Échelle du bonheur"
+  },
+  "footer": {
+    "viewSourceCode": "Voir le code source"
   }
 }
