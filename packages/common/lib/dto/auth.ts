@@ -1,8 +1,8 @@
-export interface AuthLoginRequestDto {
+export interface AuthRequestDto {
   username: string;
   password: string;
 }
 
-export interface AuthLoginResponseDto {
+export interface AuthResponseDto {
   accessToken: string;
 }

@@ -32,4 +32,6 @@ const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
   return <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>;
 };
 
-export { AuthContext as default, AuthContextProvider, type IAuthContext, type LoginHandler, type LogoutHandler };
+export default AuthContext;
+export { AuthContextProvider };
+export type { AuthToken, LoginHandler, LogoutHandler, IAuthContext };

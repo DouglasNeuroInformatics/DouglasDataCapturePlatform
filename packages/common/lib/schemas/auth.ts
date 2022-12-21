@@ -1,10 +1,12 @@
 import Joi from 'joi';
 
-export const authLoginRequestSchema = Joi.object({
+import { AuthRequestDto, AuthResponseDto } from '../dto/auth';
+
+export const authRequestSchema = Joi.object<AuthRequestDto>({
   username: Joi.string().required(),
   password: Joi.string().required()
 });
 
-export const authLoginResponseSchema = Joi.object({
+export const authResponseSchema = Joi.object<AuthResponseDto>({
   accessToken: Joi.string().required()
 });

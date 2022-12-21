@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
 
-import { AuthLoginRequestDto } from '@dnp/common/dto';
-import { authLoginRequestSchema } from '@dnp/common/schemas';
+import { AuthRequestDto } from '@dnp/common/dto';
+import { authRequestSchema } from '@dnp/common/schemas';
 import { joiResolver } from '@hookform/resolvers/joi/dist/joi.js';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
+import AuthAPI from '../api/api.auth.js';
 import Button from '../components/Button.js';
 import AuthContext from '../store/auth-context.js';
 
@@ -13,18 +14,17 @@ const LoginPage = () => {
   const authContext = useContext(AuthContext);
   const { t } = useTranslation('login');
 
-  console.log(authContext);
-
   const {
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm<AuthLoginRequestDto>({
-    resolver: joiResolver(authLoginRequestSchema)
+  } = useForm<AuthRequestDto>({
+    resolver: joiResolver(authRequestSchema)
   });
 
-  const onSubmit: SubmitHandler<AuthLoginRequestDto> = (data) => {
-    alert(JSON.stringify(data));
+  const onSubmit: SubmitHandler<AuthRequestDto> = async (credentials) => {
+    const token = await AuthAPI.requestToken(credentials);
+    alert(JSON.stringify(token));
   };
 
   return (
