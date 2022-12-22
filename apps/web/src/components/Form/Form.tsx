@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { TextFieldProps } from './TextField.js';
-
 interface FormProps {
   children: React.ReactElement | React.ReactElement[]
 }

@@ -27,7 +27,7 @@ const LoginPage = () => {
   const onSubmit: SubmitHandler<AuthRequestDto> = async (credentials) => {
     const token = await AuthAPI.requestToken(credentials);
     if (token) {
-      authContext.setAuthToken(token);
+      authContext.setToken(token);
       navigate('/');
       window.sessionStorage.setItem('token', token)
     } else {
