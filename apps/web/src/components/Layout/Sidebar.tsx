@@ -3,8 +3,8 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { HiHome, HiUserPlus, HiEye, HiPlus, HiFaceSmile } from 'react-icons/hi2';
 
-import SidebarLink from './SidebarLink.js';
-import UserDropdown from './UserDropdown.js';
+import SidebarLink from './SidebarLink';
+import UserDropdown from './UserDropdown';
 
 const Sidebar = () => {
   const { t } = useTranslation('common');

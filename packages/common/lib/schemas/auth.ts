@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-import { AuthRequestDto, AuthResponseDto } from '../dto/auth';
+import { AuthRequestDto, AuthResponseDto } from '../dto';
 
 export const authRequestSchema = Joi.object<AuthRequestDto>({
   username: Joi.string().required(),

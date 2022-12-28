@@ -1,4 +1,4 @@
-import { Sex } from '@dnp/common/enums';
+import { Sex } from '@dnp/common';
 
 import { Subject } from '../../schemas/subject.schema';
 

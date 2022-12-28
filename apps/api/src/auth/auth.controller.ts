@@ -1,7 +1,7 @@
 import { Body, Controller, Post, UsePipes } from '@nestjs/common';
 
-import { AuthRequestDto, AuthResponseDto } from '@dnp/common/dto';
-import { authRequestSchema } from '@dnp/common/schemas';
+import { AuthRequestDto, AuthResponseDto } from '@dnp/common';
+import { authRequestSchema } from '@dnp/common';
 
 import { ValidationPipe } from '../validation/validation.pipe';
 

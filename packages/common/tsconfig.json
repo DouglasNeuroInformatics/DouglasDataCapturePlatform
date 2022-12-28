@@ -1,6 +1,7 @@
 {
   "extends": "@dnp/tsconfig/base.json",
   "compilerOptions": {
+    "lib": ["ES2015"],
     "outDir": "./dist",
     "rootDir": "./lib"
   }

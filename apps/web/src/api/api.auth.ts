@@ -1,7 +1,7 @@
-import { AuthRequestDto, AuthResponseDto } from '@dnp/common/dto';
-import { authResponseSchema } from '@dnp/common/schemas';
+import { AuthRequestDto, AuthResponseDto } from '@dnp/common';
+import { authResponseSchema } from '@dnp/common';
 
-import { ApiRequest, ApiRequestError, BaseApi } from './api.base.js';
+import { ApiRequest, ApiRequestError, BaseApi } from './api.base';
 
 export default class AuthApi extends BaseApi {
   static requestToken: ApiRequest<AuthRequestDto, AuthResponseDto> = async ({ username, password }) => {

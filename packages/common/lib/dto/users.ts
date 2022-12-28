@@ -1,4 +1,4 @@
-import { UserRole } from '../enums/index';
+import { UserRole } from '../enums';
 
 export interface CreateUserRequestDto {
   username: string;

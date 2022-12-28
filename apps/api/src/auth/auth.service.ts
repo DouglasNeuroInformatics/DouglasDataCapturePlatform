@@ -1,7 +1,7 @@
 import { Injectable, InternalServerErrorException, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
-import { AuthRequestDto, AuthResponseDto } from '@dnp/common/dto';
+import { AuthRequestDto, AuthResponseDto } from '@dnp/common';
 import bcrypt from 'bcrypt';
 
 import { User } from '../users/schemas/user.schema';

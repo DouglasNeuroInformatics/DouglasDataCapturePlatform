@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ApiProperty } from '@nestjs/swagger';
 
-import { Sex } from '@dnp/common/enums';
+import { Sex } from '@dnp/common';
 import { HydratedDocument } from 'mongoose';
 
 @Schema({ strict: true, timestamps: true })

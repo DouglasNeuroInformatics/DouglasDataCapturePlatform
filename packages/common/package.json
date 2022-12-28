@@ -2,6 +2,8 @@
   "name": "@dnp/common",
   "version": "0.0.0",
   "private": true,
+  "main": "lib/index.ts",
+  "types": "lib/index.ts",
   "devDependencies": {
     "@dnp/tsconfig": "*"
   },
@@ -12,27 +14,5 @@
     "clean": "rm -rf dist",
     "dev": "tsc --watch",
     "lint": "eslint --fix lib"
-  },
-  "exports": {
-    "./dto": {
-      "require": "./dist/cjs/dto/index.js",
-      "import": "./dist/esm/dto/index.js",
-      "types": "./dist/esm/dto/index.d.ts"
-    },
-    "./enums": {
-      "require": "./dist/cjs/enums/index.js",
-      "import": "./dist/esm/enums/index.js",
-      "types": "./dist/esm/enums/index.d.ts"
-    },
-    "./schemas": {
-      "require": "./dist/cjs/schemas/index.js",
-      "import": "./dist/esm/schemas/index.js",
-      "types": "./dist/esm/schemas/index.d.ts"
-    },
-    "./utils": {
-      "require": "./dist/cjs/utils/index.js",
-      "import": "./dist/esm/utils/index.js",
-      "types": "./dist/esm/utils/index.d.ts"
-    }
   }
 }

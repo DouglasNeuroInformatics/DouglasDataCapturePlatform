@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 
-import { AuthRequestDto } from '@dnp/common/dto';
-import { authRequestSchema } from '@dnp/common/schemas';
+import { AuthRequestDto } from '@dnp/common';
+import { authRequestSchema } from '@dnp/common';
 import { joiResolver } from '@hookform/resolvers/joi/dist/joi.js';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';

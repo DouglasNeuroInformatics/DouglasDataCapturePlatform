@@ -1,11 +1,17 @@
 {
-  "extends": "@dnp/tsconfig/jsx.json",
+  "extends": "@dnp/tsconfig/base.json",
   "compilerOptions": {
     "allowJs": true,
     "baseUrl": "src",
+    "jsx": "react",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "outDir": "dist",
     "paths": {
-      "@/*": ["*"]
+      "@/*": [
+        "*"
+      ]
     },
-    "outDir": "dist"
+    "resolveJsonModule": true,
+    "useDefineForClassFields": true
   }
 }

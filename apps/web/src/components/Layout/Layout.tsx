@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Footer from './Footer.js';
-import Sidebar from './Sidebar.js';
+import Footer from './Footer';
+import Sidebar from './Sidebar';
 
 interface LayoutProps {
   children: React.ReactNode;
