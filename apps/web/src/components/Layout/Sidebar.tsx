@@ -8,17 +8,16 @@ import UserDropdown from './UserDropdown.js';
 
 const Sidebar = () => {
   const { t } = useTranslation('common');
-
   return (
     <div className="flex h-screen w-72 flex-col bg-slate-900 p-3 text-slate-300">
       <div className="flex items-center p-3">
-        <img alt="logo" className="w-16 mr-2" src="/logo.png" />
+        <img alt="logo" className="mr-2 w-16" src="/logo.png" />
         <h3 className="uppercase leading-tight antialiased" style={{ maxWidth: '7.5em' }}>
           {t('platformTitle')}
         </h3>
       </div>
       <hr />
-      <nav className="mb-auto block">
+      <nav className="mb-auto p-3">
         <SidebarLink Icon={HiHome} to="/" />
         <SidebarLink Icon={HiUserPlus} to="/add-subject" />
         <SidebarLink Icon={HiEye} to="/view-subjects" />
@@ -26,7 +25,9 @@ const Sidebar = () => {
         <SidebarLink Icon={HiFaceSmile} to="/happiness-scale" />
       </nav>
       <hr className="block" />
-      <UserDropdown />
+      <div className="p-3">
+        <UserDropdown />
+      </div>
     </div>
   );
 };
