@@ -9,7 +9,7 @@ const UserDropdown = () => {
   const authContext = useContext(AuthContext);
 
   //const { t } = useTranslation('common');
-  console.log(authContext.token?.decode())
+  console.log("TOKEN", authContext.token);
 
   return (
     <div>
