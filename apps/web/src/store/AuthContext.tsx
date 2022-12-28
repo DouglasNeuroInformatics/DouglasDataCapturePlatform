@@ -1,12 +1,10 @@
 import React, { createContext, useState, type Dispatch, type SetStateAction } from 'react';
 
-import jwtDecode from 'jwt-decode';
-
-type AuthToken = string | null;
+import AuthToken from '../utils/AuthToken.js';
 
 interface IAuthContext {
-  token: AuthToken;
-  setToken: Dispatch<SetStateAction<AuthToken>>;
+  token: AuthToken | null;
+  setToken: Dispatch<SetStateAction<AuthToken | null>>;
   currentUser: string | null;
 }
 
@@ -17,11 +15,9 @@ const AuthContext = createContext<IAuthContext>({
 });
 
 const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const [token, setToken] = useState<AuthToken>(null);
-  const currentUser = token ? jwtDecode(token) : null;
-  console.log('currentUser', currentUser);
-
-  return <AuthContext.Provider value={{ token, setToken }}>{children}</AuthContext.Provider>;
+  const [token, setToken] = useState<AuthToken | null>(null);
+  const currentUser = null;
+  return <AuthContext.Provider value={{ token, setToken, currentUser }}>{children}</AuthContext.Provider>;
 };
 
-export { AuthContext as default, AuthContextProvider, type AuthToken, type IAuthContext };
+export { AuthContext as default, AuthContextProvider, type IAuthContext };

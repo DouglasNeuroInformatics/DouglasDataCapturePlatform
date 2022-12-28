@@ -11,6 +11,7 @@ import AuthApi from '../api/api.auth.js';
 import { ApiRequestError } from '../api/api.base.js';
 import Button from '../components/Button.js';
 import AuthContext from '../store/AuthContext.js';
+import AuthToken from '../utils/AuthToken.js';
 
 const LoginPage = () => {
   const authContext = useContext(AuthContext);
@@ -25,7 +26,7 @@ const LoginPage = () => {
     AuthApi.requestToken(credentials)
       .then((dto) => {
         console.log('Updating authContext...')
-        authContext.setToken(dto.accessToken);
+        authContext.setToken(new AuthToken(dto.accessToken));
         console.log('Done. Navigating...')
         navigate('/')
       })

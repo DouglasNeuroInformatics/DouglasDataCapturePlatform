@@ -14,7 +14,7 @@ const UserDropdown = () => {
   return (
     <div>
       <HiUserCircle className="h-8 w-8" />
-      <span>{authContext.currentUser?.toString}</span>
+      <span>{authContext.currentUser}</span>
     </div>
   );
 };
