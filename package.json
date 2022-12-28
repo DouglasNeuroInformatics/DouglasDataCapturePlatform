@@ -10,7 +10,7 @@
   "license": "AGPL-3.0",
   "scripts": {
     "build": "turbo run build",
-    "clean": "turbo run clean",
+    "clean": "fd -H -I --prune \".turbo|dist|node_modules\" --exec rm -rf",
     "dev": "turbo run dev",
     "format": "prettier --write .",
     "lint": "turbo run lint",
