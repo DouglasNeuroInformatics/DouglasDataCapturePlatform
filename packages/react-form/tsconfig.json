@@ -1,7 +1,0 @@
-{
-  "extends": "@dnp/tsconfig/jsx.json",
-  "compilerOptions": {
-    "outDir": "./dist",
-    "rootDir": "./src"
-  }
-}
