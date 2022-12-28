@@ -1,11 +1,27 @@
-import APIException from './api.exception.js';
+import { ValidationError } from 'joi';
 
-export default abstract class BaseAPI {
-  protected static host = import.meta.env.VITE_API_HOST;
+export class ApiRequestError extends Error {
+  constructor(message?: string, options?: ErrorOptions) {
+    super(message, options);
+    this.name = 'ApiRequestError';
+  }
 
-  protected static checkResponse(response: Response) {
-    if (!response.ok) {
-      throw new APIException(`ERROR ${response.status}: ${response.statusText}`);
+  static createFrom(error: unknown): ApiRequestError {
+    switch (error) {
+      case error instanceof ValidationError:
+        return new this('Schema validation failed!', {
+          cause: error
+        });
+      default:
+        return new this('An unknown error occured!', {
+          cause: error
+        });
     }
   }
+}
+
+export type ApiRequest<RequestDto, ResponseDto> = (requestDto: RequestDto) => Promise<ResponseDto>;
+
+export abstract class BaseApi {
+  protected static host = import.meta.env.VITE_API_HOST;
 }

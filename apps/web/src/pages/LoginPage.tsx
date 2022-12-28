@@ -7,7 +7,8 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import AuthAPI from '../api/api.auth.js';
+import AuthApi from '../api/api.auth.js';
+import { ApiRequestError } from '../api/api.base.js';
 import Button from '../components/Button.js';
 import AuthContext from '../store/AuthContext.js';
 
@@ -16,23 +17,21 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation('login');
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors }
-  } = useForm<AuthRequestDto>({
+  const { register, handleSubmit, formState } = useForm<AuthRequestDto>({
     resolver: joiResolver(authRequestSchema)
   });
 
-  const onSubmit: SubmitHandler<AuthRequestDto> = async (credentials) => {
-    const token = await AuthAPI.requestToken(credentials);
-    if (token) {
-      authContext.setToken(token);
-      navigate('/');
-      window.sessionStorage.setItem('token', token)
-    } else {
-      alert('Failed to obtain token with credentials');
-    }
+  const onSubmit: SubmitHandler<AuthRequestDto> = (credentials) => {
+    AuthApi.requestToken(credentials)
+      .then((dto) => {
+        console.log('Updating authContext...')
+        authContext.setToken(dto.accessToken);
+        console.log('Done. Navigating...')
+        navigate('/')
+      })
+      .catch((error: ApiRequestError) => {
+        alert(error.message);
+      });
   };
 
   return (
@@ -43,9 +42,9 @@ const LoginPage = () => {
         </div>
         <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
           <input className="my-2 border-2 p-2" placeholder="username" {...register('username')} type="text" />
-          {errors.username && <span>{errors.username.message}</span>}
+          {formState.errors.username && <span>{formState.errors.username.message}</span>}
           <input className="my-2 border-2 p-2" placeholder="password" {...register('password')} type="password" />
-          {errors.password && <span>{errors.password.message}</span>}
+          {formState.errors.password && <span>{formState.errors.password.message}</span>}
           <Button type="submit">{t('loginBtn')}</Button>
         </form>
       </div>
