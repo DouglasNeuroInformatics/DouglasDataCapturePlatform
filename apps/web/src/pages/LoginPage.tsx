@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import AuthApi from '@/api/api.auth.js';
 import { ApiRequestError } from '@/api/api.base.js';
 import Button from '@/components/Button.js';
+import Modal from '@/components/Modal';
 import AuthContext from '@/store/AuthContext.js';
 import AuthToken from '@/utils/AuthToken.js';
 
@@ -36,6 +37,7 @@ const LoginPage = () => {
 
   return (
     <div className="h-screen">
+      <Modal />
       <div className="container flex h-full max-w-md flex-col items-center justify-center">
         <div className="flex justify-center">
           <img alt="logo" className="w-20 p-3" src="/logo.png" />
