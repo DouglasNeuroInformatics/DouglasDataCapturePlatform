@@ -16,6 +16,12 @@ module.exports = {
   },
   plugins: ['import', '@typescript-eslint'],
   rules: {
+    'sort-imports': [
+      'error',
+      {
+        ignoreDeclarationSort: true
+      }
+    ],
     '@typescript-eslint/no-misused-promises': [
       'error',
       {

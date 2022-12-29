@@ -1,4 +1,4 @@
-export type InstrumentFieldType = 'text' | 'options';
+import { InstrumentFieldType } from './instruments.enums';
 
 export interface InstrumentField {
   name: string;

@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react';
 import { AuthRequestDto } from '@dnp/common';
 import { authRequestSchema } from '@dnp/common';
 import { joiResolver } from '@hookform/resolvers/joi';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 

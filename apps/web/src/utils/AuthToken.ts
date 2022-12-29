@@ -1,4 +1,4 @@
-import { authTokenPayloadSchema, AuthTokenPayload } from '@dnp/common';
+import { AuthTokenPayload, authTokenPayloadSchema } from '@dnp/common';
 import jwtDecode from 'jwt-decode';
 
 export default class AuthToken {
