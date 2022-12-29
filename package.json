@@ -18,17 +18,10 @@
     "prepare": "husky install"
   },
   "devDependencies": {
+    "@dnp/eslint-config": "*",
     "@dnp/tsconfig": "*",
-    "@types/http-errors": "^2.0.1",
     "@types/node": "^18.11.9",
-    "@typescript-eslint/eslint-plugin": "^5.46.1",
-    "@typescript-eslint/parser": "^5.46.1",
     "eslint": "^8.30.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-import-resolver-typescript": "^3.5.2",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-react": "^7.31.11",
-    "globals": "^13.19.0",
     "husky": "^8.0.0",
     "prettier": "^2.8.0",
     "ts-node": "^10.9.1",
@@ -41,9 +34,6 @@
   },
   "packageManager": "yarn@1.22.19",
   "dependencies": {
-    "class-transformer": "^0.5.1",
-    "class-validator": "^0.14.0",
-    "http-errors": "^2.0.0",
     "joi": "^17.7.0"
   }
 }

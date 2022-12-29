@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc && vite build",
     "dev": "vite",
-    "lint": "eslint --fix src",
+    "lint": "eslint src/**/* --fix",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -32,6 +32,7 @@
     "@types/validator": "^13.7.10",
     "@vitejs/plugin-react": "^3.0.0",
     "autoprefixer": "^10.4.13",
+    "eslint-plugin-react": "^7.31.11",
     "postcss": "^8.4.20",
     "prettier-plugin-tailwindcss": "^0.2.1",
     "tailwindcss": "^3.2.4",

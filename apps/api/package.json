@@ -6,7 +6,7 @@
   "scripts": {
     "build": "nest build",
     "dev": "NODE_ENV=development nest start --watch",
-    "lint": "eslint --fix src",
+    "lint": "eslint src/**/* --fix",
     "prebuild": "rm -rf dist",
     "start": "nest start",
     "start:debug": "nest start --debug --watch",

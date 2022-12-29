@@ -13,6 +13,6 @@
     "build:esm": "tsc --module esnext --outDir dist/esm",
     "clean": "rm -rf dist",
     "dev": "tsc --watch",
-    "lint": "eslint --fix lib"
+    "lint": "eslint lib/**/* --fix"
   }
 }
