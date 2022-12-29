@@ -1,6 +1,6 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { ConflictException, Injectable, NotImplementedException } from '@nestjs/common';
 
-import { CreateInstrumentRequestDto , UpdateInstrumentRequestDto } from '@dnp/common';
+import { CreateInstrumentRequestDto } from '@dnp/common';
 
 import { InstrumentsRepository } from './instruments.repository';
 import { Instrument } from './schemas/instrument.schema';
@@ -9,24 +9,18 @@ import { Instrument } from './schemas/instrument.schema';
 export class InstrumentsService {
   constructor(private readonly instrumentsRepository: InstrumentsRepository) {}
 
-  create(createInstrumentDto: CreateInstrumentRequestDto): Promise<Instrument> {
-    return this.instrumentsRepository.create(createInstrumentDto);
-  }
-
   findAll(): Promise<Instrument[]> {
     return this.instrumentsRepository.findAll();
   }
 
-  // use generic type
-  findAllOfKind(kind: string): Promise<Instrument[]> {
-    return this.instrumentsRepository.find({ kind });
+  findByName(): void {
+    throw new NotImplementedException();
   }
 
-  async update(id: string, updateInstrumentDto: UpdateInstrumentRequestDto): Promise<Instrument> {
-    const updatedInstrument = await this.instrumentsRepository.updateById(id, updateInstrumentDto);
-    if (!updatedInstrument) {
-      throw new NotFoundException();
+  async create(dto: CreateInstrumentRequestDto): Promise<Instrument> {
+    if (await this.instrumentsRepository.exists({ title: dto.title })) {
+      throw new ConflictException(`An instrument with the title '${dto.title}' already exists!`);
     }
-    return updatedInstrument;
+    return this.instrumentsRepository.create(dto);
   }
 }

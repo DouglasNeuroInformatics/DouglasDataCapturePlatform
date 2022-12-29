@@ -2,19 +2,20 @@ import Joi from 'joi';
 
 import { CreateInstrumentRequestDto, UpdateInstrumentRequestDto } from './instruments.dto';
 import { InstrumentFieldType } from './instruments.enums';
-import { InstrumentField } from './instruments.interfaces';
+import { InstrumentFieldInterface } from './instruments.interfaces';
 
-export const instrumentFieldSchema = Joi.object<InstrumentField>({
+export const instrumentFieldSchema = Joi.object<InstrumentFieldInterface>({
   name: Joi.string().required(),
-  description: Joi.string().required(),
+  label: Joi.string().required(),
   isRequired: Joi.boolean().required(),
-  type: Joi.string().allow(...Object.values(InstrumentFieldType)).required()
+  type: Joi.string().valid(...Object.values(InstrumentFieldType)).required()
 });
 
 export const createInstrumentRequestSchema = Joi.object<CreateInstrumentRequestDto>({
   title: Joi.string().required(),
   description: Joi.string().required(),
-  fields: Joi.array().items(instrumentFieldSchema)
+  instructions: Joi.string().required(),
+  fields: Joi.array().items(instrumentFieldSchema).required()
 });
 
 export const updateInstrumentRequestSchema = Joi.object<UpdateInstrumentRequestDto>({});

@@ -1,14 +1,15 @@
 import { InstrumentFieldType } from './instruments.enums';
 
-export interface InstrumentField {
+export interface InstrumentFieldInterface {
   name: string;
-  description: string;
+  label: string;
   isRequired: boolean;
   type: InstrumentFieldType;
 }
 
-export interface Instrument {
+export interface InstrumentInterface {
   title: string;
   description: string;
-  fields: InstrumentField[];
+  instructions: string;
+  fields: InstrumentFieldInterface[];
 }

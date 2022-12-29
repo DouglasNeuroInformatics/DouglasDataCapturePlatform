@@ -1,7 +1,7 @@
-import { Instrument } from './instruments.interfaces';
+import { InstrumentInterface } from './instruments.interfaces';
 
-export type CreateInstrumentRequestDto = Instrument;
+export type CreateInstrumentRequestDto = InstrumentInterface;
 
-export type CreateInstrumentResponseDto = Instrument;
+export type CreateInstrumentResponseDto = InstrumentInterface;
 
-export type UpdateInstrumentRequestDto = Instrument;
+export type UpdateInstrumentRequestDto = InstrumentInterface;
