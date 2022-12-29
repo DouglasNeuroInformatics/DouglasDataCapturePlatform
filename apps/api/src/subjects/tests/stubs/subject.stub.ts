@@ -1,6 +1,6 @@
 import { Sex } from '@dnp/common';
 
-import { Subject } from '../../schemas/subject.schema';
+import { Subject } from '@/subjects/schemas/subject.schema';
 
 // Cannot set ID to string without TypeScript complaining
 type MockSubject = Omit<Subject, '_id'>;

@@ -5,6 +5,8 @@ import { CreateInstrumentRequestDto } from '@dnp/common';
 import { InstrumentsService } from './instruments.service';
 import { Instrument } from './schemas/instrument.schema';
 
+import { ValidationPipe } from '@/validation/validation.pipe';
+
 @Controller('instruments')
 export class InstrumentsController {
   constructor(private readonly instrumentsService: InstrumentsService) {}

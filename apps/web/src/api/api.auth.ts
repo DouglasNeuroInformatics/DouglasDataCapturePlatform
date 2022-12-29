@@ -1,5 +1,4 @@
-import { AuthRequestDto, AuthResponseDto } from '@dnp/common';
-import { authResponseSchema } from '@dnp/common';
+import { AuthRequestDto, AuthResponseDto , authResponseSchema } from '@dnp/common';
 
 import { ApiRequest, ApiRequestError, BaseApi } from './api.base';
 

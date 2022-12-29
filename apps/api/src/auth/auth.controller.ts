@@ -1,11 +1,10 @@
 import { Body, Controller, Post, UsePipes } from '@nestjs/common';
 
-import { AuthRequestDto, AuthResponseDto } from '@dnp/common';
-import { authRequestSchema } from '@dnp/common';
-
-import { ValidationPipe } from '../validation/validation.pipe';
+import { AuthRequestDto, AuthResponseDto , authRequestSchema } from '@dnp/common';
 
 import { AuthService } from './auth.service';
+
+import { ValidationPipe } from '@/validation/validation.pipe';
 
 @Controller('auth')
 export class AuthController {

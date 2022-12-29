@@ -28,6 +28,7 @@ module.exports = {
         checksVoidReturn: false
       }
     ],
+    'import/no-duplicates': 'error',
     'import/exports-last': 'error',
     'import/newline-after-import': 'error',
     'import/order': [

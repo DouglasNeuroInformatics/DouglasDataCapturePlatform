@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
 
-import { AuthRequestDto } from '@dnp/common';
-import { authRequestSchema } from '@dnp/common';
+import { AuthRequestDto , authRequestSchema } from '@dnp/common';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';

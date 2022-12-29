@@ -4,9 +4,9 @@ import { Test } from '@nestjs/testing';
 import { Connection } from 'mongoose';
 import request from 'supertest';
 
-import { AppModule } from '../../../app.module';
-import { DatabaseService } from '../../../database/database.service';
-import { subjectStub } from '../stubs/subject.stub';
+import { AppModule } from '@/app.module';
+import { DatabaseService } from '@/database/database.service';
+import { subjectStub } from '@/subjects/tests/stubs/subject.stub';
 
 describe('/subject', () => {
   let app: INestApplication;
