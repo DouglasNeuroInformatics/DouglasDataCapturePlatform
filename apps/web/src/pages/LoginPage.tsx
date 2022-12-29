@@ -26,9 +26,7 @@ const LoginPage = () => {
   const onSubmit: SubmitHandler<AuthRequestDto> = (credentials) => {
     AuthApi.requestToken(credentials)
       .then((dto) => {
-        console.log('Updating authContext...')
         authContext.setToken(new AuthToken(dto.accessToken));
-        console.log('Done. Navigating...')
         navigate('/')
       })
       .catch((error: ApiRequestError) => {
