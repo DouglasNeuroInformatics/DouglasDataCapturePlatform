@@ -12,8 +12,8 @@ interface SidebarLinkProps {
 const SidebarLink = ({ Icon, to }: SidebarLinkProps) => {
   const { t } = useTranslation('common', { keyPrefix: 'sidebarLinks' });
   return (
-    <NavLink className="flex items-center hover:text-slate-200 hover:bg-slate-800 py-1" to={to}>
-      <Icon className="h-6 w-6 mr-2" />
+    <NavLink className="flex items-center py-1 hover:bg-slate-800 hover:text-slate-200" to={to}>
+      <Icon className="mr-2 h-6 w-6" />
       <span>
         <span>{t(to)}</span>
       </span>

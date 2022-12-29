@@ -8,7 +8,7 @@ async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
   app.enableCors();
   app.setGlobalPrefix('/api');
-  
+
   const configService = app.get(ConfigService);
   const port = configService.get<number>('PORT', 5500);
 

@@ -1,7 +1,7 @@
 import Joi from 'joi';
 
-import { AuthRequestDto, AuthResponseDto } from '../dto';
-import { AuthTokenPayload } from '../interfaces';
+import { AuthRequestDto, AuthResponseDto } from './auth.dto';
+import { AuthTokenPayload } from './auth.interfaces';
 
 export const authRequestSchema = Joi.object<AuthRequestDto>({
   username: Joi.string().required(),

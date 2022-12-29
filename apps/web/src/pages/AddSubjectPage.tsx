@@ -7,7 +7,7 @@ const AddSubjectPage = () => {
     <Layout>
       <h1>Add Subject</h1>
     </Layout>
-  )
-}
+  );
+};
 
 export default AddSubjectPage;

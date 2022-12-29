@@ -4,5 +4,6 @@
     "lib": ["ES2015"],
     "outDir": "./dist",
     "rootDir": "./lib"
-  }
+  },
+  "include": ["lib/**/*"]
 }

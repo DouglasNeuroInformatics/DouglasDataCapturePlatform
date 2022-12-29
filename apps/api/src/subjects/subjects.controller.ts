@@ -3,7 +3,6 @@ import { ApiTags } from '@nestjs/swagger';
 
 import { CreateSubjectRequestDto } from '@dnp/common';
 
-
 import { Subject } from './schemas/subject.schema';
 import { SubjectsService } from './subjects.service';
 

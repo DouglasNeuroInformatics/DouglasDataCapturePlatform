@@ -7,7 +7,7 @@ const ViewSubjectsPage = () => {
     <Layout>
       <h1>View Subjects</h1>
     </Layout>
-  )
-}
+  );
+};
 
 export default ViewSubjectsPage;

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 
 // import { useTranslation } from 'react-i18next';
-import { HiUserCircle} from 'react-icons/hi2';
+import { HiUserCircle } from 'react-icons/hi2';
 import { IoIosArrowUp } from 'react-icons/io';
 
 import AuthContext from '@/store/AuthContext';

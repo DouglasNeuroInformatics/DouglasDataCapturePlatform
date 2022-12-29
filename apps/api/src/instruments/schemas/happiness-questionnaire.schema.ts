@@ -5,7 +5,7 @@ import { HydratedDocument } from 'mongoose';
 @Schema()
 export class HappinessQuestionnaire {
   @Prop({ required: true })
-  score: number
+  score: number;
 }
 
 export type HappinessQuestionnaireDocument = HydratedDocument<HappinessQuestionnaire>;

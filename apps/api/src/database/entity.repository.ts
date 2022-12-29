@@ -33,7 +33,7 @@ export abstract class EntityRepository<T extends Document> {
   async updateById(id: string, updateQuery: UpdateQuery<unknown>): Promise<T | null> {
     return this.entityModel.findByIdAndUpdate(id, updateQuery, {
       new: true
-    })
+    });
   }
 
   async deleteById(id: string): Promise<boolean> {

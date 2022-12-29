@@ -5,7 +5,7 @@
     "emitDecoratorMetadata": true,
     "module": "CommonJS",
     "outDir": "dist",
-    "strictPropertyInitialization": false,
+    "strictPropertyInitialization": false
   },
   "include": ["src/**/*"]
 }

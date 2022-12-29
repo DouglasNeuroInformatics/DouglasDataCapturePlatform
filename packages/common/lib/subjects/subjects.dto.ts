@@ -1,4 +1,4 @@
-import { Sex } from '../enums';
+import { Sex } from './subjects.enums';
 
 export interface CreateSubjectRequestDto {
   firstName: string;

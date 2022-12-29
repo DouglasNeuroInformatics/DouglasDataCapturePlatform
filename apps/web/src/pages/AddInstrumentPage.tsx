@@ -7,7 +7,7 @@ const AddInstrumentPage = () => {
     <Layout>
       <h1>Add Instrument</h1>
     </Layout>
-  )
-}
+  );
+};
 
 export default AddInstrumentPage;

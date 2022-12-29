@@ -4,7 +4,7 @@ import { HydratedDocument } from 'mongoose';
 
 import { HappinessQuestionnaire } from './happiness-questionnaire.schema';
 
-@Schema({ 
+@Schema({
   discriminatorKey: 'kind',
   strict: true,
   timestamps: true

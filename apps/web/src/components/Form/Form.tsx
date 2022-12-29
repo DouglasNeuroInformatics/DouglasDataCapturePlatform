@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface FormProps {
-  children: React.ReactElement | React.ReactElement[]
+  children: React.ReactElement | React.ReactElement[];
 }
 
 const Form = ({ children }: FormProps) => {

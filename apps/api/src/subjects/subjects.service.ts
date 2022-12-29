@@ -1,6 +1,5 @@
 import { createHash } from 'node:crypto';
 
-
 import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 
 import { CreateSubjectRequestDto } from '@dnp/common';
@@ -32,7 +31,7 @@ export class SubjectsService {
       createSubjectRequestDto.dateOfBirth
     );
     if (await this.subjectsRepository.exists({ _id: subjectId })) {
-      throw new ConflictException('A subject with the provided demographic information already exists')
+      throw new ConflictException('A subject with the provided demographic information already exists');
     }
     return this.subjectsRepository.create({ _id: subjectId, ...createSubjectRequestDto });
   }

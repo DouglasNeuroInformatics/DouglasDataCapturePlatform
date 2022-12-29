@@ -9,7 +9,7 @@ interface IAuthContext {
 
 const AuthContext = createContext<IAuthContext>({
   token: null,
-  setToken: () => null,
+  setToken: () => null
 });
 
 const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {

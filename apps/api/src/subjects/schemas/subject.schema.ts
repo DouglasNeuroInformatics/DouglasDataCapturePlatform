@@ -24,7 +24,7 @@ export class Subject {
 
   @ApiProperty()
   @Prop({ enum: Object.values(Sex), required: true })
-  sex: Sex
+  sex: Sex;
 }
 
 export type SubjectDocument = HydratedDocument<Subject>;

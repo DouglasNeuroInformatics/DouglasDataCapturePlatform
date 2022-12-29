@@ -1,30 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { Dialog, Transition } from '@headlessui/react';
 
-const Modal = () => {
-  const [isOpen, setIsOpen] = useState(true);
+interface ModalProps {
+  title: string;
+  message: string;
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
+}
 
-  function closeModal() {
-    setIsOpen(false);
-  }
+const Modal = ({ title, message, isOpen, setIsOpen }: ModalProps) => {
+  //  const [isOpen, setIsOpen] = useState(true);
 
-  function openModal() {
-    setIsOpen(true);
-  }
+  const closeModal = () => setIsOpen(false);
+  const openModal = () => setIsOpen(true);
 
   return (
     <React.Fragment>
-      <div className="fixed inset-0 flex items-center justify-center">
-        <button
-          className="rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
-          type="button"
-          onClick={openModal}
-        >
-          Open dialog
-        </button>
-      </div>
-
       <Transition appear as={React.Fragment} show={isOpen}>
         <Dialog as="div" className="relative z-10" onClose={closeModal}>
           <Transition.Child
@@ -52,13 +44,10 @@ const Modal = () => {
               >
                 <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
-                    Payment successful
+                    {title}
                   </Dialog.Title>
                   <div className="mt-2">
-                    <p className="text-sm text-gray-500">
-                      Your payment has been successfully submitted. We’ve sent you an email with all of the details of
-                      your order.
-                    </p>
+                    <p className="text-sm text-gray-500">{message}</p>
                   </div>
 
                   <div className="mt-4">
@@ -67,7 +56,7 @@ const Modal = () => {
                       type="button"
                       onClick={closeModal}
                     >
-                      Got it, thanks!
+                      Okay
                     </button>
                   </div>
                 </Dialog.Panel>

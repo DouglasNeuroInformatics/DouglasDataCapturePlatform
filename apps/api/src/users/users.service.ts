@@ -16,7 +16,7 @@ export class UsersService {
   async findByUsername(username: string): Promise<User> {
     const user = await this.usersRepository.findOne({ username: username });
     if (!user) {
-      throw new NotFoundException()
+      throw new NotFoundException();
     }
     return user;
   }
@@ -32,12 +32,12 @@ export class UsersService {
   async delete(username: string): Promise<void> {
     const deleted = await this.usersRepository.deleteOne({ username });
     if (!deleted) {
-      throw new NotFoundException()
+      throw new NotFoundException();
     }
   }
 
   async isUser(username: string): Promise<boolean> {
-    return this.usersRepository.exists({ username })
+    return this.usersRepository.exists({ username });
   }
 
   async hashPassword(password: string): Promise<string> {

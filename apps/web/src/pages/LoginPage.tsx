@@ -1,9 +1,8 @@
-
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 
 import { AuthRequestDto } from '@dnp/common';
 import { authRequestSchema } from '@dnp/common';
-import { joiResolver } from '@hookform/resolvers/joi/dist/joi.js';
+import { joiResolver } from '@hookform/resolvers/joi';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -17,6 +16,7 @@ import AuthToken from '@/utils/AuthToken.js';
 
 const LoginPage = () => {
   const authContext = useContext(AuthContext);
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
   const { t } = useTranslation('login');
 
@@ -28,7 +28,7 @@ const LoginPage = () => {
     AuthApi.requestToken(credentials)
       .then((dto) => {
         authContext.setToken(new AuthToken(dto.accessToken));
-        navigate('/')
+        navigate('/');
       })
       .catch((error: ApiRequestError) => {
         alert(error.message);
@@ -37,7 +37,7 @@ const LoginPage = () => {
 
   return (
     <div className="h-screen">
-      <Modal />
+      <Modal isOpen={false} message={errorMessage} title="Error" />
       <div className="container flex h-full max-w-md flex-col items-center justify-center">
         <div className="flex justify-center">
           <img alt="logo" className="w-20 p-3" src="/logo.png" />

@@ -19,7 +19,7 @@ import { UsersModule } from './users/users.module';
     DatabaseModule,
     InstrumentsModule,
     SubjectsModule,
-    UsersModule,
+    UsersModule
   ]
 })
 export class AppModule {}

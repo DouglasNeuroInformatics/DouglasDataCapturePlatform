@@ -23,6 +23,6 @@ import { Instrument, InstrumentSchema } from './schemas/instrument.schema';
     ])
   ],
   controllers: [InstrumentsController],
-  providers: [InstrumentsRepository, InstrumentsService],
+  providers: [InstrumentsRepository, InstrumentsService]
 })
 export class InstrumentsModule {}

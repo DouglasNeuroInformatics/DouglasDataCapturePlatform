@@ -10,7 +10,7 @@ const TextField = ({ name }: TextFieldProps) => {
       <label htmlFor={name}>Password</label>
       <input name={name} type="password" />
     </div>
-  )
-}
+  );
+};
 
 export { TextField as default, type TextFieldProps };
