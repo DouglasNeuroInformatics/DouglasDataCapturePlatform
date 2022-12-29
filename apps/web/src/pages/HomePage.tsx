@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useTranslation } from 'react-i18next';
 
-import Layout from '../components/Layout/Layout';
+import Layout from '@/components/Layout/Layout';
 
 const HomePage = () => {
   const { t } = useTranslation('common');

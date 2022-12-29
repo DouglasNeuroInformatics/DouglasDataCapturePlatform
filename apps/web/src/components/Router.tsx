@@ -2,9 +2,9 @@ import React from 'react';
 
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
-import useAuth from '../hooks/useAuth';
-import HomePage from '../pages/HomePage';
-import LoginPage from '../pages/LoginPage';
+import useAuth from '@/hooks/useAuth';
+import HomePage from '@/pages/HomePage';
+import LoginPage from '@/pages/LoginPage';
 
 const Router = () => {
   const auth = useAuth();

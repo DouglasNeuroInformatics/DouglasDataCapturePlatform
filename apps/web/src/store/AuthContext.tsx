@@ -1,6 +1,6 @@
 import React, { createContext, useState, type Dispatch, type SetStateAction } from 'react';
 
-import AuthToken from '../utils/AuthToken';
+import AuthToken from '@/utils/AuthToken';
 
 interface IAuthContext {
   token: AuthToken | null;

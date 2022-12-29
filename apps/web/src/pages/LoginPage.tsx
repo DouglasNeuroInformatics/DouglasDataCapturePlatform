@@ -7,11 +7,11 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import AuthApi from '../api/api.auth.js';
-import { ApiRequestError } from '../api/api.base.js';
-import Button from '../components/Button.js';
-import AuthContext from '../store/AuthContext.js';
-import AuthToken from '../utils/AuthToken.js';
+import AuthApi from '@/api/api.auth.js';
+import { ApiRequestError } from '@/api/api.base.js';
+import Button from '@/components/Button.js';
+import AuthContext from '@/store/AuthContext.js';
+import AuthToken from '@/utils/AuthToken.js';
 
 const LoginPage = () => {
   const authContext = useContext(AuthContext);
