@@ -9,13 +9,15 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <div className="h-screen w-screen">
-      <Sidebar />
-      <div className="container absolute left-72 top-0 mx-auto flex min-h-full w-[calc(100vw-theme(spacing.72))] flex-col overflow-scroll">
+    <React.Fragment>
+      <div className="absolute left-0 h-screen w-72">
+        <Sidebar />
+      </div>
+      <div className="absolute left-72 flex h-screen w-[calc(100vw-theme(spacing.72))] flex-col overflow-scroll">
         <main className="flex-grow">{children}</main>
         <Footer />
       </div>
-    </div>
+    </React.Fragment>
   );
 };
 

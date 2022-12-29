@@ -1,7 +1,7 @@
 import { Injectable, InternalServerErrorException, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
-import { AuthRequestDto, AuthResponseDto } from '@dnp/common';
+import { AuthRequestDto , AuthResponseDto, AuthTokenPayload } from '@dnp/common';
 import bcrypt from 'bcrypt';
 
 import { User } from '@/users/schemas/user.schema';
@@ -17,7 +17,10 @@ export class AuthService {
     if (!isAuth) {
       throw new UnauthorizedException();
     }
-    const payload = { username: authRequestDto.username };
+    const payload: AuthTokenPayload = {
+      username: user.username,
+      role: user.role
+    };
     const accessToken = this.jwtService.sign(payload);
     return { accessToken };
   }
@@ -29,9 +32,8 @@ export class AuthService {
     } catch (error) {
       if (error instanceof NotFoundException) {
         throw new UnauthorizedException();
-      } else {
-        throw new InternalServerErrorException();
       }
+      throw new InternalServerErrorException();
     }
     return user;
   }
