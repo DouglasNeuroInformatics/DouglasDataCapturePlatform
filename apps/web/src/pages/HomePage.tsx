@@ -2,11 +2,10 @@ import React from 'react';
 
 import { useTranslation } from 'react-i18next';
 
-import Layout from '@/components/Layout/Layout';
+import Layout from '@/components/Layout';
 
 const HomePage = () => {
   const { t } = useTranslation('common');
-
   return (
     <Layout>
       <div className="mx-auto flex h-full max-w-3xl flex-col items-center justify-center">

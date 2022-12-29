@@ -3,8 +3,11 @@ import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import useAuth from '@/hooks/useAuth';
+import AddInstrumentPage from '@/pages/AddInstrumentPage';
+import AddSubjectPage from '@/pages/AddSubjectPage';
 import HomePage from '@/pages/HomePage';
 import LoginPage from '@/pages/LoginPage';
+import ViewSubjectsPage from '@/pages/ViewSubjectsPage';
 
 const Router = () => {
   const auth = useAuth();
@@ -13,6 +16,9 @@ const Router = () => {
       {auth.token ? (
         <Routes>
           <Route index element={<HomePage />} path="/" />
+          <Route element={<AddSubjectPage />} path="/add-subject" />
+          <Route element={<ViewSubjectsPage />} path="/view-subjects" />
+          <Route element={<AddInstrumentPage />} path="add-instrument" />
           <Route element={<Navigate to="/" />} path="*" />
         </Routes>
       ) : (
