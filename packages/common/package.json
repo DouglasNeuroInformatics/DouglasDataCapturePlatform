@@ -2,17 +2,23 @@
   "name": "@dnp/common",
   "version": "0.0.0",
   "private": true,
-  "main": "lib/index.ts",
-  "types": "lib/index.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "devDependencies": {
-    "@dnp/tsconfig": "*"
+    "@dnp/tsconfig": "*",
+    "tsup": "^6.5.0"
   },
   "scripts": {
-    "build": "yarn clean && yarn build:cjs && yarn build:esm",
-    "build:cjs": "tsc --module commonjs --outDir dist/cjs",
-    "build:esm": "tsc --module esnext --outDir dist/esm",
-    "clean": "rm -rf dist",
-    "dev": "tsc --watch",
+    "build": "tsup lib/index.ts --format cjs,esm --dts --clean",
+    "dev": "yarn build -- --watch src",
     "lint": "eslint lib/**/* --fix"
   }
 }
