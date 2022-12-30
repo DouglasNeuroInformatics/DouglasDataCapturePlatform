@@ -73,7 +73,8 @@ const Sidebar = () => {
         <SidebarNavLink Icon={HiHome} label="Home" to="/home" />
         <SidebarNavLink Icon={HiUserPlus} label="Add Subject" to="/add-subject" />
         {auth?.isAdmin && <SidebarNavLink Icon={HiEye} label="View Subjects" to="/view-subjects" />}
-        {auth?.isAdmin && <SidebarNavLink Icon={HiPlus} label="Add Instrument" to="/add-instrument" />}
+        {auth?.isAdmin && <SidebarNavLink Icon={HiPlus} label="Add Instrument" to="/instruments/add" />}
+        {auth?.isAdmin && <SidebarNavLink Icon={HiEye} label="View Instruments" to="/instruments/view" />}
         <SidebarNavGroup label="Instruments">
           <h1>Test</h1>
         </SidebarNavGroup>
