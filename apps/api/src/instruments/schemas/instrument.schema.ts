@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
-import { InstrumentFieldInterface, InstrumentFieldType, InstrumentInterface } from '@dnp/common';
+import { InstrumentField as InstrumentFieldInterface, InstrumentFieldType } from '@dnp/common';
 import { HydratedDocument } from 'mongoose';
 
 @Schema({ strict: true })
@@ -19,7 +19,7 @@ export class InstrumentField implements InstrumentFieldInterface {
 }
 
 @Schema({ strict: true, timestamps: true })
-export class Instrument implements InstrumentInterface {
+export class Instrument {
   @Prop({ required: true, unique: true })
   title: string;
 

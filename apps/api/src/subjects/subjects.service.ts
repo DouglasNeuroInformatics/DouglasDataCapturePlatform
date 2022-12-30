@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto';
 
 import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 
-import { CreateSubjectRequestDto, StringUtils } from '@dnp/common';
+import { StringUtils, SubjectDto } from '@dnp/common';
 
 import { Subject } from './schemas/subject.schema';
 import { SubjectsRepository } from './subjects.repository';
@@ -23,7 +23,7 @@ export class SubjectsService {
     return subject;
   }
 
-  async create(createSubjectRequestDto: CreateSubjectRequestDto): Promise<Subject> {
+  async create(createSubjectRequestDto: SubjectDto): Promise<Subject> {
     const subjectId = this.generateSubjectId(
       createSubjectRequestDto.firstName,
       createSubjectRequestDto.lastName,

@@ -6,7 +6,7 @@ import ErrorElement from './components/ErrorElement';
 import Layout, { layoutLoader } from './components/Layout';
 import { AuthContextProvider } from './context/AuthContext';
 import HomePage from './routes/home';
-import AddInstrumentPage from './routes/instruments/add-instrument';
+import AddInstrumentPage, { addInstrumentAction } from './routes/instruments/add-instrument';
 import ViewInstrumentsPage from './routes/instruments/view-instruments';
 import LoginPage from './routes/login';
 import AddSubjectPage, { addSubjectAction } from './routes/subjects/add-subject';
@@ -39,7 +39,8 @@ const router = createBrowserRouter([
       },
       {
         path: '/instruments/add-instrument',
-        element: <AddInstrumentPage />
+        element: <AddInstrumentPage />,
+        action: addInstrumentAction
       },
       {
         path: '/instruments/view-instruments',
