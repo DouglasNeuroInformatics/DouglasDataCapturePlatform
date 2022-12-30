@@ -2,15 +2,15 @@ import React from 'react';
 
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
+import ErrorElement from './components/ErrorElement';
 import Layout, { layoutLoader } from './components/Layout';
 import { AuthContextProvider } from './context/AuthContext';
-import AddSubjectPage, { addSubjectAction } from './pages/AddSubjectPage';
-import ErrorPage from './pages/ErrorPage';
-import HomePage from './pages/HomePage';
-import AddInstrumentPage from './pages/instruments/AddInstrumentPage';
-import ViewInstrumentsPage from './pages/instruments/ViewInstrumentsPage';
-import LoginPage from './pages/LoginPage';
-import ViewSubjectsPage, { viewSubjectsLoader } from './pages/ViewSubjectsPage';
+import HomePage from './routes/home';
+import AddInstrumentPage from './routes/instruments/add-instrument';
+import ViewInstrumentsPage from './routes/instruments/view-instruments';
+import LoginPage from './routes/login';
+import AddSubjectPage, { addSubjectAction } from './routes/subjects/add-subject';
+import ViewSubjectsPage, { viewSubjectsLoader } from './routes/subjects/view-subjects';
 
 const router = createBrowserRouter([
   {
@@ -20,7 +20,7 @@ const router = createBrowserRouter([
         <Layout />
       </React.Suspense>
     ),
-    errorElement: <ErrorPage />,
+    errorElement: <ErrorElement />,
     loader: layoutLoader,
     children: [
       {
@@ -28,21 +28,21 @@ const router = createBrowserRouter([
         element: <HomePage />
       },
       {
-        path: '/add-subject',
+        path: '/subjects/add-subject',
         element: <AddSubjectPage />,
         action: addSubjectAction
       },
       {
-        path: '/view-subjects',
+        path: '/subjects/view-subjects',
         element: <ViewSubjectsPage />,
         loader: viewSubjectsLoader
       },
       {
-        path: '/instruments/add',
+        path: '/instruments/add-instrument',
         element: <AddInstrumentPage />
       },
       {
-        path: '/instruments/view',
+        path: '/instruments/view-instruments',
         element: <ViewInstrumentsPage />
       }
     ]

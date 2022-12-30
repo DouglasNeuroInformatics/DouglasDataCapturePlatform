@@ -8,7 +8,7 @@ interface RouteError {
   statusText: string;
 }
 
-const ErrorPage = () => {
+const ErrorElement = () => {
   const error = useRouteError() as RouteError;
   console.error(error);
 
@@ -20,4 +20,4 @@ const ErrorPage = () => {
   );
 };
 
-export default ErrorPage;
+export default ErrorElement;

@@ -71,13 +71,10 @@ const Sidebar = () => {
       <SidebarDivider />
       <SidebarNav>
         <SidebarNavLink Icon={HiHome} label="Home" to="/home" />
-        <SidebarNavLink Icon={HiUserPlus} label="Add Subject" to="/add-subject" />
-        {auth?.isAdmin && <SidebarNavLink Icon={HiEye} label="View Subjects" to="/view-subjects" />}
-        {auth?.isAdmin && <SidebarNavLink Icon={HiPlus} label="Add Instrument" to="/instruments/add" />}
-        {auth?.isAdmin && <SidebarNavLink Icon={HiEye} label="View Instruments" to="/instruments/view" />}
-        <SidebarNavGroup label="Instruments">
-          <h1>Test</h1>
-        </SidebarNavGroup>
+        <SidebarNavLink Icon={HiUserPlus} label="Add Subject" to="subjects/add-subject" />
+        {auth?.isAdmin && <SidebarNavLink Icon={HiEye} label="View Subjects" to="/subjects/view-subjects" />}
+        {auth?.isAdmin && <SidebarNavLink Icon={HiPlus} label="Add Instrument" to="/instruments/add-instrument" />}
+        {auth?.isAdmin && <SidebarNavLink Icon={HiEye} label="View Instruments" to="/instruments/view-instruments" />}
       </SidebarNav>
       <SidebarDivider />
       <SidebarFooter username={auth?.username} />
