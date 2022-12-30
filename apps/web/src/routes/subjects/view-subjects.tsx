@@ -1,11 +1,11 @@
 import React from 'react';
 
 import { SubjectDto } from '@dnp/common';
-import { useLoaderData } from 'react-router-dom';
+import { type LoaderFunction, useLoaderData } from 'react-router-dom';
 
 import API from '@/api';
 
-function viewSubjectsLoader(): Promise<SubjectDto[]> {
+const viewSubjectsLoader: LoaderFunction = (): Promise<SubjectDto[]> => {
   return API.getSubjects();
 }
 
