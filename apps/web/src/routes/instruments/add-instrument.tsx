@@ -5,7 +5,7 @@ import { type ActionFunction, Form, redirect } from 'react-router-dom';
 import { extractSchema } from '@/utils/form-utils';
 
 const addInstrumentAction: ActionFunction = async ({ request, params }) => {
-  const data = extractSchema(await request.formData(), instrum)
+  const data = extractSchema(await request.formData())
   console.log(data);
   return redirect('/home');
 };

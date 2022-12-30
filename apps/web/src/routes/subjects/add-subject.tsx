@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { subjectSchema } from '@dnp/common';
+import { subjectDtoSchema } from '@dnp/common';
 import { type ActionFunction, Form, redirect } from 'react-router-dom';
 
 import API from '@/api';
 
 const addSubjectAction: ActionFunction = async ({ request, params }) => {
-  const { value, error } = subjectSchema.validate(Object.fromEntries(await request.formData()), {
+  const { value, error } = subjectDtoSchema.validate(Object.fromEntries(await request.formData()), {
     abortEarly: false
   });
   if (value) {

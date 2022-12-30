@@ -1,16 +1,16 @@
 import React from 'react';
 
-import { SubjectInterface } from '@dnp/common';
+import { SubjectDto } from '@dnp/common';
 import { useLoaderData } from 'react-router-dom';
 
 import API from '@/api';
 
-function viewSubjectsLoader(): Promise<SubjectInterface[]> {
+function viewSubjectsLoader(): Promise<SubjectDto[]> {
   return API.getSubjects();
 }
 
 const ViewSubjectsPage = () => {
-  const subjects = useLoaderData() as SubjectInterface[];
+  const subjects = useLoaderData() as SubjectDto[];
   console.log('Subjects Loader Data', subjects);
   return (
     <div className="flex flex-col items-center">

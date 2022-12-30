@@ -1,5 +1,5 @@
-import { AuthRequestDto, AuthResponseDto, SubjectDto, authResponseSchema, subjectsArraySchema } from '@dnp/common';
-import Joi, { ValidationError } from 'joi';
+import { AuthRequestDto, AuthResponseDto, SubjectDto, authResponseSchema, subjectDtoSchema } from '@dnp/common';
+import Joi from 'joi';
 
 type GetRequest<T> = () => Promise<T>;
 
@@ -13,7 +13,7 @@ export class APIRequestError extends Error {
 
   static createFrom(error: unknown): APIRequestError {
     switch (error) {
-      case error instanceof ValidationError:
+      case error instanceof Joi.ValidationError:
         return new this('Schema validation failed!', {
           cause: error
         });
@@ -65,8 +65,10 @@ export default class API {
 
   static getSubjects: GetRequest<SubjectDto[]> = async () => {
     const response = await fetch(`${this.host}/api/subjects`);
-    return subjectsArraySchema.validateAsync(await response.json(), {
-      allowUnknown: true // TEMP
-    }); // will throw if invalid
+    return Joi.array<SubjectDto[]>()
+      .items(subjectDtoSchema)
+      .validateAsync(await response.json(), {
+        allowUnknown: true // TEMP
+      }); // will throw if invalid
   };
 }
