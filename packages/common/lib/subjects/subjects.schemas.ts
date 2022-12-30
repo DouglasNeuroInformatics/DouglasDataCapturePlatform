@@ -7,5 +7,7 @@ export const createSubjectRequestSchema = Joi.object<CreateSubjectRequestDto, tr
   firstName: Joi.string().required(),
   lastName: Joi.string().required(),
   dateOfBirth: Joi.date().required(),
-  sex: Joi.string().valid(...Object.values(Sex)).required()
+  sex: Joi.string()
+    .valid(...Object.values(Sex))
+    .required()
 });

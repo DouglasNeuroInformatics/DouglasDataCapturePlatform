@@ -1,21 +1,17 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 
-import { AuthRequestDto , authRequestSchema } from '@dnp/common';
+import { AuthRequestDto, authRequestSchema } from '@dnp/common';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
-import AuthApi from '@/api/api.auth.js';
-import { ApiRequestError } from '@/api/api.base.js';
+import API, { APIRequestError } from '@/api';
 import Button from '@/components/Button.js';
-import Modal from '@/components/Modal';
-import AuthContext from '@/store/AuthContext.js';
-import AuthToken from '@/utils/AuthToken.js';
+import AuthContext from '@/context/AuthContext.js';
 
 const LoginPage = () => {
   const authContext = useContext(AuthContext);
-  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
   const { t } = useTranslation('login');
 
@@ -24,19 +20,22 @@ const LoginPage = () => {
   });
 
   const onSubmit: SubmitHandler<AuthRequestDto> = (credentials) => {
-    AuthApi.requestToken(credentials)
+    API.requestToken(credentials)
       .then((dto) => {
-        authContext.setToken(new AuthToken(dto.accessToken));
-        navigate('/');
+        authContext?.setToken(dto.accessToken);
+        navigate('/home');
       })
-      .catch((error: ApiRequestError) => {
+      .catch((error: APIRequestError) => {
         alert(error.message);
       });
   };
 
+  if (authContext.token) {
+    return <Navigate to="/home" />;
+  }
+
   return (
     <div className="h-screen">
-      <Modal isOpen={false} message={errorMessage} title="Error" />
       <div className="container flex h-full max-w-md flex-col items-center justify-center">
         <div className="flex justify-center">
           <img alt="logo" className="w-20 p-3" src="/logo.png" />

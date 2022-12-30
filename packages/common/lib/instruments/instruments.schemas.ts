@@ -8,7 +8,9 @@ export const instrumentFieldSchema = Joi.object<InstrumentFieldInterface, true>(
   name: Joi.string().required(),
   label: Joi.string().required(),
   isRequired: Joi.boolean().required(),
-  type: Joi.string().valid(...Object.values(InstrumentFieldType)).required()
+  type: Joi.string()
+    .valid(...Object.values(InstrumentFieldType))
+    .required()
 });
 
 export const createInstrumentRequestSchema = Joi.object<CreateInstrumentRequestDto, true>({

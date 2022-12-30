@@ -16,5 +16,7 @@ export const authResponseSchema = Joi.object<AuthResponseDto, true>({
 
 export const authTokenPayloadSchema = Joi.object<AuthTokenPayload, true>({
   username: Joi.string().required(),
-  role: Joi.string().valid(...Object.values(UserRole)).required()
+  role: Joi.string()
+    .valid(...Object.values(UserRole))
+    .required()
 });

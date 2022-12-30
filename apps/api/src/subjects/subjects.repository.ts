@@ -7,7 +7,6 @@ import { Subject, SubjectDocument } from './schemas/subject.schema';
 
 import { EntityRepository } from '@/database/entity.repository';
 
-
 @Injectable()
 export class SubjectsRepository extends EntityRepository<SubjectDocument> {
   constructor(@InjectModel(Subject.name) subjectModel: Model<SubjectDocument>) {

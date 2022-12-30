@@ -1,6 +1,6 @@
 import { Body, Controller, Post, UsePipes } from '@nestjs/common';
 
-import { AuthRequestDto, AuthResponseDto , authRequestSchema } from '@dnp/common';
+import { AuthRequestDto, AuthResponseDto, authRequestSchema } from '@dnp/common';
 
 import { AuthService } from './auth.service';
 

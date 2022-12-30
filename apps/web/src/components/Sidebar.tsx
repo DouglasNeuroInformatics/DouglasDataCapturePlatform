@@ -26,12 +26,11 @@ const SidebarNav = ({ children }: { children: React.ReactNode }) => {
   return <nav className="mb-auto">{children}</nav>;
 };
 
-const SidebarNavLink = ({ Icon, to }: { Icon: IconType; to: string }) => {
-  const { t } = useTranslation('common', { keyPrefix: 'sidebarLinks' });
+const SidebarNavLink = ({ Icon, label, to }: { Icon: IconType; label: string; to: string }) => {
   return (
     <NavLink className="flex items-center border p-2" to={to}>
       <Icon className="mr-1" />
-      <span>{t(to)}</span>
+      <span>{label}</span>
     </NavLink>
   );
 };
@@ -65,23 +64,22 @@ const SidebarFooter = ({ username }: { username?: string }) => {
 const Sidebar = () => {
   const auth = useAuth();
   const { t } = useTranslation('common');
-  console.log(auth);
 
   return (
     <div className="flex h-full flex-col bg-slate-900 p-3 text-slate-300">
       <SidebarHeader title={t('platformTitle')} />
       <SidebarDivider />
       <SidebarNav>
-        <SidebarNavLink Icon={HiHome} to="/" />
-        <SidebarNavLink Icon={HiUserPlus} to="/add-subject" />
-        {auth.isAdmin && <SidebarNavLink Icon={HiEye} to="/view-subjects" />}
-        {auth.isAdmin && <SidebarNavLink Icon={HiPlus} to="/add-instrument" />}
+        <SidebarNavLink Icon={HiHome} label="Home" to="/home" />
+        <SidebarNavLink Icon={HiUserPlus} label="Add Subject" to="/add-subject" />
+        {auth?.isAdmin && <SidebarNavLink Icon={HiEye} label="View Subjects" to="/view-subjects" />}
+        {auth?.isAdmin && <SidebarNavLink Icon={HiPlus} label="Add Instrument" to="/add-instrument" />}
         <SidebarNavGroup label="Instruments">
           <h1>Test</h1>
         </SidebarNavGroup>
       </SidebarNav>
       <SidebarDivider />
-      <SidebarFooter username={auth.username} />
+      <SidebarFooter username={auth?.username} />
     </div>
   );
 };
