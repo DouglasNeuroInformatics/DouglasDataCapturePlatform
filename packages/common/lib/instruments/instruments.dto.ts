@@ -1,7 +1,8 @@
-import { InstrumentInterface } from './instruments.interfaces';
+import { InstrumentField } from './instruments.interfaces';
 
-export type CreateInstrumentRequestDto = InstrumentInterface;
-
-export type CreateInstrumentResponseDto = InstrumentInterface;
-
-export type UpdateInstrumentRequestDto = InstrumentInterface;
+export interface InstrumentDto {
+  title: string;
+  description: string;
+  instructions: string;
+  fields: InstrumentField[];
+}

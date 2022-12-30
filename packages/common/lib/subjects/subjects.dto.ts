@@ -1,5 +1,8 @@
-import { SubjectInterface } from './subjects.interfaces';
+import { Sex } from './subjects.enums';
 
-export type CreateSubjectRequestDto = SubjectInterface;
-
-export type SubjectDto = SubjectInterface;
+export interface SubjectDto {
+  firstName: string;
+  lastName: string;
+  dateOfBirth: Date;
+  sex: Sex;
+}
