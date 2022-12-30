@@ -4,6 +4,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import Layout, { layoutLoader } from './components/Layout';
 import { AuthContextProvider } from './context/AuthContext';
+import AddSubjectPage, { addSubjectAction } from './pages/AddSubjectPage';
 import ErrorPage from './pages/ErrorPage';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
@@ -25,6 +26,11 @@ const router = createBrowserRouter([
         element: <HomePage />
       },
       {
+        path: '/add-subject',
+        element: <AddSubjectPage />,
+        action: addSubjectAction
+      },
+      {
         path: '/view-subjects',
         element: <ViewSubjectsPage />,
         loader: viewSubjectsLoader
@@ -37,7 +43,7 @@ const router = createBrowserRouter([
       <React.Suspense>
         <LoginPage />
       </React.Suspense>
-    ),
+    )
   }
 ]);
 

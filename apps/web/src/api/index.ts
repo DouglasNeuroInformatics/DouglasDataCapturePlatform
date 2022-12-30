@@ -52,6 +52,17 @@ export default class API {
     }
   };
 
+  static addSubject: PostRequest<SubjectDto, SubjectDto> = async (dto) => {
+    const response = await fetch(`${this.host}/api/subjects`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(dto)
+    });
+    console.log(response);
+  };
+
   static getSubjects: GetRequest<SubjectDto[]> = async () => {
     const response = await fetch(`${this.host}/api/subjects`);
     return subjectsArraySchema.validateAsync(await response.json(), {
