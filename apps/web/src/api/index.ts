@@ -1,7 +1,9 @@
-import { AuthRequestDto, AuthResponseDto, authResponseSchema } from '@dnp/common';
-import { ValidationError } from 'joi';
+import { AuthRequestDto, AuthResponseDto, SubjectDto, authResponseSchema, subjectsArraySchema } from '@dnp/common';
+import Joi, { ValidationError } from 'joi';
 
-type APIRequest<RequestDto, ResponseDto> = (requestDto: RequestDto) => Promise<ResponseDto>;
+type GetRequest<T> = () => Promise<T>;
+
+type PostRequest<T, U> = (requestDto: T) => Promise<U>;
 
 export class APIRequestError extends Error {
   constructor(message?: string, options?: ErrorOptions) {
@@ -26,7 +28,7 @@ export class APIRequestError extends Error {
 export default class API {
   private static host = import.meta.env.VITE_API_HOST;
 
-  static requestToken: APIRequest<AuthRequestDto, AuthResponseDto> = async ({ username, password }) => {
+  static requestToken: PostRequest<AuthRequestDto, AuthResponseDto> = async ({ username, password }) => {
     try {
       const response = await fetch(`${this.host}/api/auth`, {
         method: 'POST',
@@ -48,5 +50,12 @@ export default class API {
       }
       throw APIRequestError.createFrom(error);
     }
+  };
+
+  static getSubjects: GetRequest<SubjectDto[]> = async () => {
+    const response = await fetch(`${this.host}/api/subjects`);
+    return subjectsArraySchema.validateAsync(await response.json(), {
+      allowUnknown: true // TEMP
+    }); // will throw if invalid
   };
 }

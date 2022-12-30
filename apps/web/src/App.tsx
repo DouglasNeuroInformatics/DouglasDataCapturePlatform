@@ -7,6 +7,7 @@ import { AuthContextProvider } from './context/AuthContext';
 import ErrorPage from './pages/ErrorPage';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
+import ViewSubjectsPage, { viewSubjectsLoader } from './pages/ViewSubjectsPage';
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,11 @@ const router = createBrowserRouter([
       {
         path: '/home',
         element: <HomePage />
+      },
+      {
+        path: '/view-subjects',
+        element: <ViewSubjectsPage />,
+        loader: viewSubjectsLoader
       }
     ]
   },
@@ -31,7 +37,7 @@ const router = createBrowserRouter([
       <React.Suspense>
         <LoginPage />
       </React.Suspense>
-    )
+    ),
   }
 ]);
 

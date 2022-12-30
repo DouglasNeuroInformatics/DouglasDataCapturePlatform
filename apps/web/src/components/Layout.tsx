@@ -7,7 +7,7 @@ import Sidebar from '@/components/Sidebar';
 import useAuth from '@/hooks/useAuth';
 
 function layoutLoader() {
-  console.log('Loader triggered!');
+  console.log('Layout loader triggered!');
   return null;
 }
 
