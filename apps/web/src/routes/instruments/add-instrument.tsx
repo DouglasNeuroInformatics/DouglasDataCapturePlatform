@@ -2,7 +2,9 @@ import React from 'react';
 
 import { InstrumentDto, instrumentDtoSchema } from '@dnp/common';
 import { ValidationError } from 'joi';
-import { type ActionFunction, Form, redirect,  useActionData } from 'react-router-dom';
+import { type ActionFunction, redirect, useActionData } from 'react-router-dom';
+
+import Form from '@/components/Form';
 
 const addInstrumentAction: ActionFunction = async ({ request }) => {
   let dto: InstrumentDto;
@@ -21,18 +23,12 @@ const addInstrumentAction: ActionFunction = async ({ request }) => {
 
 const AddInstrumentPage = () => {
   const validationError = useActionData() as ValidationError | undefined;
-  console.log(validationError);
 
-  if (validationError) {
-    console.log(validationError.details)
-  }
-  
   return (
     <div>
       <h1>Add a New Instrument</h1>
-      <Form method="post">
-        <input name="title" placeholder="title" type="text" />
-
+      <Form>
+        <Form.TextField label="title" name="title" />
         <button type="submit">Submit</button>
       </Form>
     </div>

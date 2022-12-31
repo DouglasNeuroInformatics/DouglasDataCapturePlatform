@@ -11,7 +11,6 @@ const viewSubjectsLoader: LoaderFunction = (): Promise<SubjectDto[]> => {
 
 const ViewSubjectsPage = () => {
   const subjects = useLoaderData() as SubjectDto[];
-  console.log('Subjects Loader Data', subjects);
   return (
     <div className="flex flex-col items-center">
       <h1 className="mb-3 text-3xl">View Subjects</h1>
