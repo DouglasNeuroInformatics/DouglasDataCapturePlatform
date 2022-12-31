@@ -1,18 +1,11 @@
 import React, { useContext } from 'react';
 
-import classNames from 'classnames';
-
 import FormContext from '@/context/FormContext';
 
-interface TextFieldProps {
-  name: string;
-  label: string;
-}
-
-const TextField = ({ name, label }: TextFieldProps) => {
+const TextField = ({ name, label }: { name: string; label: string }) => {
   const formContext = useContext(FormContext);
   return (
-    <div className="relative">
+    <div className="relative my-3">
       <input
         className="peer h-10 w-full border-b-2 border-gray-300 bg-transparent text-gray-900 placeholder-transparent focus:border-rose-600 focus:outline-none"
         name={name}
@@ -30,4 +23,4 @@ const TextField = ({ name, label }: TextFieldProps) => {
   );
 };
 
-export { TextField as default };
+export default TextField;

@@ -12,6 +12,7 @@ const addInstrumentAction: ActionFunction = async ({ request }) => {
     dto = await instrumentDtoSchema.validateAsync(await request.formData(), {
       abortEarly: false
     });
+    alert(JSON.stringify(dto))
   } catch (error) {
     if (error instanceof ValidationError) {
       return error;
@@ -22,14 +23,12 @@ const addInstrumentAction: ActionFunction = async ({ request }) => {
 };
 
 const AddInstrumentPage = () => {
-  const validationError = useActionData() as ValidationError | undefined;
-
   return (
     <div>
       <h1>Add a New Instrument</h1>
       <Form>
         <Form.TextField label="title" name="title" />
-        <button type="submit">Submit</button>
+        <Form.SubmitButton label="Submit" />
       </Form>
     </div>
   );
