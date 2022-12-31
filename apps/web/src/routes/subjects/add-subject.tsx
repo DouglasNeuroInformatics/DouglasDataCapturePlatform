@@ -5,7 +5,7 @@ import { type ActionFunction, Form, redirect } from 'react-router-dom';
 
 import API from '@/api';
 
-const addSubjectAction: ActionFunction = async ({ request, params }) => {
+const addSubjectAction: ActionFunction = async ({ request }) => {
   const { value, error } = subjectDtoSchema.validate(Object.fromEntries(await request.formData()), {
     abortEarly: false
   });

@@ -5,26 +5,6 @@ type GetRequest<T> = () => Promise<T>;
 
 type PostRequest<T, U> = (requestDto: T) => Promise<U>;
 
-export class APIRequestError extends Error {
-  constructor(message?: string, options?: ErrorOptions) {
-    super(message, options);
-    this.name = 'ApiRequestError';
-  }
-
-  static createFrom(error: unknown): APIRequestError {
-    switch (error) {
-      case error instanceof Joi.ValidationError:
-        return new this('Schema validation failed!', {
-          cause: error
-        });
-      default:
-        return new this('An unknown error occured!', {
-          cause: error
-        });
-    }
-  }
-}
-
 export default class API {
   private static host = import.meta.env.VITE_API_HOST;
 

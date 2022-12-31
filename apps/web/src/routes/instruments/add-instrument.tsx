@@ -2,7 +2,7 @@ import React from 'react';
 
 import { InstrumentDto, instrumentDtoSchema } from '@dnp/common';
 import { ValidationError } from 'joi';
-import { type ActionFunction, redirect, useActionData } from 'react-router-dom';
+import { type ActionFunction, redirect } from 'react-router-dom';
 
 import Form from '@/components/Form';
 

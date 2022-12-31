@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { Navigate, Outlet } from 'react-router-dom';
 
@@ -12,7 +12,14 @@ function layoutLoader() {
 
 const Layout = () => {
   const auth = useAuth();
-  return auth ? (
+
+  useEffect(() => {
+    if (import.meta.env.DEV) {
+      void auth.methods.loginDev()
+    }
+  }, [])
+  
+  return auth.currentUser ? (
     <React.Fragment>
       <div className="absolute left-0 h-screen w-72">
         <Sidebar />

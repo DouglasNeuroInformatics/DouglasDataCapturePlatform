@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import classNames from 'classnames';
 import { useTranslation } from 'react-i18next';
 import { IconType } from 'react-icons';
-import { HiChevronRight, HiEye, HiHome, HiPlus, HiUserPlus } from 'react-icons/hi2';
+import { HiEye, HiHome, HiPlus, HiUserPlus } from 'react-icons/hi2';
 import { NavLink } from 'react-router-dom';
 
 import UserDropup from './UserDropup';
@@ -35,13 +34,19 @@ const Sidebar = () => {
       <nav className="mb-auto">
         <SidebarNavLink Icon={HiHome} label="Home" to="/home" />
         <SidebarNavLink Icon={HiUserPlus} label="Add Subject" to="subjects/add-subject" />
-        {auth?.isAdmin && <SidebarNavLink Icon={HiEye} label="View Subjects" to="/subjects/view-subjects" />}
-        {auth?.isAdmin && <SidebarNavLink Icon={HiPlus} label="Add Instrument" to="/instruments/add-instrument" />}
-        {auth?.isAdmin && <SidebarNavLink Icon={HiEye} label="View Instruments" to="/instruments/view-instruments" />}
+        {auth.currentUser?.isAdmin && (
+          <SidebarNavLink Icon={HiEye} label="View Subjects" to="/subjects/view-subjects" />
+        )}
+        {auth.currentUser?.isAdmin && (
+          <SidebarNavLink Icon={HiPlus} label="Add Instrument" to="/instruments/add-instrument" />
+        )}
+        {auth.currentUser?.isAdmin && (
+          <SidebarNavLink Icon={HiEye} label="View Instruments" to="/instruments/view-instruments" />
+        )}
       </nav>
       <hr className="my-1" />
       <div className="flex items-center">
-        <UserDropup username={auth?.username} />
+        <UserDropup username={auth.currentUser?.username} />
       </div>
     </div>
   );

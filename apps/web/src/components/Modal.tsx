@@ -13,7 +13,7 @@ const Modal = ({ title, message, isOpen, setIsOpen }: ModalProps) => {
   //  const [isOpen, setIsOpen] = useState(true);
 
   const closeModal = () => setIsOpen(false);
-  const openModal = () => setIsOpen(true);
+  // const openModal = () => setIsOpen(true);
 
   return (
     <React.Fragment>

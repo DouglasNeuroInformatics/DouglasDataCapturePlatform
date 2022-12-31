@@ -2,8 +2,8 @@
 
 // All of these should be undefined in production
 interface ImportMetaDevEnv {
-  readonly VITE_ADMIN_USERNAME?: string;
-  readonly VITE_ADMIN_PASSWORD?: string;
+  readonly VITE_DEV_USERNAME?: string;
+  readonly VITE_DEV_PASSWORD?: string;
 }
 
 interface ImportMetaEnv extends ImportMetaDevEnv {

@@ -8,10 +8,11 @@ import { IoIosArrowUp } from 'react-icons/io';
 import LanguageToggle from './LanguageToggle';
 
 import AuthContext from '@/context/AuthContext';
+import useAuth from '@/hooks/useAuth';
 import useOnClickOutside from '@/hooks/useOnClickOutside';
 
 const UserDropup = ({ username }: { username?: string }) => {
-  const authContext = useContext(AuthContext);
+  const auth = useAuth();
   const ref = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -22,10 +23,6 @@ const UserDropup = ({ username }: { username?: string }) => {
       closeDropup();
     }
   });
-
-  const logoutUser = () => {
-    authContext.setToken(null);
-  };
 
   return (
     <div className="relative w-full" ref={ref}>
@@ -41,7 +38,7 @@ const UserDropup = ({ username }: { username?: string }) => {
           show={isOpen}
         >
           <div className="absolute bottom-3 w-32 bg-slate-800 shadow-lg">
-            <button className="w-full p-2 hover:bg-slate-700" onClick={logoutUser}>
+            <button className="w-full p-2 hover:bg-slate-700" onClick={() => auth.methods.logout()}>
               Logout
             </button>
             <LanguageToggle className="w-full p-2 hover:bg-slate-700" onClick={closeDropup} />

@@ -1,42 +1,35 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
-import { AuthRequestDto, AuthResponseDto, authRequestSchema } from '@dnp/common';
+import { AuthRequestDto, authRequestSchema } from '@dnp/common';
 import { ValidationError } from 'joi';
-import { ActionFunction, useActionData, useNavigate } from 'react-router-dom';
+import { ActionFunction, useActionData } from 'react-router-dom';
 
-import API from '@/api';
 import Form from '@/components/Form';
-import AuthContext from '@/context/AuthContext';
+import useAuth from '@/hooks/useAuth';
 
 const loginAction: ActionFunction = async ({ request }) => {
   const data = Object.fromEntries(await request.formData());
   let requestDto: AuthRequestDto;
-  let responseDto: AuthResponseDto;
   try {
     requestDto = await authRequestSchema.validateAsync(data);
-    responseDto = await API.requestToken(requestDto);
   } catch (error) {
     if (error instanceof ValidationError) {
       return error;
     }
     throw error;
   }
-  return responseDto.accessToken;
+  return requestDto;
 };
 
 const LoginPage = () => {
-  const authContext = useContext(AuthContext);
-  const navigate = useNavigate();
-  const actionData = useActionData() as string | null | undefined | ValidationError;
-
-  const isLoggedIn = actionData && !(actionData instanceof Error);
+  const auth = useAuth();
+  const actionData = useActionData() as AuthRequestDto | ValidationError | null | undefined;
 
   useEffect(() => {
-    if (isLoggedIn) {
-      authContext.setToken(actionData);
-      navigate('/home');
+    if (actionData && !(actionData instanceof Error)) {
+      void auth.methods.login(actionData);
     }
-  }, [isLoggedIn]);
+  }, [actionData]);
 
   return (
     <div className="h-screen">
