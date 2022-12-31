@@ -5,6 +5,8 @@ import classNames from 'classnames';
 import { HiUserCircle } from 'react-icons/hi2';
 import { IoIosArrowUp } from 'react-icons/io';
 
+import LanguageToggle from './LanguageToggle';
+
 import AuthContext from '@/context/AuthContext';
 import useOnClickOutside from '@/hooks/useOnClickOutside';
 
@@ -13,9 +15,11 @@ const UserDropup = ({ username }: { username?: string }) => {
   const ref = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
 
+  const closeDropup = () => setIsOpen(false);
+
   useOnClickOutside(ref, () => {
     if (isOpen) {
-      setIsOpen(false);
+      closeDropup();
     }
   });
 
@@ -40,6 +44,7 @@ const UserDropup = ({ username }: { username?: string }) => {
             <button className="w-full p-2 hover:bg-slate-700" onClick={logoutUser}>
               Logout
             </button>
+            <LanguageToggle className="w-full p-2 hover:bg-slate-700" onClick={closeDropup} />
           </div>
         </Transition>
       </div>

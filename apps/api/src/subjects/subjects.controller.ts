@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post, UsePipes } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
-import { SubjectDto, subjectDtoSchema} from '@dnp/common';
+import { SubjectDto, subjectDtoSchema } from '@dnp/common';
 
 import { Subject } from './schemas/subject.schema';
 import { SubjectsService } from './subjects.service';

@@ -3,7 +3,7 @@ import React from 'react';
 import FieldError from './FieldError';
 
 interface FormGroupProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 const FormGroup = ({ children }: FormGroupProps) => {
@@ -12,7 +12,7 @@ const FormGroup = ({ children }: FormGroupProps) => {
       {children}
       <FieldError />
     </div>
-  )
-}
+  );
+};
 
 export default FormGroup;

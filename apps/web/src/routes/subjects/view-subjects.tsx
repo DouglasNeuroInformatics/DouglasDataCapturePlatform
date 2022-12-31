@@ -7,7 +7,7 @@ import API from '@/api';
 
 const viewSubjectsLoader: LoaderFunction = (): Promise<SubjectDto[]> => {
   return API.getSubjects();
-}
+};
 
 const ViewSubjectsPage = () => {
   const subjects = useLoaderData() as SubjectDto[];
