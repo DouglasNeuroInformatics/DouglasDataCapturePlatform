@@ -4,6 +4,7 @@ import { SubjectDto } from '@dnp/common';
 import { type LoaderFunction, useLoaderData } from 'react-router-dom';
 
 import API from '@/api';
+import PageHeading from '@/components/PageHeading';
 
 const viewSubjectsLoader: LoaderFunction = (): Promise<SubjectDto[]> => {
   return API.getSubjects();
@@ -13,7 +14,7 @@ const ViewSubjectsPage = () => {
   const subjects = useLoaderData() as SubjectDto[];
   return (
     <div className="flex flex-col items-center">
-      <h1 className="mb-3 text-3xl">View Subjects</h1>
+      <PageHeading>View Subjects</PageHeading>
       <table>
         <thead>
           <tr className="border-b">

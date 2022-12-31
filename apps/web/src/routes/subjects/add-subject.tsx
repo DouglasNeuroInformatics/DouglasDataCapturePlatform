@@ -1,10 +1,27 @@
 import React from 'react';
 
 import { subjectDtoSchema } from '@dnp/common';
-import { type ActionFunction, Form, redirect } from 'react-router-dom';
+import { type ActionFunction, redirect } from 'react-router-dom';
 
 import API from '@/api';
+import Form from '@/components/Form';
+import PageHeading from '@/components/PageHeading';
 
+const addSubjectAction: ActionFunction = async ({ request }) => {
+  return null
+}
+
+const AddSubjectPage = () => {
+  return (
+    <div>
+      <PageHeading>Add Subject</PageHeading>
+    </div>
+  )
+}
+
+export { AddSubjectPage as default, addSubjectAction };
+  
+/*
 const addSubjectAction: ActionFunction = async ({ request }) => {
   const { value, error } = subjectDtoSchema.validate(Object.fromEntries(await request.formData()), {
     abortEarly: false
@@ -35,3 +52,4 @@ const AddSubjectPage = () => {
 };
 
 export { AddSubjectPage as default, addSubjectAction };
+*/
