@@ -3,9 +3,10 @@ import React, { useState } from 'react';
 import classNames from 'classnames';
 import { useTranslation } from 'react-i18next';
 import { IconType } from 'react-icons';
-import { HiChevronRight, HiEye, HiHome, HiPlus, HiUserCircle, HiUserPlus } from 'react-icons/hi2';
-import { IoIosArrowUp } from 'react-icons/io';
+import { HiChevronRight, HiEye, HiHome, HiPlus, HiUserPlus } from 'react-icons/hi2';
 import { NavLink } from 'react-router-dom';
+
+import UserDropup from './UserDropup';
 
 import useAuth from '@/hooks/useAuth';
 
@@ -19,8 +20,6 @@ const SidebarHeader = ({ title }: { title: string }) => {
     </div>
   );
 };
-
-const SidebarDivider = () => <hr />;
 
 const SidebarNav = ({ children }: { children: React.ReactNode }) => {
   return <nav className="mb-auto">{children}</nav>;
@@ -51,12 +50,11 @@ const SidebarNavGroup = ({ label, children }: { label: string; children: React.R
   );
 };
 
+
 const SidebarFooter = ({ username }: { username?: string }) => {
   return (
     <div className="flex items-center">
-      <HiUserCircle className="mr-2 h-8 w-8" />
-      <span>{username}</span>
-      <IoIosArrowUp className="mx-1 hover:rotate-180" />
+      <UserDropup username={username} />
     </div>
   );
 };
@@ -68,7 +66,7 @@ const Sidebar = () => {
   return (
     <div className="flex h-full flex-col bg-slate-900 p-3 text-slate-300">
       <SidebarHeader title={t('platformTitle')} />
-      <SidebarDivider />
+      <hr className="my-1" />
       <SidebarNav>
         <SidebarNavLink Icon={HiHome} label="Home" to="/home" />
         <SidebarNavLink Icon={HiUserPlus} label="Add Subject" to="subjects/add-subject" />
@@ -76,7 +74,7 @@ const Sidebar = () => {
         {auth?.isAdmin && <SidebarNavLink Icon={HiPlus} label="Add Instrument" to="/instruments/add-instrument" />}
         {auth?.isAdmin && <SidebarNavLink Icon={HiEye} label="View Instruments" to="/instruments/view-instruments" />}
       </SidebarNav>
-      <SidebarDivider />
+      <hr className="my-1" />
       <SidebarFooter username={auth?.username} />
     </div>
   );
