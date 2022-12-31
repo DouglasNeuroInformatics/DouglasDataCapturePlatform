@@ -18,7 +18,7 @@ const Layout = () => {
         <Sidebar />
       </div>
       <div className="absolute left-72 flex h-screen w-[calc(100vw-theme(spacing.72))] flex-col overflow-scroll">
-        <main className="flex-grow">
+        <main className="flex-grow sm:container">
           <Outlet />
         </main>
         <Footer />

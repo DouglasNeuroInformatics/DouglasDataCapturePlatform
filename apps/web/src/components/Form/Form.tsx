@@ -11,7 +11,7 @@ interface FormProps {
 const Form = ({ children }: FormProps) => {
   return (
     <FormContextProvider>
-      <ReactRouterForm className="flex flex-col" method="post">
+      <ReactRouterForm autoComplete="off" className="flex flex-col" method="post">
         {children}
       </ReactRouterForm>
     </FormContextProvider>
