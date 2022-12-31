@@ -29,27 +29,20 @@ export default class API {
   private static host = import.meta.env.VITE_API_HOST;
 
   static requestToken: PostRequest<AuthRequestDto, AuthResponseDto> = async ({ username, password }) => {
-    try {
-      const response = await fetch(`${this.host}/api/auth`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          username,
-          password
-        })
-      });
-      if (!response.ok) {
-        throw new APIRequestError(`${response.status}: ${response.statusText}`);
-      }
-      return authResponseSchema.validateAsync(await response.json());
-    } catch (error) {
-      if (error instanceof APIRequestError) {
-        throw error;
-      }
-      throw APIRequestError.createFrom(error);
+    const response = await fetch(`${this.host}/api/auth`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        username,
+        password
+      })
+    });
+    if (!response.ok) {
+      throw response;
     }
+    return authResponseSchema.validateAsync(await response.json());
   };
 
   static addSubject: PostRequest<SubjectDto, SubjectDto> = async (dto) => {

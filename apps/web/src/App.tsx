@@ -8,7 +8,7 @@ import { AuthContextProvider } from './context/AuthContext';
 import HomePage from './routes/home';
 import AddInstrumentPage, { addInstrumentAction } from './routes/instruments/add-instrument';
 import ViewInstrumentsPage from './routes/instruments/view-instruments';
-import LoginPage from './routes/login';
+import LoginPage, { loginAction } from './routes/login';
 import AddSubjectPage, { addSubjectAction } from './routes/subjects/add-subject';
 import ViewSubjectsPage, { viewSubjectsLoader } from './routes/subjects/view-subjects';
 
@@ -54,7 +54,9 @@ const router = createBrowserRouter([
       <React.Suspense>
         <LoginPage />
       </React.Suspense>
-    )
+    ),
+    action: loginAction,
+    errorElement: <ErrorElement />
   }
 ]);
 

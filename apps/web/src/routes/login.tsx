@@ -1,55 +1,55 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 
-import { AuthRequestDto, authRequestSchema } from '@dnp/common';
-import { joiResolver } from '@hookform/resolvers/joi';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { AuthRequestDto, AuthResponseDto, authRequestSchema } from '@dnp/common';
+import { ValidationError } from 'joi';
+import { ActionFunction, useActionData, useNavigate } from 'react-router-dom';
 
-import API, { APIRequestError } from '@/api';
-import Button from '@/components/Button.js';
-import AuthContext from '@/context/AuthContext.js';
+import API from '@/api';
+import Form from '@/components/Form';
+import AuthContext from '@/context/AuthContext';
+
+const loginAction: ActionFunction = async ({ request }) => {
+  const data = Object.fromEntries(await request.formData());
+  let requestDto: AuthRequestDto;
+  let responseDto: AuthResponseDto;
+  try {
+    requestDto = await authRequestSchema.validateAsync(data);
+    responseDto = await API.requestToken(requestDto);
+  } catch (error) {
+    if (error instanceof ValidationError) {
+      return error;
+    }
+    throw error;
+  }
+  return responseDto.accessToken;
+};
 
 const LoginPage = () => {
   const authContext = useContext(AuthContext);
   const navigate = useNavigate();
-  const { t } = useTranslation('login');
+  const actionData = useActionData() as string | null | undefined | ValidationError;
 
-  const { register, handleSubmit, formState } = useForm<AuthRequestDto>({
-    resolver: joiResolver(authRequestSchema)
-  });
+  const isLoggedIn = actionData && !(actionData instanceof Error);
 
-  const onSubmit: SubmitHandler<AuthRequestDto> = (credentials) => {
-    API.requestToken(credentials)
-      .then((dto) => {
-        authContext?.setToken(dto.accessToken);
-        navigate('/home');
-      })
-      .catch((error: APIRequestError) => {
-        alert(error.message);
-      });
-  };
-
-  if (authContext.token) {
-    return <Navigate to="/home" />;
-  }
+  useEffect(() => {
+    if (isLoggedIn) {
+      authContext.setToken(actionData);
+      navigate('/home');
+    }
+  }, [isLoggedIn]);
 
   return (
     <div className="h-screen">
-      <div className="container flex h-full max-w-md flex-col items-center justify-center">
-        <div className="flex justify-center">
-          <img alt="logo" className="w-20 p-3" src="/logo.png" />
-        </div>
-        <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
-          <input className="my-2 border-2 p-2" placeholder="username" {...register('username')} type="text" />
-          {formState.errors.username && <span>{formState.errors.username.message}</span>}
-          <input className="my-2 border-2 p-2" placeholder="password" {...register('password')} type="password" />
-          {formState.errors.password && <span>{formState.errors.password.message}</span>}
-          <Button type="submit">{t('loginBtn')}</Button>
-        </form>
+      <div className="container flex h-full flex-col items-center justify-center">
+        <h1>Login</h1>
+        <Form>
+          <Form.TextField label="username" name="username" />
+          <Form.TextField label="password" name="password" />
+          <Form.SubmitButton label="Login" />
+        </Form>
       </div>
     </div>
   );
 };
 
-export default LoginPage;
+export { LoginPage as default, loginAction };
