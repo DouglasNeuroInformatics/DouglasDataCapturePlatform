@@ -6,19 +6,10 @@ import { ActionFunction, useActionData } from 'react-router-dom';
 
 import Form from '@/components/Form';
 import useAuth from '@/hooks/useAuth';
+import { parseRequestDto } from '@/utils';
 
 const loginAction: ActionFunction = async ({ request }) => {
-  const data = Object.fromEntries(await request.formData());
-  let requestDto: AuthRequestDto;
-  try {
-    requestDto = await authRequestSchema.validateAsync(data);
-  } catch (error) {
-    if (error instanceof ValidationError) {
-      return error;
-    }
-    throw error;
-  }
-  return requestDto;
+  return parseRequestDto(request, authRequestSchema)
 };
 
 const LoginPage = () => {
