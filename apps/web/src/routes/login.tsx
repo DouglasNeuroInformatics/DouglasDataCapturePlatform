@@ -44,7 +44,7 @@ const LoginPage = () => {
         <h1>Login</h1>
         <Form>
           <Form.TextField label="username" name="username" />
-          <Form.TextField label="password" name="password" />
+          <Form.TextField label="password" name="password" variant="password" />
           <Form.SubmitButton label="Login" />
         </Form>
       </div>
