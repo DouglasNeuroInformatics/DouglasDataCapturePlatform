@@ -8,7 +8,7 @@ import router from './router';
 const App = () => {
   return (
     <AuthContextProvider>
-      <RouterProvider router={router} />;
+      <RouterProvider router={router} />
     </AuthContextProvider>
   );
 };
