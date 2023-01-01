@@ -1,6 +1,6 @@
 import { ConflictException, Injectable, NotImplementedException } from '@nestjs/common';
 
-import { InstrumentDto } from '@dnp/common';
+import { InstrumentPostRequestDto } from '@dnp/common';
 
 import { InstrumentsRepository } from './instruments.repository';
 import { Instrument } from './schemas/instrument.schema';
@@ -17,7 +17,7 @@ export class InstrumentsService {
     throw new NotImplementedException();
   }
 
-  async create(dto: InstrumentDto): Promise<Instrument> {
+  async create(dto: InstrumentPostRequestDto): Promise<Instrument> {
     if (await this.instrumentsRepository.exists({ title: dto.title })) {
       throw new ConflictException(`An instrument with the title '${dto.title}' already exists!`);
     }

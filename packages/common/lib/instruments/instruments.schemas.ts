@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-import { InstrumentDto } from './instruments.dto';
+import { InstrumentGetResponseDto, InstrumentPostRequestDto, InstrumentPostResponseDto } from './instruments.dto';
 import { InstrumentFieldType } from './instruments.enums';
 import { InstrumentField } from './instruments.interfaces';
 
@@ -13,7 +13,21 @@ export const instrumentFieldSchema = Joi.object<InstrumentField, true>({
     .required()
 });
 
-export const instrumentDtoSchema = Joi.object<InstrumentDto, true>({
+export const instrumentGetResponseSchema = Joi.object<InstrumentGetResponseDto, true>({
+  title: Joi.string().required(),
+  description: Joi.string().required(),
+  instructions: Joi.string().required(),
+  fields: Joi.array().items(instrumentFieldSchema).required()
+});
+
+export const instrumentPostRequestSchema = Joi.object<InstrumentPostRequestDto, true>({
+  title: Joi.string().required(),
+  description: Joi.string().required(),
+  instructions: Joi.string().required(),
+  fields: Joi.array().items(instrumentFieldSchema).required()
+});
+
+export const instrumentPostResponseSchema = Joi.object<InstrumentPostResponseDto, true>({
   title: Joi.string().required(),
   description: Joi.string().required(),
   instructions: Joi.string().required(),
