@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto';
 
 import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 
-import { StringUtils, SubjectDto } from '@dnp/common';
+import { StringUtils, SubjectPostRequestDto } from '@dnp/common';
 
 import { Subject } from './schemas/subject.schema';
 import { SubjectsRepository } from './subjects.repository';
@@ -11,7 +11,7 @@ import { SubjectsRepository } from './subjects.repository';
 export class SubjectsService {
   constructor(private readonly subjectsRepository: SubjectsRepository) {}
 
-  findAll(): Promise<Subject[]> {
+  async findAll(): Promise<Subject[]> {
     return this.subjectsRepository.findAll();
   }
 
@@ -23,16 +23,12 @@ export class SubjectsService {
     return subject;
   }
 
-  async create(createSubjectRequestDto: SubjectDto): Promise<Subject> {
-    const subjectId = this.generateSubjectId(
-      createSubjectRequestDto.firstName,
-      createSubjectRequestDto.lastName,
-      createSubjectRequestDto.dateOfBirth
-    );
+  async create(dto: SubjectPostRequestDto): Promise<Subject> {
+    const subjectId = this.generateSubjectId(dto.firstName, dto.lastName, dto.dateOfBirth);
     if (await this.subjectsRepository.exists({ _id: subjectId })) {
       throw new ConflictException('A subject with the provided demographic information already exists');
     }
-    return this.subjectsRepository.create({ _id: subjectId, ...createSubjectRequestDto });
+    return this.subjectsRepository.create({ _id: subjectId, ...dto });
   }
 
   async deleteById(id: string): Promise<void> {

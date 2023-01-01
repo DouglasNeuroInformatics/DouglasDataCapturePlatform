@@ -7,7 +7,7 @@ const languages = {
     nativeName: 'English'
   },
   fr: {
-    nativeName: 'French'
+    nativeName: 'Français'
   }
 };
 

@@ -15,10 +15,10 @@ const Layout = () => {
 
   useEffect(() => {
     if (import.meta.env.DEV) {
-      void auth.methods.loginDev()
+      void auth.methods.loginDev();
     }
-  }, [])
-  
+  }, []);
+
   return auth.currentUser ? (
     <React.Fragment>
       <div className="absolute left-0 h-screen w-72">

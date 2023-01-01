@@ -1,17 +1,17 @@
 import React from 'react';
 
-import { SubjectDto } from '@dnp/common';
+import { SubjectGetResponseDto } from '@dnp/common';
 import { type LoaderFunction, useLoaderData } from 'react-router-dom';
 
 import API from '@/api';
 import PageHeading from '@/components/PageHeading';
 
-const viewSubjectsLoader: LoaderFunction = (): Promise<SubjectDto[]> => {
+const viewSubjectsLoader: LoaderFunction = (): Promise<SubjectGetResponseDto[]> => {
   return API.getSubjects();
 };
 
 const ViewSubjectsPage = () => {
-  const subjects = useLoaderData() as SubjectDto[];
+  const subjects = useLoaderData() as SubjectGetResponseDto[];
   return (
     <div className="flex flex-col items-center">
       <PageHeading>View Subjects</PageHeading>

@@ -9,7 +9,7 @@ import useAuth from '@/hooks/useAuth';
 import { parseRequestDto } from '@/utils';
 
 const loginAction: ActionFunction = async ({ request }) => {
-  return parseRequestDto(request, authRequestSchema)
+  return parseRequestDto(request, authRequestSchema);
 };
 
 const LoginPage = () => {

@@ -1,4 +1,13 @@
-import { AuthRequestDto, AuthResponseDto, SubjectDto, authResponseSchema, subjectDtoSchema } from '@dnp/common';
+import {
+  AuthRequestDto,
+  AuthResponseDto,
+  SubjectGetResponseDto,
+  SubjectPostRequestDto,
+  SubjectPostResponseDto,
+  authResponseSchema,
+  subjectGetResponseSchema,
+  subjectPostResponseSchema
+} from '@dnp/common';
 import Joi from 'joi';
 
 type GetRequest<T> = () => Promise<T>;
@@ -25,7 +34,7 @@ export default class API {
     return authResponseSchema.validateAsync(await response.json());
   };
 
-  static addSubject: PostRequest<SubjectDto, SubjectDto> = async (dto) => {
+  static addSubject: PostRequest<SubjectPostRequestDto, SubjectPostResponseDto> = async (dto) => {
     const response = await fetch(`${this.host}/api/subjects`, {
       method: 'POST',
       headers: {
@@ -33,13 +42,18 @@ export default class API {
       },
       body: JSON.stringify(dto)
     });
-    console.log(response);
+    if (!response.ok) {
+      throw response;
+    }
+    return subjectPostResponseSchema.validateAsync(await response.json(), {
+      allowUnknown: true // Until the server-side schemas are set
+    });
   };
 
-  static getSubjects: GetRequest<SubjectDto[]> = async () => {
+  static getSubjects: GetRequest<SubjectGetResponseDto[]> = async () => {
     const response = await fetch(`${this.host}/api/subjects`);
-    return Joi.array<SubjectDto[]>()
-      .items(subjectDtoSchema)
+    return Joi.array<SubjectGetResponseDto[]>()
+      .items(subjectGetResponseSchema)
       .validateAsync(await response.json(), {
         allowUnknown: true // TEMP
       }); // will throw if invalid

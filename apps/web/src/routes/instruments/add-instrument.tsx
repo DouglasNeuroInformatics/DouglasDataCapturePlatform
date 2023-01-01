@@ -13,7 +13,7 @@ const addInstrumentAction: ActionFunction = async ({ request }) => {
     dto = await instrumentDtoSchema.validateAsync(await request.formData(), {
       abortEarly: false
     });
-    alert(JSON.stringify(dto))
+    alert(JSON.stringify(dto));
   } catch (error) {
     if (error instanceof ValidationError) {
       return error;

@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import { Transition } from '@headlessui/react';
 import classNames from 'classnames';
@@ -7,7 +7,6 @@ import { IoIosArrowUp } from 'react-icons/io';
 
 import LanguageToggle from './LanguageToggle';
 
-import AuthContext from '@/context/AuthContext';
 import useAuth from '@/hooks/useAuth';
 import useOnClickOutside from '@/hooks/useOnClickOutside';
 

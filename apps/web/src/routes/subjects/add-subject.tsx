@@ -1,55 +1,35 @@
 import React from 'react';
 
-import { subjectDtoSchema } from '@dnp/common';
-import { type ActionFunction, redirect } from 'react-router-dom';
+import { Sex, subjectPostRequestSchema } from '@dnp/common';
+import { type ActionFunction } from 'react-router-dom';
 
 import API from '@/api';
 import Form from '@/components/Form';
 import PageHeading from '@/components/PageHeading';
+import { formatOptions, parseRequestDto } from '@/utils';
 
 const addSubjectAction: ActionFunction = async ({ request }) => {
-  return null
-}
-
-const AddSubjectPage = () => {
-  return (
-    <div>
-      <PageHeading>Add Subject</PageHeading>
-    </div>
-  )
-}
-
-export { AddSubjectPage as default, addSubjectAction };
-  
-/*
-const addSubjectAction: ActionFunction = async ({ request }) => {
-  const { value, error } = subjectDtoSchema.validate(Object.fromEntries(await request.formData()), {
-    abortEarly: false
-  });
-  if (value) {
-    await API.addSubject(value);
+  const obj = await parseRequestDto(request, subjectPostRequestSchema);
+  if (obj instanceof Error) {
+    console.log(obj);
+    return obj;
   }
-  const errorMessages = error?.details.map((item) => item.message) as string[];
-  alert(JSON.stringify(errorMessages));
-  return redirect('/');
-  // const errorMessages = error?.details.map((item) => item.message);
-  // const data = API.addSubject(Object.fromEntries(formData));
+  return API.addSubject(obj);
 };
 
 const AddSubjectPage = () => {
   return (
-    <div>
-      <h1>Add a Subject</h1>
-      <Form method="post">
-        <input name="firstName" placeholder="First Name" type="text" />
-        <input name="lastName" placeholder="Last Name" type="text" />
-        <input name="sex" placeholder="Sex" type="text" />
-        <input name="dateOfBirth" placeholder="Date of Birth" type="date" />
-        <button type="submit">Submit</button>
+    <div className="flex flex-col items-center">
+      <PageHeading>Add Subject</PageHeading>
+      <Form>
+        <Form.TextField label="First Name" name="firstName" />
+        <Form.TextField label="Last Name" name="lastName" />
+        <Form.SelectField label="Sex" name="sex" options={formatOptions(Sex)} />
+        <Form.DateField name="dateOfBirth" />
+        <Form.SubmitButton />
       </Form>
     </div>
   );
 };
 
 export { AddSubjectPage as default, addSubjectAction };
-*/

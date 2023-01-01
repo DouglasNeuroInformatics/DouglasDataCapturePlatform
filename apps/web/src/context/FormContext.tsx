@@ -2,9 +2,7 @@ import React, { createContext } from 'react';
 
 import useValidationError from '@/hooks/useValidationError';
 
-interface ErrorMessages {
-  [key: string]: string | undefined;
-}
+type ErrorMessages = Record<string, string | undefined>;
 
 interface FormContextInterface {
   errorMessages: ErrorMessages;
