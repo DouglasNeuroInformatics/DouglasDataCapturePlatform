@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, UsePipes } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UsePipes } from '@nestjs/common';
 
 import { InstrumentPostRequestDto, instrumentPostRequestSchema } from '@dnp/common';
 
@@ -20,5 +20,10 @@ export class InstrumentsController {
   @Get()
   findAll(): Promise<Instrument[]> {
     return this.instrumentsService.findAll();
+  }
+
+  @Get(':id')
+  findById(@Param('id') id: string): Promise<Instrument> {
+    return this.instrumentsService.findById(id);
   }
 }

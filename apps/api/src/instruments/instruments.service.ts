@@ -1,4 +1,4 @@
-import { ConflictException, Injectable, NotImplementedException } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException, NotImplementedException } from '@nestjs/common';
 
 import { InstrumentPostRequestDto } from '@dnp/common';
 
@@ -11,6 +11,14 @@ export class InstrumentsService {
 
   findAll(): Promise<Instrument[]> {
     return this.instrumentsRepository.findAll();
+  }
+
+  async findById(id: string): Promise<Instrument> {
+    const instrument = await this.instrumentsRepository.findById(id);
+    if (!instrument) {
+      throw new NotFoundException();
+    }
+    return instrument;
   }
 
   findByName(): void {

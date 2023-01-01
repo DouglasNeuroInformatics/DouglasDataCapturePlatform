@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .btn-primary {
+    @apply w-20 rounded-lg bg-indigo-500 p-2 text-center font-medium text-white;
+  }
+}

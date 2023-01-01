@@ -14,6 +14,7 @@ export const instrumentFieldSchema = Joi.object<InstrumentField, true>({
 });
 
 export const instrumentGetResponseSchema = Joi.object<InstrumentGetResponseDto, true>({
+  _id: Joi.string().required(),
   title: Joi.string().required(),
   description: Joi.string().required(),
   instructions: Joi.string().required(),
@@ -28,6 +29,7 @@ export const instrumentPostRequestSchema = Joi.object<InstrumentPostRequestDto, 
 });
 
 export const instrumentPostResponseSchema = Joi.object<InstrumentPostResponseDto, true>({
+  _id: Joi.string().required(),
   title: Joi.string().required(),
   description: Joi.string().required(),
   instructions: Joi.string().required(),

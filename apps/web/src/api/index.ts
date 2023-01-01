@@ -6,7 +6,9 @@ import {
   SubjectPostResponseDto,
   authResponseSchema,
   subjectGetResponseSchema,
-  subjectPostResponseSchema
+  subjectPostResponseSchema,
+  InstrumentGetResponseDto,
+  instrumentGetResponseSchema
 } from '@dnp/common';
 import Joi from 'joi';
 
@@ -55,7 +57,26 @@ export default class API {
     return Joi.array<SubjectGetResponseDto[]>()
       .items(subjectGetResponseSchema)
       .validateAsync(await response.json(), {
-        allowUnknown: true // TEMP
-      }); // will throw if invalid
+        allowUnknown: true
+      });
+  };
+
+  static getInstruments: GetRequest<InstrumentGetResponseDto[]> = async () => {
+    const response = await fetch(`${this.host}/api/instruments`);
+    return Joi.array<InstrumentGetResponseDto[]>()
+      .items(instrumentGetResponseSchema)
+      .validateAsync(await response.json(), {
+        allowUnknown: true
+      });
+  };
+
+  static getInstrumentById: GetRequest<InstrumentGetResponseDto> = async (id: string) => {
+    const response = await fetch(`${this.host}/api/instruments/${id}`);
+    if (!response.ok) {
+      throw response;
+    }
+    return instrumentGetResponseSchema.validateAsync(await response.json(), {
+      allowUnknown: true // Until the server-side schemas are set
+    });
   };
 }

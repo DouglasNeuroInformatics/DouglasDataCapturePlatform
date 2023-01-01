@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { InstrumentDto, instrumentDtoSchema } from '@dnp/common';
+import { InstrumentPostRequestDto, instrumentPostRequestSchema } from '@dnp/common';
 import { ValidationError } from 'joi';
 import { type ActionFunction, redirect } from 'react-router-dom';
 
@@ -8,9 +8,9 @@ import Form from '@/components/Form';
 import PageHeading from '@/components/PageHeading';
 
 const addInstrumentAction: ActionFunction = async ({ request }) => {
-  let dto: InstrumentDto;
+  let dto: InstrumentPostRequestDto;
   try {
-    dto = await instrumentDtoSchema.validateAsync(await request.formData(), {
+    dto = await instrumentPostRequestSchema.validateAsync(await request.formData(), {
       abortEarly: false
     });
     alert(JSON.stringify(dto));

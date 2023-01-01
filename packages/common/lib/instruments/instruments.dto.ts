@@ -7,8 +7,12 @@ export interface BaseInstrumentDto {
   fields: InstrumentField[];
 }
 
-export type InstrumentGetResponseDto = BaseInstrumentDto
+export interface InstrumentGetResponseDto extends BaseInstrumentDto {
+  _id: string;
+}
 
 export type InstrumentPostRequestDto = BaseInstrumentDto;
 
-export type InstrumentPostResponseDto = BaseInstrumentDto;
+export interface InstrumentPostResponseDto extends BaseInstrumentDto {
+  _id: string
+}
