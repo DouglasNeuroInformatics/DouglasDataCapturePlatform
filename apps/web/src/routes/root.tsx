@@ -24,7 +24,7 @@ const Root = () => {
       <div className="absolute left-0 h-screen w-72">
         <Sidebar />
       </div>
-      <div className="absolute left-72 flex h-screen w-[calc(100vw-theme(spacing.72))] flex-col overflow-scroll">
+      <div className="absolute left-72 pt-5 flex h-screen w-[calc(100vw-theme(spacing.72))] flex-col overflow-scroll">
         <main className="flex-grow sm:container">
           <Outlet />
         </main>
