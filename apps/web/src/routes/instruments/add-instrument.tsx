@@ -5,7 +5,6 @@ import { ValidationError } from 'joi';
 import { type ActionFunction, redirect } from 'react-router-dom';
 
 import Form from '@/components/Form';
-import PageHeading from '@/components/PageHeading';
 
 const addInstrumentAction: ActionFunction = async ({ request }) => {
   let dto: InstrumentPostRequestDto;
@@ -26,7 +25,7 @@ const addInstrumentAction: ActionFunction = async ({ request }) => {
 const AddInstrumentPage = () => {
   return (
     <div>
-      <PageHeading>Add Instrument</PageHeading>
+      <h1>Add Instrument</h1>
       <Form>
         <Form.TextField label="title" name="title" />
         <Form.SubmitButton label="Submit" />

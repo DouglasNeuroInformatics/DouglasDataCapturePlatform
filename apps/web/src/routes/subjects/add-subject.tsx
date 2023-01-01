@@ -5,7 +5,6 @@ import { type ActionFunction } from 'react-router-dom';
 
 import API from '@/api';
 import Form from '@/components/Form';
-import PageHeading from '@/components/PageHeading';
 import { formatOptions, parseRequestDto } from '@/utils';
 
 const addSubjectAction: ActionFunction = async ({ request }) => {
@@ -20,7 +19,7 @@ const addSubjectAction: ActionFunction = async ({ request }) => {
 const AddSubjectPage = () => {
   return (
     <div className="flex flex-col items-center">
-      <PageHeading>Add Subject</PageHeading>
+      <h1>Add Subject</h1>
       <Form>
         <Form.TextField label="First Name" name="firstName" />
         <Form.TextField label="Last Name" name="lastName" />

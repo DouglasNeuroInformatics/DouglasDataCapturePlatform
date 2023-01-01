@@ -6,11 +6,11 @@ import Footer from '@/components/Footer';
 import Sidebar from '@/components/Sidebar';
 import useAuth from '@/hooks/useAuth';
 
-function layoutLoader() {
+function rootLoader() {
   return null;
 }
 
-const Layout = () => {
+const Root = () => {
   const auth = useAuth();
 
   useEffect(() => {
@@ -36,4 +36,4 @@ const Layout = () => {
   );
 };
 
-export { Layout as default, layoutLoader };
+export { Root as default, rootLoader };

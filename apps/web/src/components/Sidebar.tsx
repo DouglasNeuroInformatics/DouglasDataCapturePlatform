@@ -26,9 +26,9 @@ const Sidebar = () => {
     <div className="flex h-full flex-col bg-slate-900 p-3 text-slate-300">
       <div className="flex items-center p-2">
         <img alt="logo" className="mr-2 w-16" src="/logo.png" />
-        <h3 className="uppercase leading-tight antialiased" style={{ maxWidth: '7.5em' }}>
+        <span className="uppercase leading-tight antialiased" style={{ maxWidth: '7.5em' }}>
           {t('platformTitle')}
-        </h3>
+        </span>
       </div>
       <hr className="my-1" />
       <nav className="mb-auto">
