@@ -9,19 +9,19 @@ import UserDropup from './UserDropup';
 
 import useAuth from '@/hooks/useAuth';
 
-const SidebarNavLink = ({ Icon, label, to }: { Icon: IconType; label: string; to: string }) => {
+const SidebarNavLink = ({ Icon, href }: { Icon: IconType; href: string }) => {
+  const { t } = useTranslation();
   return (
-    <NavLink className="flex items-center border p-2" to={to}>
-      <Icon className="mr-1" />
-      <span>{label}</span>
+    <NavLink className="flex items-center p-2 hover:bg-slate-800" to={href}>
+      <Icon className="mr-2" />
+      <span>{t(`sidebar.links.${href}`)}</span>
     </NavLink>
   );
 };
 
 const Sidebar = () => {
   const auth = useAuth();
-  const { t } = useTranslation('common');
-
+  const { t } = useTranslation();
   return (
     <div className="flex h-full flex-col bg-slate-900 p-3 text-slate-300">
       <div className="flex items-center p-2">
@@ -32,17 +32,11 @@ const Sidebar = () => {
       </div>
       <hr className="my-1" />
       <nav className="mb-auto">
-        <SidebarNavLink Icon={HiHome} label="Home" to="/home" />
-        <SidebarNavLink Icon={HiUserPlus} label="Add Subject" to="subjects/add-subject" />
-        {auth.currentUser?.isAdmin && (
-          <SidebarNavLink Icon={HiEye} label="View Subjects" to="/subjects/view-subjects" />
-        )}
-        {auth.currentUser?.isAdmin && (
-          <SidebarNavLink Icon={HiPlus} label="Add Instrument" to="/instruments/add-instrument" />
-        )}
-        {auth.currentUser?.isAdmin && (
-          <SidebarNavLink Icon={HiEye} label="View Instruments" to="/instruments/view-instruments" />
-        )}
+        <SidebarNavLink Icon={HiHome} href="/home" />
+        <SidebarNavLink Icon={HiUserPlus} href="/subjects/add-subject" />
+        {auth.currentUser?.isAdmin && <SidebarNavLink Icon={HiEye} href="/subjects/view-subjects" />}
+        {auth.currentUser?.isAdmin && <SidebarNavLink Icon={HiPlus} href="/instruments/add-instrument" />}
+        {auth.currentUser?.isAdmin && <SidebarNavLink Icon={HiEye} href="/instruments/view-instruments" />}
       </nav>
       <hr className="my-1" />
       <div className="flex items-center">

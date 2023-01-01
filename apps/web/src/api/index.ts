@@ -1,14 +1,14 @@
 import {
   AuthRequestDto,
   AuthResponseDto,
+  InstrumentGetResponseDto,
   SubjectGetResponseDto,
   SubjectPostRequestDto,
   SubjectPostResponseDto,
   authResponseSchema,
+  instrumentGetResponseSchema,
   subjectGetResponseSchema,
-  subjectPostResponseSchema,
-  InstrumentGetResponseDto,
-  instrumentGetResponseSchema
+  subjectPostResponseSchema
 } from '@dnp/common';
 import Joi from 'joi';
 

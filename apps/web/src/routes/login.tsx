@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 
 import { AuthRequestDto, authRequestSchema } from '@dnp/common';
 import { ValidationError } from 'joi';
+import { useTranslation } from 'react-i18next';
 import { ActionFunction, useActionData } from 'react-router-dom';
 
 import Form from '@/components/Form';
@@ -15,6 +16,7 @@ const loginAction: ActionFunction = async ({ request }) => {
 const LoginPage = () => {
   const auth = useAuth();
   const actionData = useActionData() as AuthRequestDto | ValidationError | null | undefined;
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (actionData && !(actionData instanceof Error)) {
@@ -25,7 +27,7 @@ const LoginPage = () => {
   return (
     <div className="h-screen">
       <div className="container flex h-full flex-col items-center justify-center">
-        <h1>Login</h1>
+        <h1>{t('login.pageTitle')}</h1>
         <Form>
           <Form.TextField label="username" name="username" />
           <Form.TextField label="password" name="password" variant="password" />

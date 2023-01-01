@@ -26,17 +26,14 @@ const InstrumentPage = () => {
   const instrument = useLoaderData() as InstrumentGetResponseDto;
   return (
     <div>
-      <h1 className="text-center mb-5">{instrument.title}</h1>
+      <h1 className="mb-5 text-center">{instrument.title}</h1>
       <div className="card">
         <Stepper
           steps={[
             {
               name: 'Overview',
               element: (
-                <InstrumentOverview
-                  description={instrument.description}
-                  instructions={instrument.instructions}
-                />
+                <InstrumentOverview description={instrument.description} instructions={instrument.instructions} />
               )
             },
             {

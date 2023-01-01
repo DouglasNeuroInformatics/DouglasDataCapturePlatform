@@ -14,5 +14,5 @@ export interface InstrumentGetResponseDto extends BaseInstrumentDto {
 export type InstrumentPostRequestDto = BaseInstrumentDto;
 
 export interface InstrumentPostResponseDto extends BaseInstrumentDto {
-  _id: string
+  _id: string;
 }

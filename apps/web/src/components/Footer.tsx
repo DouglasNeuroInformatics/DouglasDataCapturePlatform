@@ -6,7 +6,7 @@ import { FaGithub } from 'react-icons/fa';
 const currentYear = new Date().getFullYear();
 
 export const Footer = () => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation();
   return (
     <footer className="container mx-auto">
       <hr />

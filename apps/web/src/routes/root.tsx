@@ -6,7 +6,6 @@ import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
 import Sidebar from '@/components/Sidebar';
 import useAuth from '@/hooks/useAuth';
-import classNames from 'classnames';
 
 function rootLoader() {
   return null;

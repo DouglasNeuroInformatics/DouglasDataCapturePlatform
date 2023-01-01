@@ -16,9 +16,11 @@ const ViewInstrumentsPage = () => {
       <h1 className="text-center">View Instruments</h1>
       {instruments.map((instrument, i) => (
         <div className="card my-5" key={i}>
-          <h3>{ instrument.title }</h3>
+          <h3>{instrument.title}</h3>
           <p>{instrument.description}</p>
-          <Link className="btn-primary" to={`/instruments/${instrument._id}`}>Start</Link>
+          <Link className="btn-primary" to={`/instruments/${instrument._id}`}>
+            Start
+          </Link>
         </div>
       ))}
     </div>

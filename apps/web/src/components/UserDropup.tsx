@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 
 import { Transition } from '@headlessui/react';
 import classNames from 'classnames';
+import { useTranslation } from 'react-i18next';
 import { HiUserCircle } from 'react-icons/hi2';
 import { IoIosArrowUp } from 'react-icons/io';
 
@@ -14,6 +15,7 @@ const UserDropup = ({ username }: { username?: string }) => {
   const auth = useAuth();
   const ref = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
+  const { t } = useTranslation();
 
   const closeDropup = () => setIsOpen(false);
 
@@ -36,9 +38,9 @@ const UserDropup = ({ username }: { username?: string }) => {
           leaveTo="transform opacity-0 scale-95"
           show={isOpen}
         >
-          <div className="absolute bottom-3 w-32 bg-slate-800 shadow-lg">
+          <div className="absolute bottom-3 w-40 bg-slate-800 shadow-lg">
             <button className="w-full p-2 hover:bg-slate-700" onClick={() => auth.methods.logout()}>
-              Logout
+              {t('userDropup.logout')}
             </button>
             <LanguageToggle className="w-full p-2 hover:bg-slate-700" onClick={closeDropup} />
           </div>
