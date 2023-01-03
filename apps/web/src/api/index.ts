@@ -12,7 +12,7 @@ import {
 } from '@dnp/common';
 import Joi from 'joi';
 
-type GetRequest<T> = () => Promise<T>;
+type GetRequest<T> = (...args: any[]) => Promise<T>;
 
 type PostRequest<T, U> = (requestDto: T) => Promise<U>;
 
