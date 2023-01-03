@@ -53,5 +53,5 @@ module.exports = {
       typescript: true
     }
   },
-  ignorePatterns: ['*.js', 'tsconfig.json']
+  ignorePatterns: ['*.js', '*.cjs', '*.mjs', 'tsconfig.json']
 };

@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 
 import { InstrumentsController } from './instruments.controller';
+import { InstrumentsRepository } from './instruments.repository';
 import { InstrumentsService } from './instruments.service';
 import { Instrument, InstrumentSchema } from './schemas/instrument.schema';
 
@@ -15,6 +16,6 @@ import { Instrument, InstrumentSchema } from './schemas/instrument.schema';
     ])
   ],
   controllers: [InstrumentsController],
-  providers: [InstrumentsService]
+  providers: [InstrumentsRepository, InstrumentsService]
 })
 export class InstrumentsModule {}

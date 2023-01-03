@@ -5,6 +5,15 @@ module.exports = {
     project: ['./tsconfig.json'],
     tsconfigRootDir: __dirname
   },
+  overrides: {
+    files: ['**/*/*.spec.ts', '**/*/*.test.ts'],
+    plugins: ['jest'],
+    rules: {
+      // you should turn the original rule off *only* for test files
+      '@typescript-eslint/unbound-method': 'off',
+      'jest/unbound-method': 'error'
+    }
+  },
   rules: {
     '@typescript-eslint/explicit-function-return-type': 'error',
     '@typescript-eslint/explicit-module-boundary-types': 'error',

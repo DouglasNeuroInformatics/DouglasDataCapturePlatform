@@ -1,34 +1,20 @@
-import { ConflictException, Injectable, NotFoundException, NotImplementedException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
 
-import { InstrumentPostRequestDto } from '@dnp/common';
+import { Model } from 'mongoose';
 
-import { InstrumentsRepository } from './instruments.repository';
-import { Instrument } from './schemas/instrument.schema';
+import { CreateInstrumentRequestDto } from './dto/create-instrument.dto';
+import { Instrument, InstrumentDocument } from './schemas/instrument.schema';
 
 @Injectable()
 export class InstrumentsService {
-  constructor(private readonly instrumentsRepository: InstrumentsRepository) {}
+  constructor(@InjectModel(Instrument.name) private instrumentModel: Model<InstrumentDocument>) {}
 
-  findAll(): Promise<Instrument[]> {
-    return this.instrumentsRepository.findAll();
+  create(dto: CreateInstrumentRequestDto): Promise<Instrument> {
+    return this.instrumentModel.create(dto);
   }
 
-  async findById(id: string): Promise<Instrument> {
-    const instrument = await this.instrumentsRepository.findById(id);
-    if (!instrument) {
-      throw new NotFoundException();
-    }
-    return instrument;
-  }
-
-  findByName(): void {
-    throw new NotImplementedException();
-  }
-
-  async create(dto: InstrumentPostRequestDto): Promise<Instrument> {
-    if (await this.instrumentsRepository.exists({ title: dto.title })) {
-      throw new ConflictException(`An instrument with the title '${dto.title}' already exists!`);
-    }
-    return this.instrumentsRepository.create(dto);
+  getAll(): Promise<Instrument[]> {
+    return this.instrumentModel.find({}).exec();
   }
 }

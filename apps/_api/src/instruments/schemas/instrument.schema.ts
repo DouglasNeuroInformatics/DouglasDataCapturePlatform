@@ -1,9 +1,10 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
+import { InstrumentField as InstrumentFieldInterface, InstrumentFieldType } from '@dnp/common';
 import { HydratedDocument } from 'mongoose';
 
 @Schema({ strict: true })
-export class InstrumentField {
+export class InstrumentField implements InstrumentFieldInterface {
   @Prop({ required: true, unique: true })
   name: string;
 
@@ -13,8 +14,8 @@ export class InstrumentField {
   @Prop({ required: true })
   isRequired: boolean;
 
-  @Prop({ enum: ['string', 'number'], required: true })
-  type: string;
+  @Prop({ enum: Object.values(InstrumentFieldType), required: true })
+  type: InstrumentFieldType;
 }
 
 @Schema({ strict: true, timestamps: true })
