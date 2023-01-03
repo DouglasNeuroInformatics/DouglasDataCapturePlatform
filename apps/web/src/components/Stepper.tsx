@@ -55,7 +55,7 @@ const Stepper = ({ steps }: StepperProps) => {
         ))}
       </div>
       <div>{steps.at(state.currentIndex)?.element}</div>
-      <div>
+      <div className="mt-2">
         <button className="btn-primary mr-2" onClick={() => dispatch({ type: 'decrement' })}>
           Back
         </button>

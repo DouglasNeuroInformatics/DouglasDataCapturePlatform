@@ -29,9 +29,9 @@ const ViewSubjectsPage = () => {
               i // later key should be ID
             ) => (
               <tr key={i}>
-                <td>{i}</td>
-                <td>{subject.dateOfBirth.toISOString()}</td>
-                <td>{subject.sex}</td>
+                <td className="p-1">{i}</td>
+                <td className="p-1">{subject.dateOfBirth.toDateString()}</td>
+                <td className="p-1">{subject.sex}</td>
               </tr>
             )
           )}

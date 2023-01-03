@@ -18,7 +18,7 @@ const ViewInstrumentsPage = () => {
         <div className="card my-5" key={i}>
           <h3>{instrument.title}</h3>
           <p>{instrument.description}</p>
-          <Link className="btn-primary" to={`/instruments/${instrument._id}`}>
+          <Link className="btn-primary mt-2" to={`/instruments/${instrument._id}`}>
             Start
           </Link>
         </div>

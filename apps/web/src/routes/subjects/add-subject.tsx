@@ -20,7 +20,7 @@ const AddSubjectPage = () => {
   return (
     <div className="flex flex-col items-center">
       <h1>Add Subject</h1>
-      <Form>
+      <Form className="w-6/12">
         <Form.TextField label="First Name" name="firstName" />
         <Form.TextField label="Last Name" name="lastName" />
         <Form.SelectField label="Sex" name="sex" options={formatOptions(Sex)} />
