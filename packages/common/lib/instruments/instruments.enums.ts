@@ -1,4 +1,4 @@
 export enum InstrumentFieldType {
-  Text = 'text',
-  Options = 'options'
+  String = 'string',
+  Number = 'number'
 }

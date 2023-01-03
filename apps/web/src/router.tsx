@@ -4,7 +4,7 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import ErrorElement from './components/ErrorElement';
 import HomePage from './routes/home';
-import InstrumentPage, { instrumentPageLoader } from './routes/instruments/:instrument';
+import InstrumentPage, { instrumentPageAction, instrumentPageLoader } from './routes/instruments/:instrument';
 import AddInstrumentPage, { addInstrumentAction } from './routes/instruments/add-instrument';
 import ViewInstrumentsPage, { viewInstrumentsLoader } from './routes/instruments/view-instruments';
 import LoginPage, { loginAction } from './routes/login';
@@ -50,6 +50,7 @@ const router = createBrowserRouter([
       {
         path: '/instruments/:id',
         element: <InstrumentPage />,
+        action: instrumentPageAction,
         loader: instrumentPageLoader
       }
     ]

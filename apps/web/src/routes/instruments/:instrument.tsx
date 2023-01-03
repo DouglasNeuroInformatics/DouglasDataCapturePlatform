@@ -1,17 +1,23 @@
 import React from 'react';
 
-import { InstrumentGetResponseDto } from '@dnp/common';
-import { LoaderFunction, useLoaderData, useNavigate } from 'react-router-dom';
+import { InstrumentField, InstrumentGetResponseDto } from '@dnp/common';
+import { LoaderFunction, useLoaderData } from 'react-router-dom';
 
 import API from '@/api';
+import Form from '@/components/Form';
 import Stepper from '@/components/Stepper';
 
 const instrumentPageLoader: LoaderFunction = async ({ params }) => {
   return API.getInstrumentById(params.id);
 };
 
+const instrumentPageAction: LoaderFunction = async ({ request }) => {
+  const obj = await request.formData();
+  console.log(obj);
+  return null;
+};
+
 const InstrumentOverview = ({ description, instructions }: { description: string; instructions: string }) => {
-  const navigate = useNavigate();
   return (
     <div>
       <h3 className="mt-5 text-xl font-bold">Description</h3>
@@ -19,6 +25,25 @@ const InstrumentOverview = ({ description, instructions }: { description: string
       <h3 className="mt-5 text-xl font-bold">Instructions</h3>
       <p>{instructions}</p>
     </div>
+  );
+};
+
+const InstrumentForm = ({ fields }: { fields: InstrumentField[] }) => {
+  console.log(fields);
+  return (
+    <Form>
+      {fields.map((field, i) => {
+        switch (field.type) {
+          case 'string':
+            return <Form.TextField key={i} label={field.label} name={field.name} />;
+          case 'number':
+            return 'Number';
+          default:
+            throw new Error(`Behavior for field of type ${field.type} is undefined!`);
+        }
+      })}
+      <Form.SubmitButton />
+    </Form>
   );
 };
 
@@ -37,8 +62,8 @@ const InstrumentPage = () => {
               )
             },
             {
-              name: 'Bar',
-              element: <h1>Foo Bar</h1>
+              name: 'Questions',
+              element: <InstrumentForm fields={instrument.fields} />
             }
           ]}
         />
@@ -47,4 +72,4 @@ const InstrumentPage = () => {
   );
 };
 
-export { InstrumentPage as default, instrumentPageLoader };
+export { InstrumentPage as default, instrumentPageAction, instrumentPageLoader };

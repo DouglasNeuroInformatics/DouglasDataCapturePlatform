@@ -26,4 +26,10 @@ export class InstrumentsController {
   findById(@Param('id') id: string): Promise<Instrument> {
     return this.instrumentsService.findById(id);
   }
+
+  @Post()
+  @UsePipes(new ValidationPipe(instrumentPostRequestSchema))
+  add(@Body() dto: InstrumentPostRequestDto): Promise<Instrument> {
+    return this.instrumentsService.create(dto);
+  }
 }
