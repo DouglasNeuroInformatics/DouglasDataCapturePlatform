@@ -6,6 +6,7 @@ import Joi from 'joi';
 import { AuthModule } from './auth/auth.module';
 import { DatabaseModule } from './database/database.module';
 import { InstrumentsModule } from './instruments/instruments.module';
+import { SubjectsModule } from './subjects/subjects.module';
 import { UsersModule } from './users/users.module';
 
 @Module({
@@ -22,6 +23,7 @@ import { UsersModule } from './users/users.module';
     }),
     DatabaseModule,
     InstrumentsModule,
+    SubjectsModule,
     UsersModule
   ]
 })

@@ -51,6 +51,7 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
     "cors": "^2.8.5",
+    "joi": "^17.7.0",
     "mongoose": "^6.8.0",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.0",

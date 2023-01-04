@@ -72,7 +72,6 @@ describe('Users', () => {
     });
 
     */
-  
   });
 
   describe('GET /users/:username', () => undefined);
@@ -80,5 +79,4 @@ describe('Users', () => {
   describe('PATCH /users/:username', () => undefined);
 
   describe('DELETE /users/:username', () => undefined);
-
 });

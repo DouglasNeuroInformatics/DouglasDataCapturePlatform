@@ -8,7 +8,7 @@ export class CreateUserReqDto {
   @ApiProperty()
   @IsString()
   username: string;
-  
+
   @ApiProperty()
   @IsString()
   password: string;

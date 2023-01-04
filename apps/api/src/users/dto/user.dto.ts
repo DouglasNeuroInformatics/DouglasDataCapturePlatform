@@ -13,7 +13,7 @@ export class BaseUserDto {
   @IsString()
   @Exclude({ toPlainOnly: true })
   password: string;
-  
+
   @ApiProperty({ enum: UserRole })
   @IsString()
   role: string;

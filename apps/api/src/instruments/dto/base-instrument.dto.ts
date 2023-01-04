@@ -24,5 +24,5 @@ export class BaseInstrumentDto {
 
   @ApiProperty()
   @ValidateNested()
-  fields: InstrumentFieldDto[]
+  fields: InstrumentFieldDto[];
 }

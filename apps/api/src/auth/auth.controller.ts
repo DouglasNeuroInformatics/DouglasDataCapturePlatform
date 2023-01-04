@@ -9,12 +9,11 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('/login')
-  login() { }
-  
+  login() {}
+
   @Post('/logout')
-  logout() { }
-  
+  logout() {}
+
   @Post('/refresh-token')
-  refreshToken() { }
-  
+  refreshToken() {}
 }

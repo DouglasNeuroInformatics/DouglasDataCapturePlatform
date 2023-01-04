@@ -8,8 +8,8 @@ import { Instrument, InstrumentDocument } from './schemas/instrument.schema';
 
 @Injectable()
 export class InstrumentsService {
-  constructor(@InjectModel(Instrument.name) private instrumentModel: Model<InstrumentDocument>) { }
-  
+  constructor(@InjectModel(Instrument.name) private instrumentModel: Model<InstrumentDocument>) {}
+
   create(dto: CreateInstrumentReqDto): Promise<Instrument> {
     return this.instrumentModel.create(dto);
   }

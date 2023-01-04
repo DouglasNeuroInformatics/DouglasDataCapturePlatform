@@ -5,7 +5,7 @@ import FormContext from '@/context/FormContext';
 const Field = ({ name, children }: { name: string; children: React.ReactNode }) => {
   const formContext = useContext(FormContext);
   return (
-    <div className="relative my-3 z-50">
+    <div className="relative z-50 my-3">
       {children}
       <span className="peer-placeholder-shown:">{formContext.errorMessages[name]}</span>
     </div>

@@ -21,11 +21,13 @@ async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
   app.enableCors();
   app.setGlobalPrefix('/api');
-  app.useGlobalPipes(new ValidationPipe({
-    forbidNonWhitelisted: true,
-    transform: true
-  }));
-  
+  app.useGlobalPipes(
+    new ValidationPipe({
+      forbidNonWhitelisted: true,
+      transform: true
+    })
+  );
+
   const configService = app.get(ConfigService);
   const port = configService.get('PORT') as number;
 
