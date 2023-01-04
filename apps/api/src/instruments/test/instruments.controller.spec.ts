@@ -1,5 +1,5 @@
 import { Test } from '@nestjs/testing';
-import { CreateInstrumentRequestDto } from '../dto/create-instrument.dto';
+import { CreateInstrumentReqDto } from '../dto/create-instrument.dto';
 
 import { InstrumentsController } from '../instruments.controller';
 import { InstrumentsService } from '../instruments.service';
@@ -27,20 +27,21 @@ describe('InstrumentsController', () => {
   describe('create', () => {
     describe('when create is called', () => {
       let instrument: Instrument;
-      let createInstrumentRequestDto: CreateInstrumentRequestDto;
+      let createInstrumentReqDto: CreateInstrumentReqDto;
 
       beforeEach(async () => {
         const { title, description, instructions } = getInstrumentStub();
-        createInstrumentRequestDto = {
+        createInstrumentReqDto = {
           title,
           description,
-          instructions
+          instructions,
+          fields: []
         };
-        instrument = await instrumentsController.create(createInstrumentRequestDto);
+        instrument = await instrumentsController.create(createInstrumentReqDto);
       });
 
       it('should call instrumentsService.create', () => {
-        expect(instrumentsService.create).toBeCalledWith(createInstrumentRequestDto);
+        expect(instrumentsService.create).toBeCalledWith(createInstrumentReqDto);
       });
 
       it('should return the created instrument', () => {
