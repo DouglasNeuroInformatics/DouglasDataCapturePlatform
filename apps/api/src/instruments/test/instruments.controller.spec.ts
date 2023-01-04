@@ -1,6 +1,6 @@
 import { Test } from '@nestjs/testing';
-import { CreateInstrumentReqDto } from '../dto/create-instrument.dto';
 
+import { CreateInstrumentReqDto } from '../dto/create-instrument.dto';
 import { InstrumentsController } from '../instruments.controller';
 import { InstrumentsService } from '../instruments.service';
 import { Instrument } from '../schemas/instrument.schema';

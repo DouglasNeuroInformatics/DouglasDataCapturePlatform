@@ -1,11 +1,16 @@
-import { AppModule } from '@/app.module';
-import { DatabaseService } from '@/database/database.service';
+import { HttpStatus, INestApplication } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
+
 import { Connection } from 'mongoose';
+import request from 'supertest';
+
 import { getInstrumentStub } from './stubs/instrument.stub';
 
-import request from 'supertest';
-import { HttpStatus, INestApplication } from '@nestjs/common';
+import { AppModule } from '@/app.module';
+import { DatabaseService } from '@/database/database.service';
+
+
+
 
 describe('Instruments', () => {
   let app: INestApplication;

@@ -5,6 +5,7 @@ import Joi from 'joi';
 import { DatabaseModule } from './database/database.module';
 
 import { InstrumentsModule } from './instruments/instruments.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -18,7 +19,8 @@ import { InstrumentsModule } from './instruments/instruments.module';
       })
     }),
     DatabaseModule,
-    InstrumentsModule
+    InstrumentsModule,
+    UsersModule
   ]
 })
 export class AppModule {}
