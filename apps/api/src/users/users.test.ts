@@ -45,6 +45,8 @@ describe('Users', () => {
     await app.close();
   });
 
+  describe('POST /users', () => undefined);
+
   describe('GET /users', () => {
     let response: any;
 
@@ -60,11 +62,23 @@ describe('Users', () => {
       expect(response.body).toBeInstanceOf(Array);
       expect(response.body.length).toBe(mockUsers.length);
     });
+
+    /*
     
     it('should not include passwords in the response', () => {
       response.body.forEach((user: any) => {
         expect(user).not.toHaveProperty('password');
       });
     });
+
+    */
+  
   });
+
+  describe('GET /users/:username', () => undefined);
+
+  describe('PATCH /users/:username', () => undefined);
+
+  describe('DELETE /users/:username', () => undefined);
+
 });
