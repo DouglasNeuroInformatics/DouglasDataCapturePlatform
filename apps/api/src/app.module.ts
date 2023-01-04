@@ -2,13 +2,15 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 
 import Joi from 'joi';
-import { DatabaseModule } from './database/database.module';
 
+import { AuthModule } from './auth/auth.module';
+import { DatabaseModule } from './database/database.module';
 import { InstrumentsModule } from './instruments/instruments.module';
 import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
+    AuthModule,
     ConfigModule.forRoot({
       isGlobal: true,
       validationSchema: Joi.object({

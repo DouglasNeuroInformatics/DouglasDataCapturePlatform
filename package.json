@@ -34,6 +34,7 @@
   },
   "packageManager": "yarn@1.22.19",
   "dependencies": {
-    "joi": "^17.7.0"
+    "joi": "^17.7.0",
+    "zod": "^3.20.2"
   }
 }
