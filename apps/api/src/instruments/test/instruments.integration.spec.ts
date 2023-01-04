@@ -7,7 +7,7 @@ import { getInstrumentStub } from './stubs/instrument.stub';
 import request from 'supertest';
 import { HttpStatus, INestApplication } from '@nestjs/common';
 
-describe('/instruments', () => {
+describe('Instruments', () => {
   let app: INestApplication;
   let dbConnection: Connection;
   let httpServer: any;
@@ -23,11 +23,29 @@ describe('/instruments', () => {
     httpServer = app.getHttpServer();
   });
 
-  test('GET /instruments', async () => {
-    await dbConnection.collection('instruments').insertOne(getInstrumentStub());
-    const response = await request(httpServer).get('/instruments');
-    expect(response.status).toBe(HttpStatus.OK);
-    expect(response.body).toMatchObject([getInstrumentStub()]);
+  afterEach(async () => {
+    await dbConnection.collection('instruments').deleteMany({});
+  });
+
+  afterAll(async () => {
+    await app.close();
+  });
+
+  describe('GET /instrument', () => {
+    let response: any;
+
+    beforeEach(async () => {
+      await dbConnection.collection('instruments').insertOne(getInstrumentStub());
+      response = await request(httpServer).get('/instruments');
+    });
+
+    it('should return a response status code of 200', async () => {
+      expect(response.status).toBe(HttpStatus.OK);
+    });
+
+    it('should return all instruments in the database', async () => {
+      expect(response.body).toMatchObject([getInstrumentStub()]);
+    });
   });
 
   describe('POST /instrument', () => {
@@ -38,16 +56,7 @@ describe('/instruments', () => {
         instructions: 'Please complete the following question',
         fields: []
       });
-      expect(response.status).toBe(HttpStatus.CREATED)
+      expect(response.status).toBe(HttpStatus.CREATED);
     });
-  });
-
-
-  afterEach(async () => {
-    await dbConnection.collection('instruments').deleteMany({});
-  });
-
-  afterAll(async () => {
-    await app.close();
   });
 });
