@@ -1,11 +1,5 @@
-export class CreateInstrumentRequestDto {
-  title: string;
-  description: string;
-  instructions: string;
-}
+import { BaseInstrumentDto } from './base-instrument.dto';
 
-export class InstrumentResponseDto {
-  title: string;
-  description: string;
-  instructions: string;
-}
+export class CreateInstrumentReqDto extends BaseInstrumentDto {}
+
+export class CreateInstrumentResDto extends BaseInstrumentDto {}
