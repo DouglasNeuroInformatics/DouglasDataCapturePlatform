@@ -11,11 +11,8 @@ export class User {
   @Prop({ required: true })
   password: string;
 
-  @Prop({ enum: Object.values(UserRole), required: true })
-  role: UserRole;
-
-  @Prop()
-  refreshToken: string;
+  @Prop({ enum: UserRole, required: true, type: String })
+  role: string;
 }
 
 export type UserDocument = HydratedDocument<User>;

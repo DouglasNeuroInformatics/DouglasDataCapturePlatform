@@ -11,7 +11,10 @@ module.exports = {
       plugins: ['jest'],
       rules: {
         // you should turn the original rule off *only* for test files
+        '@typescript-eslint/no-unsafe-member-access': 'off',
         '@typescript-eslint/unbound-method': 'off',
+        '@typescript-eslint/no-unsafe-assignment': 'off',
+        '@typescript-eslint/no-unsafe-call': "off",
         'jest/unbound-method': 'error'
       }
     }

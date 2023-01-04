@@ -2,8 +2,8 @@ import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/commo
 import { ApiTags } from '@nestjs/swagger';
 
 import { CreateUserReqDto, CreateUserResDto } from './dto/create-user.dto';
+import { GetUserResDto } from './dto/get-user.dto';
 import { UpdateUserReqDto } from './dto/update-user.dto';
-import { User } from './schemas/user.schema';
 import { UsersService } from './users.service';
 
 @ApiTags('users')
@@ -17,17 +17,17 @@ export class UsersController {
   }
 
   @Get()
-  findAll(): Promise<User[]> {
+  findAll(): Promise<GetUserResDto[]> {
     return this.usersService.findAll();
   }
 
   @Get(':username')
-  findUser(@Param('username') username: string): Promise<User> {
+  findUser(@Param('username') username: string): Promise<GetUserResDto> {
     return this.usersService.findUser(username);
   }
 
   @Patch(':username')
-  updateUser(@Param('username') username: string, @Body() dto: UpdateUserReqDto): Promise<User> {
+  updateUser(@Param('username') username: string, @Body() dto: UpdateUserReqDto): Promise<GetUserResDto> {
     return this.usersService.updateUser(username, dto);
   }
 

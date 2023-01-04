@@ -9,9 +9,6 @@ import { getInstrumentStub } from './stubs/instrument.stub';
 import { AppModule } from '@/app.module';
 import { DatabaseService } from '@/database/database.service';
 
-
-
-
 describe('Instruments', () => {
   let app: INestApplication;
   let dbConnection: Connection;
@@ -44,7 +41,7 @@ describe('Instruments', () => {
       response = await request(httpServer).get('/instruments');
     });
 
-    it('should return a response status code of 200', async () => {
+    it('should return a response status code of 200', () => {
       expect(response.status).toBe(HttpStatus.OK);
     });
 

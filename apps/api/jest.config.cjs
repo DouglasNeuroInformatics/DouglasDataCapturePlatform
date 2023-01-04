@@ -7,9 +7,8 @@ module.exports = {
   moduleFileExtensions: ['js', 'json', 'ts'],
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths),
   modulePaths: [compilerOptions.baseUrl],
-  roots: ['<rootDir>'],
+  roots: ['<rootDir>/src'],
   testEnvironment: 'node',
-  testRegex: '.*\\.spec\\.ts$',
   transform: {
     '^.+\\.ts$': 'ts-jest'
   }
