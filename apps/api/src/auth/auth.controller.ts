@@ -1,5 +1,5 @@
 import { Body, Controller, HttpCode, HttpStatus, Post, UseGuards } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 import { AuthService } from './auth.service';
 import { AuthLoginReqDto, AuthLoginResDto } from './dto/auth.dto';
@@ -8,11 +8,12 @@ import { ParseRequestUser } from '@/common/decorators/parse-request-user.decorat
 import { PublicRoute } from '@/common/decorators/public-route.decorator';
 import { RefreshTokenGuard } from '@/common/guards/refresh-token.guard';
 
+@ApiBearerAuth('accessToken')
 @ApiTags('auth')
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
-
+  constructor(private readonly authService: AuthService) { }
+  
   @PublicRoute()
   @Post('login')
   @HttpCode(HttpStatus.OK)
