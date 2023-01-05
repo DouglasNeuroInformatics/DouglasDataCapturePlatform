@@ -9,10 +9,7 @@ import { RefreshTokenStrategy } from './strategies/refresh-token.strategy';
 import { UsersModule } from '@/users/users.module';
 
 @Module({
-  imports: [
-    JwtModule.register({}),
-    UsersModule
-  ],
+  imports: [JwtModule.register({}), UsersModule],
   providers: [AuthService, AccessTokenStrategy, RefreshTokenStrategy],
   controllers: [AuthController]
 })

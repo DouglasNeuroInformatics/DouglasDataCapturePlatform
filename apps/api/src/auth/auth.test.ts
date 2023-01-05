@@ -50,7 +50,7 @@ describe('Auth', () => {
     await dbConnection.collection('users').deleteMany({});
     await app.close();
   });
-  
+
   describe('POST /auth/login', () => {
     let response: any;
 
