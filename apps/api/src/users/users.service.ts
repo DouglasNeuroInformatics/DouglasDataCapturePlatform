@@ -31,7 +31,7 @@ export class UsersService {
     return user;
   }
 
-  async updateUser(username: string, dto: UpdateUserReqDto): Promise<User> {
+  async updateUser(username: string, dto: Partial<User>): Promise<User> {
     const updatedUser = await this.usersRepository.updateUser(username, dto);
     if (!updatedUser) {
       throw new NotFoundException();
