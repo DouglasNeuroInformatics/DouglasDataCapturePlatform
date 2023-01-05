@@ -42,7 +42,19 @@ export class AuthService {
     await this.usersService.updateUser(username, { refreshToken: undefined }); // change to null later
   }
 
-  refresh() {}
+  async refresh(username: string, refreshToken: string): Promise<Tokens> {
+    const user = await this.usersService.findUser(username);
+    if (!user.refreshToken) {
+      throw new UnauthorizedException();
+    }
+    const isValid = await bcrypt.compare(refreshToken, user.refreshToken);
+    if (!isValid) {
+      throw new UnauthorizedException();
+    }
+    const tokens = await this.getTokens(user);
+    await this.updateUserRefreshToken(user.username, tokens.refreshToken);
+    return tokens;
+  }
 
   private async getUserOrThrowUnauthorized(username: string): Promise<User> {
     try {
@@ -75,7 +87,14 @@ export class AuthService {
   }
 
   private async getToken(user: User, options: JwtSignOptions): Promise<string> {
-    return this.jwtService.signAsync({ username: user.username, role: user.role }, options);
+    return this.jwtService.signAsync(
+      {
+        username: user.username,
+        role: user.role,
+        refreshToken: user.refreshToken
+      },
+      options
+    );
   }
 
   private async hashRefreshToken(refreshToken: string): Promise<string> {

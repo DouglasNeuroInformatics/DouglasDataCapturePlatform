@@ -7,6 +7,9 @@ import { Request } from 'express';
 import { AuthService } from './auth.service';
 import { AuthLoginReqDto, AuthLoginResDto } from './dto/auth.dto';
 
+import { AccessTokenGuard } from '@/common/guards/access-token.guard';
+import { RefreshTokenGuard } from '@/common/guards/refresh-token.guard';
+
 @ApiTags('auth')
 @Controller('auth')
 export class AuthController {
@@ -17,19 +20,23 @@ export class AuthController {
   login(@Body() dto: AuthLoginReqDto): Promise<AuthLoginResDto> {
     return this.authService.login(dto);
   }
-  
-  @UseGuards(AuthGuard('jwt'))
+
+  @UseGuards(AccessTokenGuard)
   @Post('logout')
   @HttpCode(HttpStatus.OK)
-  logout(@Req() req: Request): void {
-    console.log(req)
-    // return this.authService.logout();
+  logout(@Req() req: Request): Promise<void> {
+    const user: any = req.user; // VALIDATE
+    console.log(user);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
+    return this.authService.logout(user.username);
   }
 
-  @UseGuards(AuthGuard('jwt-refresh'))
+  @UseGuards(RefreshTokenGuard)
   @Post('refresh')
   @HttpCode(HttpStatus.OK)
-  refresh(): void {
-    this.authService.refresh();
+  refresh(@Req() req: Request): Promise<any> {
+    const user: any = req.user; // VALIDATE
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
+    return this.authService.refresh(user.username, user.refreshToken);
   }
 }
