@@ -1,12 +1,10 @@
-import { Body, Controller, HttpCode, HttpStatus, Post, Req, UseGuards } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
+import { Body, Controller, HttpCode, HttpStatus, Post, UseGuards } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-
-import { Request } from 'express';
 
 import { AuthService } from './auth.service';
 import { AuthLoginReqDto, AuthLoginResDto } from './dto/auth.dto';
 
+import { ParseRequestUser } from '@/common/decorators/parse-request-user.decorator';
 import { AccessTokenGuard } from '@/common/guards/access-token.guard';
 import { RefreshTokenGuard } from '@/common/guards/refresh-token.guard';
 
@@ -24,19 +22,17 @@ export class AuthController {
   @UseGuards(AccessTokenGuard)
   @Post('logout')
   @HttpCode(HttpStatus.OK)
-  logout(@Req() req: Request): Promise<void> {
-    const user: any = req.user; // VALIDATE
-    console.log(user);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
-    return this.authService.logout(user.username);
+  logout(@ParseRequestUser('username') username: string): Promise<void> {
+    return this.authService.logout(username);
   }
 
   @UseGuards(RefreshTokenGuard)
   @Post('refresh')
   @HttpCode(HttpStatus.OK)
-  refresh(@Req() req: Request): Promise<any> {
-    const user: any = req.user; // VALIDATE
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
-    return this.authService.refresh(user.username, user.refreshToken);
+  refresh(
+    @ParseRequestUser('username') username: string,
+    @ParseRequestUser('refreshToken') refreshToken: string
+  ): Promise<any> {
+    return this.authService.refresh(username, refreshToken);
   }
 }
