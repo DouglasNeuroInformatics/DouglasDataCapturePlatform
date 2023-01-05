@@ -5,7 +5,7 @@ import { AuthService } from './auth.service';
 import { AuthLoginReqDto, AuthLoginResDto } from './dto/auth.dto';
 
 import { ParseRequestUser } from '@/common/decorators/parse-request-user.decorator';
-import { AccessTokenGuard } from '@/common/guards/access-token.guard';
+import { PublicRoute } from '@/common/decorators/public-route.decorator';
 import { RefreshTokenGuard } from '@/common/guards/refresh-token.guard';
 
 @ApiTags('auth')
@@ -13,19 +13,21 @@ import { RefreshTokenGuard } from '@/common/guards/refresh-token.guard';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
+  @PublicRoute()
   @Post('login')
   @HttpCode(HttpStatus.OK)
   login(@Body() dto: AuthLoginReqDto): Promise<AuthLoginResDto> {
     return this.authService.login(dto);
   }
 
-  @UseGuards(AccessTokenGuard)
   @Post('logout')
   @HttpCode(HttpStatus.OK)
   logout(@ParseRequestUser('username') username: string): Promise<void> {
     return this.authService.logout(username);
   }
 
+  // Will be handled by refresh token guard
+  @PublicRoute()
   @UseGuards(RefreshTokenGuard)
   @Post('refresh')
   @HttpCode(HttpStatus.OK)
