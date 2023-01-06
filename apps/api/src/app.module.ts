@@ -5,7 +5,7 @@ import { APP_GUARD } from '@nestjs/core';
 import Joi from 'joi';
 
 import { AuthModule } from './auth/auth.module';
-import { AccessTokenGuard } from './common/guards/access-token.guard';
+import { AccessTokenGuard } from './auth/guards/access-token.guard';
 import { DatabaseModule } from './database/database.module';
 import { InstrumentsModule } from './instruments/instruments.module';
 import { SubjectsModule } from './subjects/subjects.module';

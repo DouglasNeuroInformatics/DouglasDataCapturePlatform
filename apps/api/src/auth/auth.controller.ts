@@ -1,21 +1,19 @@
-import { Body, Controller, HttpCode, HttpStatus, Post, UseGuards } from '@nestjs/common';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 
 import { AuthService } from './auth.service';
+import { Auth } from './decorators/auth.decorator';
 import { AuthLoginReqDto } from './dto/auth.dto';
 import { AuthTokens } from './interfaces/auth.interfaces';
 
 import { ParseRequestUser } from '@/common/decorators/parse-request-user.decorator';
-import { PublicRoute } from '@/common/decorators/public-route.decorator';
-import { RefreshTokenGuard } from '@/common/guards/refresh-token.guard';
 
-@ApiBearerAuth('accessToken')
 @ApiTags('auth')
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @PublicRoute()
+  @Auth({ isPublic: true })
   @Post('login')
   @HttpCode(HttpStatus.OK)
   login(@Body() dto: AuthLoginReqDto): Promise<AuthTokens> {
@@ -28,9 +26,6 @@ export class AuthController {
     return this.authService.logout(username);
   }
 
-  // Will be handled by refresh token guard
-  @PublicRoute()
-  @UseGuards(RefreshTokenGuard)
   @Post('refresh')
   @HttpCode(HttpStatus.OK)
   refresh(
