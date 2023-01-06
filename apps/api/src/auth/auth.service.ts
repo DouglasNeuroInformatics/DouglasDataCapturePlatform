@@ -55,7 +55,7 @@ export class AuthService {
     await this.updateUserRefreshToken(user.username, tokens.refreshToken);
     return tokens;
   }
-
+  
   private async getUserOrThrowUnauthorized(username: string): Promise<User> {
     try {
       return this.usersService.findUser(username);

@@ -20,7 +20,7 @@ export class AuthController {
   login(@Body() dto: AuthLoginReqDto): Promise<AuthLoginResDto> {
     return this.authService.login(dto);
   }
-
+  
   @Post('logout')
   @HttpCode(HttpStatus.OK)
   logout(@ParseRequestUser('username') username: string): Promise<void> {
