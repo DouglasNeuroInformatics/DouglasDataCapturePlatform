@@ -7,11 +7,3 @@ export class AuthLoginReqDto {
   @IsString()
   password: string;
 }
-
-export class AuthLoginResDto {
-  @IsString()
-  accessToken: string;
-
-  @IsString()
-  refreshToken: string;
-}

@@ -1,10 +1,16 @@
-import { Injectable, InternalServerErrorException, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+  UnauthorizedException
+} from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { JwtService, JwtSignOptions } from '@nestjs/jwt';
+import { JwtService } from '@nestjs/jwt';
 
 import bcrypt from 'bcrypt';
 
-import { AuthLoginReqDto, AuthLoginResDto } from './dto/auth.dto';
+import { AuthLoginReqDto } from './dto/auth.dto';
 import { AuthTokens, JwtPayload } from './interfaces/auth.interfaces';
 
 import { User } from '@/users/schemas/user.schema';
@@ -18,17 +24,12 @@ export class AuthService {
     private readonly usersService: UsersService
   ) {}
 
-  async login({ username, password }: AuthLoginReqDto): Promise<any> {
-    let user: User;
-    try {
-      user = await this.usersService.findUser(username);
-    } catch (error) {
-      throw new UnauthorizedException('Invalid login credentials');
-    }
+  async login({ username, password }: AuthLoginReqDto): Promise<AuthTokens> {
+    const user = await this.getUser(username);
 
     const isAuth = await bcrypt.compare(password, user.password);
     if (!isAuth) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException('Invalid login credentials');
     }
 
     const tokens = await this.getTokens(user);
@@ -36,12 +37,39 @@ export class AuthService {
     return tokens;
   }
 
-  logout(username: string): any {
-    return;
+  async logout(username: string): Promise<void> {
+    const user = await this.getUser(username);
+    if (!user.refreshToken) {
+      throw new BadRequestException('User is already logged out');
+    }
+    await this.usersService.updateUser(username, { refreshToken: undefined }); // change to null later
   }
 
-  refresh(username: string, refreshToken: string): any {
-    return;
+  async refresh(username: string, refreshToken: string): Promise<AuthTokens> {
+    const user = await this.getUser(username);
+    if (!user.refreshToken) {
+      throw new UnauthorizedException();
+    }
+    const isValid = await bcrypt.compare(refreshToken, user.refreshToken);
+    if (!isValid) {
+      throw new UnauthorizedException();
+    }
+    const tokens = await this.getTokens(user);
+    await this.updateUserRefreshToken(user.username, tokens.refreshToken);
+    return tokens;
+  }
+
+  private getUser(username: string): Promise<User> {
+    try {
+      return this.usersService.findUser(username);
+    } catch (error) {
+      if (error instanceof NotFoundException) {
+        throw new UnauthorizedException('Invalid login credentials');
+      }
+      throw new InternalServerErrorException('Internal Server Error', {
+        cause: error instanceof Error ? error : undefined
+      });
+    }
   }
 
   private async getTokens(user: User): Promise<AuthTokens> {
@@ -73,30 +101,4 @@ export class AuthService {
   private async hashRefreshToken(refreshToken: string): Promise<string> {
     return bcrypt.hash(refreshToken, await bcrypt.genSalt());
   }
-
-  /*
-
-  async logout(username: string): Promise<void> {
-    const user = await this.usersService.findUser(username);
-    if (!user.refreshToken) {
-      throw new BadRequestException(`User '${username} is already logged out`);
-    }
-    await this.usersService.updateUser(username, { refreshToken: undefined }); // change to null later
-  }
-
-  async refresh(username: string, refreshToken: string): Promise<Tokens> {
-    const user = await this.usersService.findUser(username);
-    if (!user.refreshToken) {
-      throw new UnauthorizedException();
-    }
-    const isValid = await bcrypt.compare(refreshToken, user.refreshToken);
-    if (!isValid) {
-      throw new UnauthorizedException();
-    }
-    const tokens = await this.getTokens(user);
-    await this.updateUserRefreshToken(user.username, tokens.refreshToken);
-    return tokens;
-  }
-
-  */
 }
