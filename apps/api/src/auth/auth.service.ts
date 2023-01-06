@@ -1,15 +1,10 @@
-import {
-  BadRequestException,
-  Injectable,
-  InternalServerErrorException,
-  NotFoundException,
-  UnauthorizedException
-} from '@nestjs/common';
+import { BadRequestException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 
 import bcrypt from 'bcrypt';
 
+import { InvalidCredentialsException } from './auth.exceptions';
 import { AuthLoginReqDto } from './dto/auth.dto';
 import { AuthTokens, JwtPayload } from './interfaces/auth.interfaces';
 
@@ -29,7 +24,7 @@ export class AuthService {
 
     const isAuth = await bcrypt.compare(password, user.password);
     if (!isAuth) {
-      throw new UnauthorizedException('Invalid login credentials');
+      throw new InvalidCredentialsException();
     }
 
     const tokens = await this.getTokens(user);
@@ -48,11 +43,11 @@ export class AuthService {
   async refresh(username: string, refreshToken: string): Promise<AuthTokens> {
     const user = await this.getUser(username);
     if (!user.refreshToken) {
-      throw new UnauthorizedException();
+      throw new InvalidCredentialsException();
     }
     const isValid = await bcrypt.compare(refreshToken, user.refreshToken);
     if (!isValid) {
-      throw new UnauthorizedException();
+      throw new InvalidCredentialsException();
     }
     const tokens = await this.getTokens(user);
     await this.updateUserRefreshToken(user.username, tokens.refreshToken);
@@ -64,7 +59,7 @@ export class AuthService {
       return this.usersService.findUser(username);
     } catch (error) {
       if (error instanceof NotFoundException) {
-        throw new UnauthorizedException('Invalid login credentials');
+        throw new InvalidCredentialsException();
       }
       throw new InternalServerErrorException('Internal Server Error', {
         cause: error instanceof Error ? error : undefined
