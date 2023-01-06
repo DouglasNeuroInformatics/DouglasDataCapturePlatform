@@ -1,6 +1,6 @@
 import { Request } from 'express';
 
-import { AuthLoginReqDto, AuthLoginResDto } from '../dto/auth.dto';
+import { AuthLoginReqDto, AuthLoginResDto } from '@/auth/dto/auth.dto';
 
 export const mockAuthLoginReqDto: AuthLoginReqDto = Object.freeze({
   username: 'admin',
