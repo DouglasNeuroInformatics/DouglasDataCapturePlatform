@@ -20,7 +20,8 @@ import { UsersModule } from './users/users.module';
         MONGO_DEV_CONNECTION_URI: Joi.string().required(),
         MONGO_TEST_CONNECTION_URI: Joi.string().required(),
         NODE_ENV: Joi.string().valid('development', 'test').required(),
-        PORT: Joi.number().required()
+        PORT: Joi.number().required(),
+        SECRET_KEY: Joi.string().required()
       })
     }),
     DatabaseModule,

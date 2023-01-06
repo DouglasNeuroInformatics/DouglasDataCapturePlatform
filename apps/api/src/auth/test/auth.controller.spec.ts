@@ -1,11 +1,9 @@
 import { Test } from '@nestjs/testing';
 
+import { createMock } from '@golevelup/ts-jest';
+
 import { AuthController } from '../auth.controller';
 import { AuthService } from '../auth.service';
-
-import { mockAuthLoginReqDto } from './stubs/auth.stubs';
-
-jest.mock('../auth.service');
 
 describe('AuthController', () => {
   let authController: AuthController;
@@ -14,7 +12,12 @@ describe('AuthController', () => {
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
       controllers: [AuthController],
-      providers: [AuthService]
+      providers: [
+        {
+          provide: AuthService,
+          useValue: createMock<AuthService>()
+        }
+      ]
     }).compile();
 
     authController = moduleRef.get(AuthController);
@@ -23,7 +26,10 @@ describe('AuthController', () => {
 
   describe('login', () => {
     it('should call authService.login', async () => {
-      await authController.login(mockAuthLoginReqDto);
+      await authController.login({
+        username: 'admin',
+        password: 'default'
+      });
       expect(authService.login).toBeCalled();
     });
   });
