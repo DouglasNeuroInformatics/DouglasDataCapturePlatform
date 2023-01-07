@@ -32,9 +32,5 @@
     "node": ">=18.0.0 <19.0.0",
     "npm": ">=9.0.0 <10.0.0"
   },
-  "packageManager": "yarn@1.22.19",
-  "dependencies": {
-    "class-transformer": "^0.5.1",
-    "class-validator": "^0.14.0"
-  }
+  "packageManager": "yarn@1.22.19"
 }
