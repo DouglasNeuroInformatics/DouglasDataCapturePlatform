@@ -12,6 +12,7 @@ module.exports = {
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, { prefix: __dirname }),
   modulePaths: [compilerOptions.baseUrl],
   roots: [path.resolve(__dirname, 'src'), path.resolve(__dirname, 'test')],
+  setupFilesAfterEnv: [path.resolve(__dirname, 'test', 'jest.setup.js')],
   testEnvironment: 'node',
   transform: {
     '^.+\\.ts$': 'ts-jest'

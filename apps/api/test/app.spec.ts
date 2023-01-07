@@ -13,7 +13,7 @@ describe('App (e2e) {Supertest}', () => {
   let app: NestExpressApplication;
   let db: Connection;
   let server: any;
-
+  
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
       imports: [AppModule]
@@ -36,6 +36,7 @@ describe('App (e2e) {Supertest}', () => {
   });
 
   describe('auth', () => {
+    sayHello();
     describe('POST /auth/login', () => {
       describe('admin requests authentication with valid credentials', () => {
         let response: any;
