@@ -4,7 +4,7 @@ import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 
 import { AppModule } from './app.module';
-import { Swagger } from './swagger';
+import { SwaggerService } from './swagger/swagger.service';
 
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -17,7 +17,8 @@ async function bootstrap(): Promise<void> {
     })
   );
 
-  Swagger.init(app);
+  const swaggerService = app.get(SwaggerService);
+  swaggerService.setupSwagger(app);
 
   const configService = app.get(ConfigService);
   const port = configService.get('PORT') as number;

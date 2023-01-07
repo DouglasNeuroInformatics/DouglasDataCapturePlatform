@@ -10,6 +10,7 @@ import { ExceptionFilter } from './core/exception.filter';
 import { DatabaseModule } from './database/database.module';
 import { InstrumentsModule } from './instruments/instruments.module';
 import { SubjectsModule } from './subjects/subjects.module';
+import { SwaggerModule } from './swagger/swagger.module';
 import { UsersModule } from './users/users.module';
 
 @Module({
@@ -28,6 +29,7 @@ import { UsersModule } from './users/users.module';
     DatabaseModule,
     InstrumentsModule,
     SubjectsModule,
+    SwaggerModule,
     UsersModule
   ],
   providers: [
