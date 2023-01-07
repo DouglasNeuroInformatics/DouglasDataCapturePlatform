@@ -3,7 +3,10 @@
   "collection": "@nestjs/schematics",
   "sourceRoot": "src",
   "compilerOptions": {
-    "assets": ["swagger/static/**/*"],
+    "assets": [{
+      "include": "swagger/resources/**/*",
+      "watchAssets": true
+    }],
     "plugins": [
       {
         "name": "@nestjs/swagger",

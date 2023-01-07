@@ -8,5 +8,5 @@ const customizeTopbar = () => {
 };
 
 window.addEventListener('load', () => {
-  customizeTopbar();
+  //customizeTopbar();
 });

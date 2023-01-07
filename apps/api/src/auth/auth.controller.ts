@@ -1,5 +1,5 @@
 import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
 import { AuthService } from './auth.service';
 import { Auth } from './decorators/auth.decorator';
@@ -8,11 +8,15 @@ import { AuthTokens } from './interfaces/auth.interfaces';
 
 import { ParseRequestUser } from '@/common/decorators/parse-request-user.decorator';
 
-@ApiTags('auth')
+@ApiTags('Authentication')
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
-
+  constructor(private readonly authService: AuthService) { }
+  
+  @ApiOperation({
+    description: 'test',
+    
+  })
   @Auth({ isPublic: true })
   @Post('login')
   @HttpCode(HttpStatus.OK)

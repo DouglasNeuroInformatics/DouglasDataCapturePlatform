@@ -1,0 +1,18 @@
+.swagger-ui html {
+  box-sizing: border-box
+}
+
+.swagger-ui .wrapper {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px
+}
+
+.title > span {
+  display: none;
+}
+
+.info > .description p {
+  color: red;
+}

@@ -6,7 +6,7 @@ import { SubjectPostRequestDto } from '@dnp/common';
 import { Subject } from './schemas/subject.schema';
 import { SubjectsService } from './subjects.service';
 
-@ApiTags('subjects')
+@ApiTags('Subjects')
 @Controller('subjects')
 export class SubjectsController {
   constructor(private subjectsService: SubjectsService) {}

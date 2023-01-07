@@ -1,0 +1,38 @@
+---
+openapi: "3.0.0"
+info:
+  title: Douglas Data Capture Platform API
+  description: |
+    The Douglas Data Capture Platform is a system that allows users to input, 
+    store, and retrieve data. It is based on a REST API, which stands for 
+    Representational State Transfer Application Programming Interface. This 
+    type of API is designed to be easy to use and flexible, and follows a 
+    set of architectural principles that make it ideal for building web services.
+
+    The Douglas Data Capture Platform API includes a variety of endpoints, or specific
+    locations within the API that perform a specific function. These endpoints allow 
+    authorized users to access and manipulate data stored within the platform. The API accepts 
+    form-encoded request bodies, which means that a client can submit data to the API in
+    a format that is easy to read and interpret. The API then processes this data and returns
+    a JSON-encoded response, which is the standard format for exchanging data over the web.
+
+    Authentication for the Douglas Data Capture Platform API is handled using JSON Web Tokens (JWTs).
+    JWTs are a secure way of transmitting information between parties, and are often used to 
+    authenticate API requests. This ensures that only authorized users are able to access and manipulate 
+    data within the platform.
+  license:
+    name: AGPL-3.0
+    url: https://www.gnu.org/licenses/agpl-3.0.txt
+  contact:
+    name: Joshua Unrau
+    email: joshua.unrau@mail.mcgill.ca
+  version: '1.0'
+tags:
+  - name: Authentication
+    description: TBD
+  - name: Instruments
+    description: TBD
+  - name: Subjects
+    description: TBD
+  - name: Users
+    description: TBD

@@ -4,7 +4,7 @@ import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CreateInstrumentReqDto, CreateInstrumentResDto } from './dto/create-instrument.dto';
 import { InstrumentsService } from './instruments.service';
 
-@ApiTags('instruments')
+@ApiTags('Instruments')
 @Controller('instruments')
 export class InstrumentsController {
   constructor(private readonly instrumentsService: InstrumentsService) {}
