@@ -1,42 +1,72 @@
 import { HttpStatus } from '@nestjs/common';
-import { NestExpressApplication } from '@nestjs/platform-express';
-import { Test } from '@nestjs/testing';
 
-import { Connection } from 'mongoose';
 import request from 'supertest';
 
-import { AppModule } from '@/app.module';
-import { DatabaseService } from '@/database/database.service';
 import { mockAdmin, mockAdminPlainTextPassword, mockUser } from '@/users/test/stubs/user.stubs';
 
+const { app, db, spec, server } = TestSetup;
+
+beforeAll(async () => {
+  await db.collection('users').insertMany(structuredClone([mockAdmin, mockUser]));
+});
+
+afterAll(async () => {
+  if (db.name !== 'testing') {
+    throw new Error(`Unexpected database name ${db.name}`);
+  }
+  await db.dropDatabase();
+});
+
+Object.entries(spec.paths).forEach(([path, fields]) => {
+  console.log(path, fields.description);
+})
+
+
+for (let i = 0; i < 5; i++) {
+  describe(i.toString(), () => {
+    it('should be defined', () => {
+      expect(i).toBeDefined()
+    })
+  })
+}
+
+/*
+
+
+
+
+sayHello();
+*/
+/*
+
+test.each([
+  [1, 1, 2],
+  [1, 2, 3],
+  [2, 1, 3]
+])('.add(%i, %i)', (a, b, expected) => {
+  expect(a + b).toBe(expected);
+});
+
+describe.each([
+  [1, 1, 2],
+  [1, 2, 3],
+  [2, 1, 3]
+])('.add(%i, %i)', (a, b, expected) => {
+  test(`returns ${expected}`, () => {
+    expect(a + b).toBe(expected);
+  });
+
+  test(`returned value not be greater than ${expected}`, () => {
+    expect(a + b).not.toBeGreaterThan(expected);
+  });
+
+  test(`returned value not be less than ${expected}`, () => {
+    expect(a + b).not.toBeLessThan(expected);
+  });
+});
+
 describe('App (e2e) {Supertest}', () => {
-  let app: NestExpressApplication;
-  let db: Connection;
-  let server: any;
-  
-  beforeAll(async () => {
-    const moduleRef = await Test.createTestingModule({
-      imports: [AppModule]
-    }).compile();
-
-    app = moduleRef.createNestApplication();
-    await app.init();
-
-    db = moduleRef.get(DatabaseService).getDbHandle();
-    await db.collection('users').insertMany(structuredClone([mockAdmin, mockUser]));
-    server = app.getHttpServer();
-  });
-
-  afterAll(async () => {
-    if (db.name !== 'testing') {
-      throw new Error(`Unexpected database name ${db.name}`);
-    }
-    await db.dropDatabase();
-    await app.close();
-  });
-
   describe('auth', () => {
-    sayHello();
     describe('POST /auth/login', () => {
       describe('admin requests authentication with valid credentials', () => {
         let response: any;
@@ -48,6 +78,7 @@ describe('App (e2e) {Supertest}', () => {
         });
 
         it('should return status code 200', () => {
+          console.log(apiSpec);
           expect(response.status).toBe(HttpStatus.OK);
         });
 
@@ -76,11 +107,10 @@ describe('App (e2e) {Supertest}', () => {
           expect(response.status).toBe(HttpStatus.UNAUTHORIZED);
         });
       });
-
-      describe
     });
 
     describe('POST /auth/logout', () => undefined);
     describe('POST /auth/refresh', () => undefined);
   });
 });
+*/

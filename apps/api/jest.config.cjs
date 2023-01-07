@@ -11,10 +11,12 @@ module.exports = {
   moduleFileExtensions: ['js', 'json', 'ts'],
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, { prefix: __dirname }),
   modulePaths: [compilerOptions.baseUrl],
+  globalSetup: path.resolve(__dirname, 'test', 'jest.setup.cjs'),
+  globalTeardown: path.resolve(__dirname, 'test', 'jest.teardown.cjs'),
   roots: [path.resolve(__dirname, 'src'), path.resolve(__dirname, 'test')],
-  setupFilesAfterEnv: [path.resolve(__dirname, 'test', 'jest.setup.js')],
   testEnvironment: 'node',
   transform: {
     '^.+\\.ts$': 'ts-jest'
-  }
+  },
+  verbose: true
 };
