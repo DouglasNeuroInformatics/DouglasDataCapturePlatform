@@ -54,9 +54,10 @@ export class AuthService {
     return tokens;
   }
 
-  private getUser(username: string): Promise<User> {
+  private async getUser(username: string): Promise<User> {
+    let user: User;
     try {
-      return this.usersService.findUser(username);
+      user = await this.usersService.findUser(username);
     } catch (error) {
       if (error instanceof NotFoundException) {
         throw new InvalidCredentialsException();
@@ -65,6 +66,7 @@ export class AuthService {
         cause: error instanceof Error ? error : undefined
       });
     }
+    return user;
   }
 
   private async getTokens(user: User): Promise<AuthTokens> {

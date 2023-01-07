@@ -12,8 +12,8 @@
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "test": "jest",
-    "test:e2e": "jest --rootDir test",
-    "test:unit": "jest --rootDir src"
+    "test:unit": "jest --testPathPattern src/*",
+    "test:e2e": "jest --testPathPattern test/*"
   },
   "devDependencies": {
     "@dnp/tsconfig": "*",

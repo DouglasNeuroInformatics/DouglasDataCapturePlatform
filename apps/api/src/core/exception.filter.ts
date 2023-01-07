@@ -9,14 +9,8 @@ export class ExceptionFilter extends BaseExceptionFilter {
     const context = host.switchToHttp();
     const request = context.getRequest<Request>();
     const response = context.getResponse<Response>();
-    
-    let status: HttpStatus;
-    let errorMessage: string;
 
-    if (exception instanceof HttpException) {
-      
-    }
-    console.log(request, response);
+    console.log(exception);
     super.catch(exception, host);
   }
 

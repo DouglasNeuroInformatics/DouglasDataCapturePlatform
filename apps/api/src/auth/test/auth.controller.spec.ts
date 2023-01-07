@@ -5,6 +5,8 @@ import { createMock } from '@golevelup/ts-jest';
 import { AuthController } from '../auth.controller';
 import { AuthService } from '../auth.service';
 
+import { mockAdmin, mockAdminPlainTextPassword } from '@/users/test/stubs/user.stubs';
+
 describe('AuthController', () => {
   let authController: AuthController;
   let authService: AuthService;
@@ -27,8 +29,8 @@ describe('AuthController', () => {
   describe('login', () => {
     it('should call authService.login', async () => {
       await authController.login({
-        username: 'admin',
-        password: 'default'
+        username: mockAdmin.username,
+        password: mockAdminPlainTextPassword
       });
       expect(authService.login).toBeCalled();
     });
@@ -36,15 +38,15 @@ describe('AuthController', () => {
 
   describe('logout', () => {
     it('should call authService.logout', async () => {
-      await authController.logout('admin');
-      expect(authService.logout).toBeCalledWith('admin');
+      await authController.logout(mockAdmin.username);
+      expect(authService.logout).toBeCalledWith(mockAdmin.username);
     });
   });
 
   describe('refresh', () => {
     it('should call authService.refresh', async () => {
-      await authController.refresh('admin', 'refresh-token');
-      expect(authService.refresh).toBeCalledWith('admin', 'refresh-token');
+      await authController.refresh(mockAdmin.username, mockAdmin.refreshToken!);
+      expect(authService.refresh).toBeCalledWith(mockAdmin.username, mockAdmin.refreshToken!);
     });
   });
 });

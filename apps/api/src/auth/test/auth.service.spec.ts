@@ -4,33 +4,17 @@ import { JwtService } from '@nestjs/jwt';
 import { Test } from '@nestjs/testing';
 
 import { createMock } from '@golevelup/ts-jest';
-import bcrypt from 'bcrypt';
 
 import { InvalidCredentialsException } from '../auth.exceptions';
 import { AuthService } from '../auth.service';
 
-import { User } from '@/users/schemas/user.schema';
+import { mockAdmin, mockAdminPlainTextPassword, mockUser } from '@/users/test/stubs/user.stubs';
 import { UsersService } from '@/users/users.service';
 
-const mockPassword = {
-  plainText: 'default',
-  hash: bcrypt.hashSync('default', 10)
-};
+// this is for both refresh and access tokens
+const mockAuthToken = mockAdmin.refreshToken!;
 
-const mockAdmin: User = Object.freeze({
-  username: 'admin',
-  password: mockPassword.hash,
-  role: 'admin',
-  refreshToken: 'token'
-});
-
-const mockUser: User = Object.freeze({
-  username: 'user',
-  password: mockPassword.hash,
-  role: 'user'
-});
-
-const mockUsers = [mockAdmin, mockUser];
+const mockUsers = Object.freeze([mockAdmin, mockUser]);
 
 const MockConfigService = createMock<ConfigService>({
   getOrThrow(property: string) {
@@ -40,7 +24,7 @@ const MockConfigService = createMock<ConfigService>({
 
 const MockJwtService = createMock<JwtService>({
   signAsync: () => {
-    return Promise.resolve('token');
+    return Promise.resolve(mockAuthToken);
   }
 });
 
@@ -86,16 +70,16 @@ describe('AuthService', () => {
       await expect(
         authService.login({
           username: mockAdmin.username,
-          password: mockPassword.plainText
+          password: mockAdminPlainTextPassword
         })
       ).resolves.toStrictEqual({
-        accessToken: 'token',
-        refreshToken: 'token'
+        accessToken: mockAuthToken,
+        refreshToken: mockAuthToken
       });
       expect(usersService.updateUser).toBeCalledWith(
-        'admin',
+        mockAdmin.username,
         expect.objectContaining({
-          refreshToken: expect.not.stringMatching('token')
+          refreshToken: expect.not.stringMatching(mockAuthToken)
         })
       );
     });
@@ -112,8 +96,8 @@ describe('AuthService', () => {
     it('should throw an InvalidCredentialsException if the user provides an incorrect password', async () => {
       await expect(
         authService.login({
-          username: 'admin',
-          password: 'error'
+          username: mockAdmin.username,
+          password: mockAdmin.password + ' '
         })
       ).rejects.toBeInstanceOf(InvalidCredentialsException);
     });
@@ -121,8 +105,8 @@ describe('AuthService', () => {
 
   describe('logout', () => {
     it('should call usersService.updateUser and set the refreshToken to undefined', async () => {
-      await authService.logout('admin');
-      expect(usersService.updateUser).toBeCalledWith('admin', { refreshToken: undefined });
+      await authService.logout(mockAdmin.username);
+      expect(usersService.updateUser).toBeCalledWith(mockAdmin.username, { refreshToken: undefined });
     });
 
     it('should throw an InvalidCredentialsException if the user does not exist', async () => {

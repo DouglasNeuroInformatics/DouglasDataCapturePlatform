@@ -1,15 +1,15 @@
 {
   "extends": "@dnp/tsconfig/base.json",
   "compilerOptions": {
-    "baseUrl": "src",
+    "baseUrl": "./",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "module": "CommonJS",
     "paths": {
-      "@/*": ["*"]
+      "@/*": ["./src/*"]
     },
-    "outDir": "dist",
+    "outDir": "./dist",
     "strictPropertyInitialization": false
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "test/**/*"]
 }
