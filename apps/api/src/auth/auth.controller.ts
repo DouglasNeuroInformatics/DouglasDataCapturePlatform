@@ -1,5 +1,5 @@
 import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiForbiddenResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 import { AuthService } from './auth.service';
 import { Auth } from './decorators/auth.decorator';
@@ -11,12 +11,11 @@ import { ParseRequestUser } from '@/common/decorators/parse-request-user.decorat
 @ApiTags('Authentication')
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) { }
-  
-  @ApiOperation({
-    description: 'test',
-    
-  })
+  constructor(private readonly authService: AuthService) {}
+
+  @ApiOperation({ description: 'Request a JSON Web Token from the server.'})
+  @ApiOkResponse({ description: 'Successfully authenticated the user' })
+  @ApiForbiddenResponse({ description: 'Failed to authenticate the user' })
   @Auth({ isPublic: true })
   @Post('login')
   @HttpCode(HttpStatus.OK)

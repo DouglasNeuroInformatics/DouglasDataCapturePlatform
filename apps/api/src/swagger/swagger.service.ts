@@ -28,7 +28,7 @@ export class SwaggerService {
   private loadConfig(): Omit<OpenAPIObject, 'paths'> {
     return yaml.load(this.loadResourceAsTxt('swagger.config.yaml')) as Omit<OpenAPIObject, 'paths'>;
   }
-
+  
   private loadResourceAsTxt(filename: string): string {
     return fs.readFileSync(path.join(this.resourcesDir, filename), 'utf-8');
   }
