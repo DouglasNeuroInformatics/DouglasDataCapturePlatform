@@ -1,11 +1,10 @@
-import { BadRequestException, NotFoundException } from '@nestjs/common';
+import { BadRequestException, ForbiddenException , NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { Test } from '@nestjs/testing';
 
 import { createMock } from '@golevelup/ts-jest';
 
-import { InvalidCredentialsException } from '../auth.exceptions';
 import { AuthService } from '../auth.service';
 
 import { mockAdmin, mockAdminPlainTextPassword, mockUser } from '@/users/test/stubs/user.stubs';
@@ -84,22 +83,22 @@ describe('AuthService', () => {
       );
     });
 
-    it('should throw an InvalidCredentialsException if the user does not exist', async () => {
+    it('should throw an ForbiddenException if the user does not exist', async () => {
       await expect(
         authService.login({
           username: 'attacker',
           password: 'foo'
         })
-      ).rejects.toBeInstanceOf(InvalidCredentialsException);
+      ).rejects.toBeInstanceOf(ForbiddenException);
     });
 
-    it('should throw an InvalidCredentialsException if the user provides an incorrect password', async () => {
+    it('should throw an ForbiddenException if the user provides an incorrect password', async () => {
       await expect(
         authService.login({
           username: mockAdmin.username,
           password: mockAdmin.password + ' '
         })
-      ).rejects.toBeInstanceOf(InvalidCredentialsException);
+      ).rejects.toBeInstanceOf(ForbiddenException);
     });
   });
 
@@ -109,8 +108,8 @@ describe('AuthService', () => {
       expect(usersService.updateUser).toBeCalledWith(mockAdmin.username, { refreshToken: undefined });
     });
 
-    it('should throw an InvalidCredentialsException if the user does not exist', async () => {
-      await expect(authService.logout('foo')).rejects.toBeInstanceOf(InvalidCredentialsException);
+    it('should throw an ForbiddenException if the user does not exist', async () => {
+      await expect(authService.logout('foo')).rejects.toBeInstanceOf(ForbiddenException);
     });
 
     it('should throw a BadRequestException if the user does not have a refresh token', async () => {
@@ -119,8 +118,8 @@ describe('AuthService', () => {
   });
 
   describe('refresh', () => {
-    it('should throw an InvalidCredentialsException if the user does not exist', async () => {
-      await expect(authService.refresh('foo', 'token')).rejects.toBeInstanceOf(InvalidCredentialsException);
+    it('should throw an ForbiddenException if the user does not exist', async () => {
+      await expect(authService.refresh('foo', 'token')).rejects.toBeInstanceOf(ForbiddenException);
     });
   });
 });

@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
 import { SubjectPostRequestDto } from '@dnp/common';
 
@@ -11,21 +11,37 @@ import { SubjectsService } from './subjects.service';
 export class SubjectsController {
   constructor(private subjectsService: SubjectsService) {}
 
+  @ApiOperation({
+    description: 'Get all subjects',
+    summary: 'Get All'
+  })
   @Get()
   findAll(): Promise<Subject[]> {
     return this.subjectsService.findAll();
   }
 
+  @ApiOperation({
+    description: 'Get a subject',
+    summary: 'Get Subject'
+  })
   @Get(':id')
   findById(@Param('id') id: string): Promise<Subject> {
     return this.subjectsService.findById(id);
   }
 
+  @ApiOperation({
+    description: 'Register a new subject in the database',
+    summary: 'Create'
+  })
   @Post()
   create(@Body() dto: SubjectPostRequestDto): Promise<Subject> {
     return this.subjectsService.create(dto);
   }
 
+  @ApiOperation({
+    description: 'Delete a subject from the database',
+    summary: 'Delete'
+  })
   @Delete(':id')
   deleteById(@Param('id') id: string): Promise<void> {
     return this.subjectsService.deleteById(id);

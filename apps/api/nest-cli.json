@@ -3,16 +3,21 @@
   "collection": "@nestjs/schematics",
   "sourceRoot": "src",
   "compilerOptions": {
-    "assets": [{
-      "include": "swagger/resources/**/*",
-      "watchAssets": true
-    }],
+    "assets": [
+      {
+        "include": "docs/resources/**/*",
+        "watchAssets": true
+      },
+      {
+        "include": "swagger/resources/**/*",
+        "watchAssets": true
+      }
+    ],
     "plugins": [
       {
         "name": "@nestjs/swagger",
         "options": {
-          "classValidatorShim": false,
-          "introspectComments": true
+          "classValidatorShim": true
         }
       }
     ]

@@ -1,10 +1,15 @@
-import { BadRequestException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  ForbiddenException,
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException
+} from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 
 import bcrypt from 'bcrypt';
 
-import { InvalidCredentialsException } from './auth.exceptions';
 import { AuthLoginReqDto } from './dto/auth.dto';
 import { AuthTokens, JwtPayload } from './interfaces/auth.interfaces';
 
@@ -17,14 +22,14 @@ export class AuthService {
     private readonly config: ConfigService,
     private readonly jwtService: JwtService,
     private readonly usersService: UsersService
-  ) {}
+  ) { }
 
   async login({ username, password }: AuthLoginReqDto): Promise<AuthTokens> {
     const user = await this.getUser(username);
 
     const isAuth = await bcrypt.compare(password, user.password);
     if (!isAuth) {
-      throw new InvalidCredentialsException();
+      throw new ForbiddenException();
     }
 
     const tokens = await this.getTokens(user);
@@ -43,11 +48,11 @@ export class AuthService {
   async refresh(username: string, refreshToken: string): Promise<AuthTokens> {
     const user = await this.getUser(username);
     if (!user.refreshToken) {
-      throw new InvalidCredentialsException();
+      throw new ForbiddenException();
     }
     const isValid = await bcrypt.compare(refreshToken, user.refreshToken);
     if (!isValid) {
-      throw new InvalidCredentialsException();
+      throw new ForbiddenException();
     }
     const tokens = await this.getTokens(user);
     await this.updateUserRefreshToken(user.username, tokens.refreshToken);
@@ -60,7 +65,7 @@ export class AuthService {
       user = await this.usersService.findUser(username);
     } catch (error) {
       if (error instanceof NotFoundException) {
-        throw new InvalidCredentialsException();
+        throw new ForbiddenException();
       }
       throw new InternalServerErrorException('Internal Server Error', {
         cause: error instanceof Error ? error : undefined

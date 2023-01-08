@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
 import { CreateUserReqDto, CreateUserResDto } from './dto/create-user.dto';
 import { GetUserResDto } from './dto/get-user.dto';
@@ -9,8 +9,8 @@ import { UsersService } from './users.service';
 @ApiTags('Users')
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
-
+  constructor(private readonly usersService: UsersService) { }
+  
   @Post()
   create(@Body() dto: CreateUserReqDto): Promise<CreateUserResDto> {
     return this.usersService.create(dto);
