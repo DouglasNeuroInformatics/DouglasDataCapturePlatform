@@ -1,7 +1,7 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
-import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { Body, Controller, Post } from '@nestjs/common';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
-import { CreateInstrumentReqDto, CreateInstrumentResDto } from './dto/create-instrument.dto';
+import { InstrumentDto } from './dto/instrument.dto';
 import { InstrumentsService } from './instruments.service';
 
 @ApiTags('Instruments')
@@ -9,15 +9,13 @@ import { InstrumentsService } from './instruments.service';
 export class InstrumentsController {
   constructor(private readonly instrumentsService: InstrumentsService) {}
 
-  @ApiOperation({
-    description: 'Create a new instrument',
-    summary: 'Create'
-  })
-  @ApiCreatedResponse({ description: 'The record has been successfully created.' })
+  @ApiOperation({ summary: 'Create an Instrument' })
   @Post()
-  create(@Body() dto: CreateInstrumentReqDto): Promise<CreateInstrumentResDto> {
+  create(@Body() dto: InstrumentDto): Promise<InstrumentDto> {
     return this.instrumentsService.create(dto);
   }
+
+  /*
 
   @ApiOperation({
     description: 'Get all instruments',
@@ -28,4 +26,5 @@ export class InstrumentsController {
   getAll(): Promise<CreateInstrumentResDto[]> {
     return this.instrumentsService.getAll();
   }
+  */
 }
